@@ -7,11 +7,11 @@ public class Pair {
         this.entry=entry;
         this.exit=exit;
     }
-    private char getEntry()
+    public char getEntry()
     {
         return entry;
     }
-    private char getExit()
+    public char getExit()
     {
         return exit;
     }
