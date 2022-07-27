@@ -32,7 +32,23 @@ public class Main {
         arrRotors.add((rotor2));
 
         RotorsSet rotorsSet=new RotorsSet(arrRotors);
-        rotorsSet.manageSpins();
+
+
+        List<Pair> reflectorLisr=new ArrayList<>();
+        reflectorLisr.add(new Pair('1','4'));
+        reflectorLisr.add(new Pair('2','5'));
+        reflectorLisr.add( new Pair('3','6'));
+        Reflector  reflector=new Reflector("2",reflectorLisr);
+
+
+        List<Pair> reflectorLisr2=new ArrayList<>();
+        reflectorLisr2.add(new Pair('1','2'));
+        reflectorLisr2.add(new Pair('3','4'));
+        reflectorLisr2.add(new Pair('5','6'));
+        Reflector  reflector2=new Reflector("2",reflectorLisr2);
+
+        System.out.println(reflector2.getReflectorStructure() +"Reflector");
+  /*      rotorsSet.manageSpins();
 
 
         System.out.println(rotor.getRotorStructure().toString()+"Rotor 1");
@@ -45,6 +61,6 @@ public class Main {
         System.out.println("AFTER 3 SPINS");
         rotorsSet.manageSpins();
         System.out.println(rotor.getRotorStructure().toString()+"Rotor 1");
-        System.out.println(rotor2.getRotorStructure().toString()+"Rotor 2");
+        System.out.println(rotor2.getRotorStructure().toString()+"Rotor 2");*/
     }
 }
