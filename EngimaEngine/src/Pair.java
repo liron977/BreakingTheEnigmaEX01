@@ -28,5 +28,13 @@ public class Pair {
     {
       return "(" + this.exit +"," +this.entry +")" +"\n" ;
     }
+    @Override
+    public boolean equals(Object obj){
+        if (obj == null) {
+            return false;
+       }
+        Pair other=(Pair) obj;
+        return ((this.entry==other.entry)&&(this.exit==other.exit));
+    }
 
 }

@@ -12,8 +12,18 @@ public class Main {
         rotorStructure.add(new Pair('D','C'));
         rotorStructure.add(new Pair('E','B'));
         rotorStructure.add(new Pair('F','A'));
-        Rotor rotor=new Rotor("1",'C','2',6,rotorStructure);
-        rotor.initRotorStructure();
+        Rotor rotor=new Rotor("1",'C',"4",6,rotorStructure);
+        rotor.spinRotor();
+        rotor.spinRotor();
+        rotor.spinRotor();
+        rotor.spinRotor();
+        rotor.spinRotor();
+        rotor.spinRotor();
+        rotor.spinRotor();
+
+
+        System.out.println(rotor.isNotchLocatedInWindow());
+
         System.out.println(rotor.getRotorStructure().toString());
 
 
