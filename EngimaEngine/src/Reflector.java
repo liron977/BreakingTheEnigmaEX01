@@ -15,17 +15,17 @@ public class Reflector {
        return reflectorStructure;
     }
     public void updateReflector(){
-        char newInputEntry;
-        char inputExit;
+        char originalInputValue;
+        char originalOutputValue;
         int newInputIndex;
         int newExitIndex;
         for(int i=0;i<reflectorPairStructure.size();i++){
-            newInputEntry=this.reflectorPairStructure.get(i).getEntry();
-            inputExit=this.reflectorPairStructure.get(i).getExit();
-            newInputIndex=Character.getNumericValue(inputExit)-1;
-            newExitIndex=Character.getNumericValue(newInputEntry)-1 ;
-            reflectorStructure.set(newInputIndex,newInputEntry);
-            reflectorStructure.set(newExitIndex,newInputEntry);
+            originalInputValue=this.reflectorPairStructure.get(i).getEntry();
+            originalOutputValue=this.reflectorPairStructure.get(i).getExit();
+            newInputIndex=Character.getNumericValue(originalOutputValue)-1;
+            newExitIndex=Character.getNumericValue(originalInputValue)-1 ;
+            reflectorStructure.set(newInputIndex,originalInputValue);
+            reflectorStructure.set(newExitIndex,originalInputValue);
         }
     }
     private void initReflector(){
@@ -34,5 +34,14 @@ public class Reflector {
             reflectorStructure.add(character);
 
         }
+    }
+    public int getExitIndexFromTheReflector(int entryIndex) {
+        char valueOfEntryIndex=reflectorStructure.get(entryIndex-1);
+        for(int i=0;i<reflectorStructure.size();i++) {
+            if((i!=(entryIndex-1))&&(reflectorStructure.get(i)==valueOfEntryIndex)){
+                return i;
+            }
+        }
+        return -1;
     }
 }

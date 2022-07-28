@@ -8,6 +8,9 @@ public class RotorsSet {
         this.rotors=rotors;
         this.rotorsAmount=rotors.size();
     }
+    public List<Rotor> getListOfRotors() {
+       return rotors;
+    }
     public void manageSpins(){
 
         for(int i=0;i<rotorsAmount-1;i++) {
