@@ -6,8 +6,9 @@ public class PlugsBoard {
  private int amountOfSwappingPairs;
  private List<Pair> pairsOfSwappingCharacter = new ArrayList<>();
 
- public PlugsBoard(Keyboard keybord,List<Pair> pairsOfSwappingLetters,int amountOfSwappingPairs){
+ public PlugsBoard(Keyboard keybord,List<Pair> pairsOfSwappingLetters){
   this.keybord=keybord;
+  amountOfSwappingPairs=keybord.getKeyboardAmount();
   this.pairsOfSwappingCharacter=pairsOfSwappingLetters;
   this.amountOfSwappingPairs=amountOfSwappingPairs;
  }

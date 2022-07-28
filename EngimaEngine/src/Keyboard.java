@@ -11,4 +11,7 @@ public class Keyboard {
     public char getCharacterFromKeyboardByIndex(int index){
         return keyboard.charAt(index);
     }
+    public int getKeyboardAmount(){
+        return keyboardAmount;
+    }
 }

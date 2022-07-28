@@ -61,11 +61,10 @@ public class Main {
 
         Keyboard keyboard=new Keyboard("ABCDEF");
 
-        int amountToSwap=1;
         List<Pair> plugs=new ArrayList<>();
-       // plugs.add(new Pair('C','B'));
+        //plugs.add(new Pair('C','B'));
         plugs.add(new Pair('A','F'));
-        PlugsBoard plugsBoard=new PlugsBoard(keyboard,plugs,amountToSwap);
+        PlugsBoard plugsBoard=new PlugsBoard(keyboard,plugs);
        // PlugsBoard plugsBoard=new PlugsBoard(keyboard,plugs,amountToSwap);
 
 
@@ -79,13 +78,13 @@ public class Main {
             System.out.print("Enter an integer: ");
 
                 userIntegerInput = scanner.next().charAt(0);
-              /*  if((userIntegerInput=='\t')||(userIntegerInput=='\r\n')||(userIntegerInput=='\r')){
+               /* if((userIntegerInput=='\t')||(userIntegerInput=='\r\n')||(userIntegerInput=='\r')){
                     validInput = false;
-                }*/
-                //else {
+                }
+                else {*/
             System.out.println(theMachineEngine.manageDecode(userIntegerInput));
 
-               // }
+             //  }
 
 
         } while (validInput == true);
