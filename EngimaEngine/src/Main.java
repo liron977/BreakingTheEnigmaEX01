@@ -41,7 +41,7 @@ public class Main {
         Reflector  reflector=new Reflector("2",reflectorLisr);
         System.out.println(reflector.getReflectorStructure() +"Reflector");
 
-       System.out.println(reflector.getExitIndexFromTheReflector(6)+ "ExitIndexFromTheReflector");
+       //System.out.println(reflector.getExitIndexFromTheReflector(6)+ "ExitIndexFromTheReflector");
 
         List<Pair> reflectorLisr2=new ArrayList<>();
         reflectorLisr2.add(new Pair('1','2'));
@@ -51,7 +51,7 @@ public class Main {
 
         Keyboard keyboard=new Keyboard("ABCDEF");
         TheMachineEngine theMachineEngine=new TheMachineEngine(rotorsSet,reflector,keyboard);
-        System.out.println(theMachineEngine.manageDecode('B'));
+        System.out.println(theMachineEngine.manageDecode('F'));
 
 
         //rotor.spinRotor();

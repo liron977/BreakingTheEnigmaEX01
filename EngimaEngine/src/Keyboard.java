@@ -7,4 +7,7 @@ public class Keyboard {
     public int getIndexFromKeyboard(char ch){
         return keyboard.indexOf(ch);
     }
+    public char getCharacterFromKeyboardByIndex(int index){
+        return keyboard.charAt(index);
+    }
 }

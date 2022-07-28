@@ -68,7 +68,7 @@ public class Rotor {
     }
     public int getIndexFromRotorByExitValue(char ch){
         for(int i=0;i<rotorStructure.size();i++){
-            if(rotorStructure.get(i).getExit()==ch){
+            if(rotorStructure.get(i).getEntry()==ch){
                 return i;
             }
         }

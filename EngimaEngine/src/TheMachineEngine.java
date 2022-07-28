@@ -15,6 +15,7 @@ public class TheMachineEngine {
     public char manageDecode(char signal){
         char entryValue='C';
         int indexOfSignal;
+        Rotor tmpRotor=null;
 
         rotorsSet.manageSpins();
          indexOfSignal= keyboard.getIndexFromKeyboard(signal);
@@ -28,8 +29,16 @@ public class TheMachineEngine {
         for (Rotor rotor:rotorsSet.getListOfRotors()) {
             entryValue=rotor.getExitValueFromRotorByIndex(indexOfSignal);
             indexOfSignal=rotor.getIndexFromRotorByExitValue(entryValue);
+            tmpRotor=rotor;
         }
         Collections.reverse(rotorsSet.getListOfRotors());
+        if(tmpRotor!=null){
+            indexOfSignal=tmpRotor.getIndexFromRotorByExitValue(entryValue);
+            entryValue=keyboard.getCharacterFromKeyboardByIndex(indexOfSignal);
+
+        }
+
+
         return  entryValue;
 
 

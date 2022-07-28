@@ -36,9 +36,9 @@ public class Reflector {
         }
     }
     public int getExitIndexFromTheReflector(int entryIndex) {
-        char valueOfEntryIndex=reflectorStructure.get(entryIndex-1);
+        char valueOfEntryIndex=reflectorStructure.get(entryIndex);
         for(int i=0;i<reflectorStructure.size();i++) {
-            if((i!=(entryIndex-1))&&(reflectorStructure.get(i)==valueOfEntryIndex)){
+            if((i!=(entryIndex))&&(reflectorStructure.get(i)==valueOfEntryIndex)){
                 return i;
             }
         }
