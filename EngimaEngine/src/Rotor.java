@@ -8,17 +8,17 @@ public class Rotor {
     private Pair notchPair;
     private int entriesAmount;
 
-    Rotor(String rotorId, char startingPosition, String  notchPosition, int entriesAmount, List<Pair> rotorStructure) {
+    Rotor(String rotorId, int  notchPosition, int entriesAmount, List<Pair> rotorStructure) {
         this.rotorId = rotorId;
-        this.startingPosition = startingPosition - 'A' + 1;
+        //this.startingPosition = startingPosition - 'A' + 1;
         this.entriesAmount = entriesAmount;
         this.rotorStructure = rotorStructure;
-        this.notchPair = this.rotorStructure.get(Integer.parseInt(notchPosition) -1);
-        initRotorStructure();
+        this.notchPair = this.rotorStructure.get((notchPosition) -1);
+        //initRotorStructure();
 
     }
 
-    private void initRotorStructure() {
+    private void initRotorStructure(int startingPosition) {
         List<Pair> tmpRotorStructure = new ArrayList<>();
         tmpRotorStructure.addAll(rotorStructure);
         int newPosition;
@@ -74,4 +74,5 @@ public class Rotor {
         }
         return -1;
     }
+
 }

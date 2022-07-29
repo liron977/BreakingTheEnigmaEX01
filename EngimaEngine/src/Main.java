@@ -1,11 +1,36 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import schemaGenerated.CTEEnigma;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public class Main {
 
+    private final static String JAXB_XML_GAME_PACKAGE_NAME = "schemaGenerated";
+
     public static void main(String[] args) {
-        List<Pair> rotorStructure=new ArrayList<>();
+
+        try {
+            InputStream inputStream = new FileInputStream(new File("C:\\Users\\97254\\IdeaProjects\\BreakingTheEnigma\\EngimaEngine\\src\\resources\\ex1-sanity-small.xml"));
+            CTEEnigma descriptor = deserializeFrom(inputStream);
+            System.out.println("name of first country is: " + descriptor.getCTEMachine().getABC());
+            SchemaGenerated schemaGenerated= new SchemaGenerated(descriptor);
+        } catch (JAXBException | FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    private static CTEEnigma deserializeFrom(InputStream in) throws JAXBException {
+        JAXBContext jc = JAXBContext.newInstance(JAXB_XML_GAME_PACKAGE_NAME);
+        Unmarshaller u = jc.createUnmarshaller();
+        return (CTEEnigma) u.unmarshal(in);
+    }
+
+
+ /*       List<Pair> rotorStructure=new ArrayList<>();
         int amount=6;
         rotorStructure.add(new Pair('A','F'));
         rotorStructure.add(new Pair('B','E'));
@@ -78,16 +103,16 @@ public class Main {
             System.out.print("Enter an integer: ");
 
                 userIntegerInput = scanner.next().charAt(0);
-               /* if((userIntegerInput=='\t')||(userIntegerInput=='\r\n')||(userIntegerInput=='\r')){
+               *//* if((userIntegerInput=='\t')||(userIntegerInput=='\r\n')||(userIntegerInput=='\r')){
                     validInput = false;
                 }
-                else {*/
+                else {*//*
             System.out.println(theMachineEngine.manageDecode(userIntegerInput));
 
              //  }
 
 
-        } while (validInput == true);
+        } while (validInput == true);*/
         //Scanner sc = new Scanner(System.in);
         //char c = (char) System.in.read();
 //        int i=0;
@@ -120,5 +145,5 @@ public class Main {
         rotorsSet.manageSpins();
         System.out.println(rotor.getRotorStructure().toString()+"Rotor 1");
         System.out.println(rotor2.getRotorStructure().toString()+"Rotor 2");*/
-    }
+    //}
 }

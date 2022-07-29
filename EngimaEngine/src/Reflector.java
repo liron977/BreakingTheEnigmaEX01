@@ -11,6 +11,9 @@ public class Reflector {
         initReflector();
         updateReflector();
     }
+    public String getReflectorId() {
+        return reflectorId;
+    }
     public List<Character> getReflectorStructure() {
        return reflectorStructure;
     }

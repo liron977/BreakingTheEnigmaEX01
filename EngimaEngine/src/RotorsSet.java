@@ -27,6 +27,16 @@ public class RotorsSet {
            }
         }
     }
+    @Override
+    public String toString()
+    {
+        String str="";
+        for (Rotor rotor:rotors) {
+            //str+=;
+           str= str+ "New rotow:"+ rotor.getRotorStructure().toString() + "]";
+        }
+        return str;
+    }
 
 }
 

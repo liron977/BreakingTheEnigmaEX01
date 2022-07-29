@@ -7,21 +7,18 @@ public class Pair {
         this.entry=entry;
         this.exit=exit;
     }
-    public char getEntry()
-    {
+    public void setEntry(char entry){
+        this.entry=entry;
+    }
+    public void setExit(char exit){
+        this.exit=exit;
+    }
+    public char getEntry() {
         return entry;
     }
     public char getExit()
     {
         return exit;
-    }
-    private void setEntry(char entry)
-    {
-        this.entry=entry;
-    }
-    private void setexit(char entry)
-    {
-        this.entry=entry;
     }
     @Override
     public String toString()
