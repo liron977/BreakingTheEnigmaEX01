@@ -14,11 +14,21 @@ public class ReflectorsSet {
     }
     public Reflector searchReflectorById(String reflectorId){
         for (Reflector reflector:reflectors) {
-            if(reflector.getReflectorId()==reflectorId){
+            if(reflector.getReflectorId().equals(reflectorId)){
                 return reflector;
             }
 
         }
         return null;
     }
+/*    @Override
+    public String toString()
+    {
+        String str="";
+        for (Reflector reflector:reflectors) {
+            //str+=;
+            str= str+ "New reflector:"+ reflector.getReflectorStructure().toString() + "]";
+        }
+        return str;
+    }*/
 }

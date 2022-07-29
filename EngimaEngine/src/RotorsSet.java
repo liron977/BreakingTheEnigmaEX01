@@ -8,6 +8,14 @@ public class RotorsSet {
         this.rotors=rotors;
         this.rotorsAmount=rotors.size();
     }
+    public Rotor getRotorById(String rotorId){
+        for (Rotor rotor:rotors) {
+            if(rotor.getRotorId().equals(rotorId)){
+                return rotor;
+            }
+        }
+        return null;
+    }
     public List<Rotor> getListOfRotors() {
        return rotors;
     }
@@ -27,7 +35,7 @@ public class RotorsSet {
            }
         }
     }
-    @Override
+ /*   @Override
     public String toString()
     {
         String str="";
@@ -36,7 +44,7 @@ public class RotorsSet {
            str= str+ "New rotow:"+ rotor.getRotorStructure().toString() + "]";
         }
         return str;
-    }
+    }*/
 
 }
 

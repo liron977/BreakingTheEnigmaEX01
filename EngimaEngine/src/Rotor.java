@@ -18,7 +18,7 @@ public class Rotor {
 
     }
 
-    private void initRotorStructure(int startingPosition) {
+    public void initRotorStructure(int startingPosition) {
         List<Pair> tmpRotorStructure = new ArrayList<>();
         tmpRotorStructure.addAll(rotorStructure);
         int newPosition;
@@ -35,7 +35,9 @@ public class Rotor {
     public List<Pair> getRotorStructure() {
         return rotorStructure;
     }
-
+     public String getRotorId (){
+        return rotorId;
+     }
     public void spinRotor() {
         int newPosition;
         List<Pair> tmpRotorStructure = new ArrayList<>();
