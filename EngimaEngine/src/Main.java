@@ -18,7 +18,8 @@ public class Main {
             InputStream inputStream = new FileInputStream(new File("C:\\Users\\97254\\IdeaProjects\\BreakingTheEnigma\\EngimaEngine\\src\\resources\\ex1-sanity-small.xml"));
             CTEEnigma descriptor = deserializeFrom(inputStream);
             System.out.println("name of first country is: " + descriptor.getCTEMachine().getABC());
-            SchemaGenerated schemaGenerated= new SchemaGenerated(descriptor);
+            MediatorforSchema mediatorforSchema= new MediatorforSchema(descriptor);
+            System.out.println(mediatorforSchema.xmlValidation()+"XML");
         } catch (JAXBException | FileNotFoundException e) {
             e.printStackTrace();
         }
