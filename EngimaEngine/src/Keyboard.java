@@ -5,11 +5,11 @@ public class Keyboard {
         this.keyboard=keyboard;
         this.keyboardAmount=keyboard.length();
     }
-    public int getIndexFromKeyboard(char ch){
-        return keyboard.indexOf(ch);
+    public int getIndexFromKeyboard(String ch){
+        return keyboard.indexOf(ch.charAt(0));
     }
-    public char getCharacterFromKeyboardByIndex(int index){
-        return keyboard.charAt(index);
+    public String getCharacterFromKeyboardByIndex(int index){
+        return Character.toString(keyboard.charAt(index));
     }
     public int getKeyboardAmount(){
         return keyboardAmount;

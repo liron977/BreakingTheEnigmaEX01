@@ -1,22 +1,22 @@
 public class Pair {
-    private char entry;
-    private char exit;
+    private String entry;
+    private String exit;
 
-    public Pair(char entry,char exit)
+    public Pair(String entry,String exit)
     {
         this.entry=entry;
         this.exit=exit;
     }
-    public void setEntry(char entry){
+    public void setEntry(String entry){
         this.entry=entry;
     }
-    public void setExit(char exit){
+    public void setExit(String exit){
         this.exit=exit;
     }
-    public char getEntry() {
+    public String getEntry() {
         return entry;
     }
-    public char getExit()
+    public String getExit()
     {
         return exit;
     }
@@ -31,7 +31,7 @@ public class Pair {
             return false;
        }
         Pair other=(Pair) obj;
-        return ((this.entry==other.entry)&&(this.exit==other.exit));
+        return ((this.entry.equals(other.entry))&&(this.exit.equals(other.exit)));
     }
 
 }

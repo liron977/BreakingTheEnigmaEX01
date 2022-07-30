@@ -12,15 +12,15 @@ public class PlugsBoard {
   this.pairsOfSwappingCharacter=pairsOfSwappingLetters;
   this.amountOfSwappingPairs=amountOfSwappingPairs;
  }
- public char getSwappedCharacter(char character) {
+ public String getSwappedCharacter(String str) {
   for (Pair pair: pairsOfSwappingCharacter) {
-       if(pair.getEntry()==character){
+       if(pair.getEntry().equals(str)){
         return pair.getExit();
        }
-       else if(pair.getExit()==character){
+       else if(pair.getExit().equals(str)){
         return pair.getEntry();
    }
   }
-  return character;
+  return str;
  }
 }

@@ -18,7 +18,7 @@ public class SchemaGenerated /*implements Serializable*/ {
         this.enigmaDescriptor = enigmaDescriptor;
         this.keyboardInput = enigmaDescriptor.getCTEMachine().getABC().trim();
         initRomanNumeralsList();
-     /*  //   Keyboard keyboard= new Keyboard(enigmaDescriptor.getCTEMachine().getABC().trim());
+  /*      Keyboard keyboard= new Keyboard(enigmaDescriptor.getCTEMachine().getABC().trim());
         RotorsSet rotorsSet= createRotorsSet(enigmaDescriptor);
         List<Rotor> rotorsFinal=new ArrayList<>();
         rotorsFinal.add(rotorsSet.getRotorById("1"));
@@ -29,26 +29,25 @@ public class SchemaGenerated /*implements Serializable*/ {
         Reflector reflector=reflectorsSet.searchReflectorById("I");
 
         List<Pair> plugs=new ArrayList<>();
-       // plugs.add(new Pair('C','B'));
-        plugs.add(new Pair('A','F'));
+        //plugs.add(new Pair("C","B"));
+        plugs.add(new Pair("A","F"));
         PlugsBoard plugsBoard=new PlugsBoard(keyboard,plugs);
 
         TheMachineEngine theMachineEngine=new TheMachineEngine(rotorsSet,reflector,keyboard,plugsBoard);
         Scanner scanner = new Scanner(System.in);
 
-        char userIntegerInput = 0;
+        String userIntegerInput ="";
         boolean validInput=true;
         do {
             System.out.print("Enter an integer: ");
-            userIntegerInput = scanner.next().charAt(0);
+            userIntegerInput = scanner.nextLine();
             System.out.println(theMachineEngine.manageDecode(userIntegerInput));
-        } while (validInput == true);
-*/
+        } while (validInput == true);*/
     }
 
     public int isXmlValid() {
 
-        int isKeyboardSizeIsEven = isKeyboardSizeIsEven();
+       int isKeyboardSizeIsEven = isKeyboardSizeIsEven();
         if (isKeyboardSizeIsEven == -2) {
             return -2;
         }
@@ -70,7 +69,7 @@ public class SchemaGenerated /*implements Serializable*/ {
         }
         int isRotorsMappedIslegal = isRotorsMappedIslegal();
         if (isRotorsMappedIslegal < 0) {
-            return -6;
+            return isRotorsMappedIslegal;
         }
         int isRotorsSignalslAreValid = isRotorsSignalslAreValid();
         if (isRotorsSignalslAreValid == -11) {
@@ -84,10 +83,39 @@ public class SchemaGenerated /*implements Serializable*/ {
         if (isNotchPositionLegal == -7) {
             return -7;
         }
+        int isReflectorIdIsRomanNumerals=isReflectorIdIsRomanNumerals();
+        if(isReflectorIdIsRomanNumerals==-8){
+            return -8;
+        }
+        int isEachReflectorHasUniqId=isEachReflectorHasUniqId();
+        if(isEachReflectorHasUniqId<0){
+            return isEachReflectorHasUniqId;
+        }
+        int isSignalMappedToItselfInReflector=isSignalMappedToItselfInReflector();
+        if (isSignalMappedToItselfInReflector==-15){
+            return  -15;
+        }
+        int isReflectorhasDoubleMapping=isReflectorhasDoubleMapping();
+        if(isReflectorhasDoubleMapping==-16){
+            return -16;
+        }
+        int amountOfReflectorMapped=amountOfReflectorMapped();
+        if(amountOfReflectorMapped==-17){
+            return -17;
+        }
 
         return 100;
     }
-
+    private void createKeyboard(){
+        Keyboard keyboard= new Keyboard(keyboardInput.toUpperCase());
+    }
+    private int isKeyboardSizeIsEven(){
+        int result=-2;
+        if((keyboardInput.length()%2)==0){
+            result=2;
+        }
+        return result;
+    }
     private void initRomanNumeralsList() {
         romanNumeralsList.add("I");
         romanNumeralsList.add("II");
@@ -109,33 +137,138 @@ public class SchemaGenerated /*implements Serializable*/ {
         return 8;
     }
 
-/*    private int isEachReflectorHasUniqId() {
-
+    private int isEachReflectorHasUniqId() {
         HashMap<String, Integer> idHashMap = new HashMap<>();
         List<CTEReflector> cteReflectorList = enigmaDescriptor.getCTEMachine().getCTEReflectors().getCTEReflector();
         String reflectorId;
-        String previousId;
 
         for (CTEReflector cteReflector : cteReflectorList) {
             List<CTEReflect> cteReflects = cteReflector.getCTEReflect();
             reflectorId = cteReflector.getId();
-            if ((idHashMap.get(cteReflector.getId()) != null) && (idHashMap.get(cteReflector.getId()) > 0)) {
+            if ((idHashMap.get(reflectorId) != null) && (idHashMap.get(reflectorId) > 0)) {
                 return -13;
             }
-            idHashMap.put(cteReflector.getId(), 1);
-
+            idHashMap.put(reflectorId, 1);
         }
-          *//*  SortedSet<String> keys = new TreeSet<>(idHashMap.keySet());
-            for (String key : keys) {
-                if (key != previousId + 1) {
-                    return -5;
-                } else {
-                    previousId = key;
+        return isReflectorsIdAreOrder(idHashMap);
+    }
+    private int isReflectorsIdAreOrder(HashMap<String, Integer> idHashMap)
+    {
+        String previousId = "I";
+        SortedSet<String> keys = new TreeSet<>(idHashMap.keySet());
+        for (String key : keys) {
+            switch (key) {
+                case "II":
+                   if(!previousId.equals("I")){
+                       return -14;
+                   }
+                    break;
+                case "III":
+                    if(!previousId.equals("II")){
+                        return -14;
+                    }
+                    break;
+                case "IV":
+                    if(!previousId.equals("III")){
+                        return -14;
+                    }
+                    break;
+                case "V":
+                    if(!previousId.equals("IV")){
+                        return -14;
+                    }
+                    break;
+            }
+            previousId = key;
+        }
+        return 14;
+    }
+    private int isSignalMappedToItselfInReflector(){
+        char left,right;
+        List<CTEReflector> cteReflectorList = enigmaDescriptor.getCTEMachine().getCTEReflectors().getCTEReflector();
+        HashMap<String, Integer> leftSignalMap = new HashMap<>();
+        HashMap<String, Integer> rightSignalMap = new HashMap<>();
+
+        for (CTEReflector cteReflector : cteReflectorList) {
+            List<CTEReflect> cteReflects = cteReflector.getCTEReflect();
+            for (CTEReflect reflect:cteReflects) {
+                left=(char)(reflect.getInput()+'0');
+                right=(char)(reflect.getOutput()+'0');
+                if(left==right){
+                    return -15;
                 }
             }
-            return 5;
-        }*//*
-    }*/
+        }
+        return 15;
+    }
+    private int isReflectorhasDoubleMapping(){
+        String left,right;
+        List<CTEReflector> cteReflectorList = enigmaDescriptor.getCTEMachine().getCTEReflectors().getCTEReflector();
+
+
+        for (CTEReflector cteReflector : cteReflectorList) {
+            HashMap<String, Integer> leftSignalMap = new HashMap<>();
+            HashMap<String, Integer> rightSignalMap = new HashMap<>();
+            List<CTEReflect> cteReflects = cteReflector.getCTEReflect();
+            for (CTEReflect reflect:cteReflects) {
+                left=String.valueOf(reflect.getInput());
+                right=String.valueOf(reflect.getOutput());
+                if((leftSignalMap.get(left)!=null)&&(leftSignalMap.get(left)!=0)) {
+                    return -16;
+                }
+                leftSignalMap.put(left,1);
+                if((rightSignalMap.get(right)!=null)&&(rightSignalMap.get(right)!=0)) {
+                    return -16;
+                }
+                rightSignalMap.put(right,1);
+            }
+        }
+        return 16;
+    }
+    private int amountOfReflectorMapped()
+    {
+        List<CTEReflector> cteReflectorList = enigmaDescriptor.getCTEMachine().getCTEReflectors().getCTEReflector();
+       int counter;
+       for (CTEReflector cteReflector : cteReflectorList) {
+           counter=0;
+           List<CTEReflect> cteReflects = cteReflector.getCTEReflect();
+            for (CTEReflect reflect : cteReflects) {
+                counter++;
+            }
+            if(counter*2!=keyboardInput.length()){
+                return -17;
+            }
+        }
+        return 17;
+
+    }
+    private ReflectorsSet createReflectorsSet(CTEEnigma enigmaDescriptor){
+        List<Reflector> reflectorsList=new ArrayList<>();
+        List<CTEReflector> cteReflectorList=enigmaDescriptor.getCTEMachine().getCTEReflectors().getCTEReflector();
+        String reflectorId;
+        Reflector reflector;
+
+        for (CTEReflector cteReflector: cteReflectorList) {
+            List<CTEReflect> cteReflect=cteReflector.getCTEReflect();
+            reflectorId=cteReflector.getId();
+            reflector=new Reflector(reflectorId,crateNewReflector(cteReflect));
+            reflectorsList.add(reflector);
+        }
+        ReflectorsSet reflectorsSet=new ReflectorsSet(reflectorsList);
+        return reflectorsSet;
+    }
+    private List<Pair> crateNewReflector(List<CTEReflect> cteReflect) {
+        String left,right;
+        Pair pair;
+        List<Pair> reflectorPairStructure=new ArrayList<>();
+        for (CTEReflect reflect:cteReflect) {
+            left=Integer.toString(reflect.getInput());
+            right=Integer.toString(reflect.getOutput());
+            pair=new Pair(left,right);
+            reflectorPairStructure.add(pair);
+        }
+        return  reflectorPairStructure;
+    }
     private int isNotchPositionLegal(){
         List<CTERotor> cteRotors=enigmaDescriptor.getCTEMachine().getCTERotors().getCTERotor();
         for (CTERotor cteRotor:cteRotors) {
@@ -220,28 +353,8 @@ public class SchemaGenerated /*implements Serializable*/ {
         }
         return 11;
     }
-    private int isSignalMappedToItself  (CTERotor cteRotor){
-        String left,right;
-        List<CTEPositioning> ctePositioning=cteRotor.getCTEPositioning();
-        for (CTEPositioning positing:ctePositioning) {
-             left=positing.getLeft();
-             right=positing.getRight();
-             if(left.equals(right)){
-                 return -11;
-             }
-        }
-        return 11;
-    }
-    private void createKeyboard(){
-        Keyboard keyboard= new Keyboard(keyboardInput.toUpperCase());
-    }
-    private int isKeyboardSizeIsEven(){
-        int result=-2;
-        if((keyboardInput.length()%2)==0){
-           result=2;
-        }
-        return result;
-    }
+
+
     private int isRotorsAmountIslegal(){
         int rotorsAmountFromFile=enigmaDescriptor.getCTEMachine().getRotorsCount();
         int result=-4;
@@ -289,33 +402,7 @@ public class SchemaGenerated /*implements Serializable*/ {
         }
         return count;
     }
-    private ReflectorsSet createReflectorsSet(CTEEnigma enigmaDescriptor){
-        List<Reflector> reflectorsList=new ArrayList<>();
-        List<CTEReflector> cteReflectorList=enigmaDescriptor.getCTEMachine().getCTEReflectors().getCTEReflector();
-        String reflectorId;
-        Reflector reflector;
 
-        for (CTEReflector cteReflector: cteReflectorList) {
-            List<CTEReflect> cteReflect=cteReflector.getCTEReflect();
-            reflectorId=cteReflector.getId();
-            reflector=new Reflector(reflectorId,crateNewReflector(cteReflect));
-            reflectorsList.add(reflector);
-        }
-        ReflectorsSet reflectorsSet=new ReflectorsSet(reflectorsList);
-        return reflectorsSet;
-   }
-   private List<Pair> crateNewReflector(List<CTEReflect> cteReflect) {
-       char left,right;
-       Pair pair;
-       List<Pair> reflectorPairStructure=new ArrayList<>();
-         for (CTEReflect reflect:cteReflect) {
-                left=(char)(reflect.getInput()+'0');
-                right=(char)(reflect.getOutput()+'0');
-                pair=new Pair(left,right);
-                reflectorPairStructure.add(pair);
-            }
-         return  reflectorPairStructure;
-   }
     private RotorsSet createRotorsSet(CTEEnigma enigmaDescriptor){
         List<Rotor> rotors =new ArrayList<>();
         List<CTERotor> cteRotors=enigmaDescriptor.getCTEMachine().getCTERotors().getCTERotor();
@@ -330,9 +417,9 @@ public class SchemaGenerated /*implements Serializable*/ {
     private Pair createNewPair(CTEPositioning positing){
         String left=positing.getLeft();
         String right=positing.getRight();
-        char charLeft=left.charAt(0);
-        char charRight=right.charAt(0);
-        Pair pair=new Pair(charLeft,charRight);
+        /*char charLeft=left.charAt(0);
+        char charRight=right.charAt(0);*/
+        Pair pair=new Pair(right,left);
 
         return pair;
     }
@@ -351,7 +438,7 @@ public class SchemaGenerated /*implements Serializable*/ {
         System.out.print("Enter an Char for position: ");
         Scanner scanner = new Scanner(System.in);
         char userIntegerInput = scanner.next().charAt(0);
-       int startingPosition = userIntegerInput - 'A' + 1;
+        int startingPosition = userIntegerInput - 'A' + 1;
        newRoter.initRotorStructure(startingPosition);
         return newRoter;
     }

@@ -41,9 +41,9 @@ public class TheMachineEngine {
         }
         return  entryValue;
     }*/
-public char manageDecode(char signal){
+public String manageDecode(String signal){
     int indexOfSignal;
-    char result;
+    String result;
 
     rotorsSet.manageSpins();
     indexOfSignal=theProcessFromTheRotorsToReflecter(signal);
@@ -51,8 +51,8 @@ public char manageDecode(char signal){
 
     return result;
 }
-    private int theProcessFromTheRotorsToReflecter(char signal){
-        char entryValue=plugsBoard.getSwappedCharacter(signal);
+    private int theProcessFromTheRotorsToReflecter(String signal){
+        String entryValue=plugsBoard.getSwappedCharacter(signal);
         int indexOfSignal= keyboard.getIndexFromKeyboard(entryValue);
         for (Rotor rotor: rotorsSet.getListOfRotors()) {
             entryValue=rotor.getEntryValueFromRotorByIndex(indexOfSignal);
@@ -62,9 +62,9 @@ public char manageDecode(char signal){
 
         return indexOfSignal;
     }
-    private char theProcessFromTheReflectorToRotors(int indexOfSignal){
+    private String theProcessFromTheReflectorToRotors(int indexOfSignal){
         Rotor tmpRotor=null;
-        char entryValue=Character.MAX_VALUE;
+        String entryValue="";
 
         indexOfSignal=reflector.getExitIndexFromTheReflector(indexOfSignal);
         Collections.reverse(rotorsSet.getListOfRotors());

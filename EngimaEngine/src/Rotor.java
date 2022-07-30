@@ -54,23 +54,23 @@ public class Rotor {
     public boolean isNotchLocatedInWindow() {
         return rotorStructure.get(0).equals(notchPair);
     }
-    public char getEntryValueFromRotorByIndex(int index){
+    public String getEntryValueFromRotorByIndex(int index){
       return rotorStructure.get(index).getEntry();
     }
-    public char getExitValueFromRotorByIndex(int index){
+    public String getExitValueFromRotorByIndex(int index){
         return rotorStructure.get(index).getExit();
     }
-    public int getIndexFromRotorByEntryValue(char ch){
+    public int getIndexFromRotorByEntryValue(String str){
         for(int i=0;i<rotorStructure.size();i++){
-            if(rotorStructure.get(i).getExit()==ch){
+            if(rotorStructure.get(i).getExit().equals(str)){
                 return i;
             }
         }
         return -1;
     }
-    public int getIndexFromRotorByExitValue(char ch){
+    public int getIndexFromRotorByExitValue(String str){
         for(int i=0;i<rotorStructure.size();i++){
-            if(rotorStructure.get(i).getEntry()==ch){
+            if(rotorStructure.get(i).getEntry().equals(str)){
                 return i;
             }
         }
