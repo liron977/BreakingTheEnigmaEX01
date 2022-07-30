@@ -1,13 +1,18 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import schemaGenerated.*;
 
 public class SchemaGenerated /*implements Serializable*/ {
+     private Keyboard keyboard;
+    private RotorsSet rotorsSet;
+    private ReflectorsSet reflectorsSet;
+   private PlugsBoard plugsBoard;
+   private  TheMachineEngine theMachineEngine;
+   private  CTEEnigma enigmaDescriptor;
 
     public SchemaGenerated(CTEEnigma enigmaDescriptor){
-          Keyboard keyboard= new Keyboard(enigmaDescriptor.getCTEMachine().getABC().trim());
+        this.enigmaDescriptor=enigmaDescriptor;
+       //   Keyboard keyboard= new Keyboard(enigmaDescriptor.getCTEMachine().getABC().trim());
         RotorsSet rotorsSet= createRotorsSet(enigmaDescriptor);
         List<Rotor> rotorsFinal=new ArrayList<>();
         rotorsFinal.add(rotorsSet.getRotorById("1"));
@@ -33,6 +38,64 @@ public class SchemaGenerated /*implements Serializable*/ {
             System.out.println(theMachineEngine.manageDecode(userIntegerInput));
         } while (validInput == true);
 
+    }
+    private void createKeyboard(){
+        Keyboard keyboard= new Keyboard(enigmaDescriptor.getCTEMachine().getABC().trim());
+    }
+    private int isKeyboardSizeIsEven(){
+        String keyboardInput=enigmaDescriptor.getCTEMachine().getABC().trim();
+        int result=-2;
+        if((keyboardInput.length()%2)==0){
+           result=2;
+        }
+        return result;
+    }
+    private int isRotorsAmountIslegal(){
+        int rotorsAmountFromFile=enigmaDescriptor.getCTEMachine().getRotorsCount();
+        int result=-4;
+        if(rotorsAmountFromFile>=2){
+            result=4;
+        }
+        return result;
+    }
+    private int isEachRotorHasUniqId(){
+        HashMap<Integer, Integer> idHashMap = new HashMap<>();
+        List<CTERotor> cteRotors=enigmaDescriptor.getCTEMachine().getCTERotors().getCTERotor();
+        int previousId=0;
+        for (CTERotor cteRotor:cteRotors) {
+            if(idHashMap.get(cteRotor.getId())>0){
+              return -5;
+            }
+            idHashMap.put(cteRotor.getId(),1);
+        }
+        SortedSet<Integer> keys = new TreeSet<>(idHashMap.keySet());
+        for (Integer key : keys) {
+           if(key!=previousId+1){
+               return -5;
+           }
+           else{
+               previousId=key;
+           }
+        }
+        return 5;
+    }
+    private int isRotorsCountEqualsToExistsRotorsAmount(){
+        int rotorsAmountFromFile=enigmaDescriptor.getCTEMachine().getRotorsCount();
+        int countedRotors=countRotorsFromFile();
+        int result=-3;
+        if(rotorsAmountFromFile<countedRotors){
+            result=3;
+        }
+
+        return  result;
+    }
+    private int countRotorsFromFile(){
+        List<CTERotor> cteRotors=enigmaDescriptor.getCTEMachine().getCTERotors().getCTERotor();
+        int count=0;
+        for (CTERotor cteRotor:cteRotors) {
+           count++;
+        }
+        return count;
     }
     private ReflectorsSet createReflectorsSet(CTEEnigma enigmaDescriptor){
         List<Reflector> reflectorsList=new ArrayList<>();
