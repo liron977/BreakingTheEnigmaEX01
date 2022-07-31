@@ -4,14 +4,8 @@ import Enums.RomanNumerals;
 import schemaGenerated.*;
 
 public class SchemaGenerated /*implements Serializable*/ {
-    /* private Keyboard keyboard;
-    private RotorsSet rotorsSet;
-    private ReflectorsSet reflectorsSet;
-   private PlugsBoard plugsBoard;
-   private  TheMachineEngine theMachineEngine;*/
     private CTEEnigma enigmaDescriptor;
     private String keyboardInput;
-
     private List<String> romanNumeralsList = new ArrayList<>();
 
     public SchemaGenerated(CTEEnigma enigmaDescriptor) {

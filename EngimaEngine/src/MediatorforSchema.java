@@ -1,5 +1,7 @@
 import schemaGenerated.CTEEnigma;
 
+import java.io.IOException;
+
 public class MediatorforSchema {
 
   private SchemaGenerated schemaGenerated;
@@ -7,15 +9,15 @@ public class MediatorforSchema {
   public MediatorforSchema(CTEEnigma enigmaDescriptor){
      this.schemaGenerated=new SchemaGenerated(enigmaDescriptor);
   }
-  public boolean xmlValidation(){
+  public boolean xmlValidation() {
 
-      int result= schemaGenerated.isXmlValid();
-      if(result==100){
+      int result = schemaGenerated.isXmlValid();
+      if (result == 100) {
           return true;
-      }
-      else {
+      } else {
           return false;
       }
+  }
 
   }
- }
+

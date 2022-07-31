@@ -1,12 +1,13 @@
+import EngineManager.EngineManager;
 import schemaGenerated.CTEEnigma;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.Scanner;
+
+import static java.lang.System.in;
 
 public class Main {
 
@@ -14,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        try {
+   /*     try {
             InputStream inputStream = new FileInputStream(new File("C:\\Users\\97254\\IdeaProjects\\BreakingTheEnigma\\EngimaEngine\\src\\resources\\ex1-sanity-small.xml"));
             CTEEnigma descriptor = deserializeFrom(inputStream);
             System.out.println("name of first country is: " + descriptor.getCTEMachine().getABC());
@@ -22,14 +23,79 @@ public class Main {
             System.out.println(mediatorforSchema.xmlValidation()+"XML");
         } catch (JAXBException | FileNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
+
+        Scanner scanner = new Scanner(System.in);
+        EngineManager engineManager = new EngineManager();
+        String loadStart;
+        loadStart = scanner.nextLine();
+        engineManager.load(loadStart);
+
+        System.out.println("The xml was uploaded successfully");
+
     }
-    private static CTEEnigma deserializeFrom(InputStream in) throws JAXBException {
+/*
+        Scanner scanner = new Scanner(in);
+
+        String fileName = scanner.nextLine().trim();
+
+            int len = fileName.length();
+            if (len < 4) {
+                System.out.println("File full name is too short!");
+            } else if (!fileName.endsWith(".xml")) {
+                System.out.println("This is not a full path of a xml file!");
+            } else {
+                System.out.println("Good");
+                File f = new File(fileName);
+            }
+        }*/
+
+
+
+    }
+/*    private static CTEEnigma deserializeFrom(InputStream in) throws JAXBException {
         JAXBContext jc = JAXBContext.newInstance(JAXB_XML_GAME_PACKAGE_NAME);
         Unmarshaller u = jc.createUnmarshaller();
         return (CTEEnigma) u.unmarshal(in);
     }
 
+    private Boolean isFileNameValid(final String fileName) {
+        try {
+            if (med.isFileNameValid(fileName)) {
+                return true;
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }*/
+
+
+
+
+/*    public Boolean isFileLoaded() {
+        return targetsGraph != null;
+    }*/
+/*
+    public Boolean loadFile(String fileName)  {
+    GPUPDescriptor descriptor;
+    try (InputStream inputStream = new FileInputStream(fileName)) {
+        descriptor = deserializeFrom(inputStream);
+    }
+    targetsGraph = new Graph(descriptor);
+    return true;
+}
+    public Boolean isFileNameValid(final String fileName)  {
+        int len = fileName.length();
+        if (len < 4) {
+            throw new IOException("File full name is too short!");
+        }
+        if (!fileName.endsWith(".xml")) {
+            throw new IOException("This is not a full path of a xml file!");
+        }
+        return true;
+    }
+*/
 
  /*       List<Pair> rotorStructure=new ArrayList<>();
         int amount=6;
@@ -147,4 +213,3 @@ public class Main {
         System.out.println(rotor.getRotorStructure().toString()+"Rotor 1");
         System.out.println(rotor2.getRotorStructure().toString()+"Rotor 2");*/
     //}
-}
