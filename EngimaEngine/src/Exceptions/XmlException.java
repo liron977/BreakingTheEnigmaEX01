@@ -1,13 +1,8 @@
 package Exceptions;
 
-public class XmlException extends GeneralException {
-    /* the function return the error information */
-    public String errorInfo(){
-        return "Error in file handling - ";
-    }
-
+public class XmlException extends Exception {
     /* the function create new xml exception */
     public XmlException(String message){
-        super(message);
+        super("Error in XML file: " + message);
     }
 }

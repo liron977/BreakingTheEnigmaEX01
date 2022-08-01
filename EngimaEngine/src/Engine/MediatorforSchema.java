@@ -1,6 +1,7 @@
-import schemaGenerated.CTEEnigma;
+package Engine;
 
-import java.io.IOException;
+import Engine.SchemaGenerated;
+import schemaGenerated.CTEEnigma;
 
 public class MediatorforSchema {
 

@@ -1,4 +1,5 @@
 import EngineManager.EngineManager;
+import Exceptions.XmlException;
 import schemaGenerated.CTEEnigma;
 
 import javax.xml.bind.JAXBContext;
@@ -15,25 +16,36 @@ public class Main {
 
     public static void main(String[] args) {
 
+
    /*     try {
             InputStream inputStream = new FileInputStream(new File("C:\\Users\\97254\\IdeaProjects\\BreakingTheEnigma\\EngimaEngine\\src\\resources\\ex1-sanity-small.xml"));
             CTEEnigma descriptor = deserializeFrom(inputStream);
             System.out.println("name of first country is: " + descriptor.getCTEMachine().getABC());
-            MediatorforSchema mediatorforSchema= new MediatorforSchema(descriptor);
+            Engine.MediatorforSchema mediatorforSchema= new Engine.MediatorforSchema(descriptor);
             System.out.println(mediatorforSchema.xmlValidation()+"XML");
         } catch (JAXBException | FileNotFoundException e) {
             e.printStackTrace();
         }*/
 
+        Start();
+
+
+    }
+
+    private static void Start(){
         Scanner scanner = new Scanner(System.in);
         EngineManager engineManager = new EngineManager();
         String loadStart;
         loadStart = scanner.nextLine();
-        engineManager.load(loadStart);
-
-        System.out.println("The xml was uploaded successfully");
+        try {
+            engineManager.load(loadStart);
+            System.out.println("The xml was uploaded successfully");
+        } catch (XmlException e) {
+           // System.out.println(e.errorInfo() + e.getMessage());
+        }
 
     }
+
 /*
         Scanner scanner = new Scanner(in);
 
@@ -97,71 +109,71 @@ public class Main {
     }
 */
 
- /*       List<Pair> rotorStructure=new ArrayList<>();
+ /*       List<Engine.Pair> rotorStructure=new ArrayList<>();
         int amount=6;
-        rotorStructure.add(new Pair('A','F'));
-        rotorStructure.add(new Pair('B','E'));
-        rotorStructure.add( new Pair('C','D'));
-        rotorStructure.add(new Pair('D','C'));
-        rotorStructure.add(new Pair('E','B'));
-        rotorStructure.add(new Pair('F','A'));
-        Rotor rotor=new Rotor("1",'C',"4",6,rotorStructure);
+        rotorStructure.add(new Engine.Pair('A','F'));
+        rotorStructure.add(new Engine.Pair('B','E'));
+        rotorStructure.add( new Engine.Pair('C','D'));
+        rotorStructure.add(new Engine.Pair('D','C'));
+        rotorStructure.add(new Engine.Pair('E','B'));
+        rotorStructure.add(new Engine.Pair('F','A'));
+        Engine.Rotor rotor=new Engine.Rotor("1",'C',"4",6,rotorStructure);
 
 
-        List<Pair> rotorStructure2=new ArrayList<>();
-        rotorStructure2.add(new Pair('A','B'));
-        rotorStructure2.add(new Pair('B','A'));
-        rotorStructure2.add( new Pair('C','D'));
-        rotorStructure2.add(new Pair('D','C'));
-        rotorStructure2.add(new Pair('E','F'));
-        rotorStructure2.add(new Pair('F','E'));
-        Rotor rotor2=new Rotor("1",'C',"1",6,rotorStructure2);
+        List<Engine.Pair> rotorStructure2=new ArrayList<>();
+        rotorStructure2.add(new Engine.Pair('A','B'));
+        rotorStructure2.add(new Engine.Pair('B','A'));
+        rotorStructure2.add( new Engine.Pair('C','D'));
+        rotorStructure2.add(new Engine.Pair('D','C'));
+        rotorStructure2.add(new Engine.Pair('E','F'));
+        rotorStructure2.add(new Engine.Pair('F','E'));
+        Engine.Rotor rotor2=new Engine.Rotor("1",'C',"1",6,rotorStructure2);
 
-        List<Pair> rotorStructur3=new ArrayList<>();
-        rotorStructur3.add(new Pair('A','E'));
-        rotorStructur3.add(new Pair('B','B'));
-        rotorStructur3.add( new Pair('C','D'));
-        rotorStructur3.add(new Pair('D','F'));
-        rotorStructur3.add(new Pair('E','C'));
-        rotorStructur3.add(new Pair('F','A'));
-        Rotor rotor3=new Rotor("13",'C',"1",6,rotorStructur3);
+        List<Engine.Pair> rotorStructur3=new ArrayList<>();
+        rotorStructur3.add(new Engine.Pair('A','E'));
+        rotorStructur3.add(new Engine.Pair('B','B'));
+        rotorStructur3.add( new Engine.Pair('C','D'));
+        rotorStructur3.add(new Engine.Pair('D','F'));
+        rotorStructur3.add(new Engine.Pair('E','C'));
+        rotorStructur3.add(new Engine.Pair('F','A'));
+        Engine.Rotor rotor3=new Engine.Rotor("13",'C',"1",6,rotorStructur3);
 
-        System.out.println(rotor.getRotorStructure().toString()+"Rotor 1");
-        System.out.println(rotor2.getRotorStructure().toString()+"Rotor 2");
+        System.out.println(rotor.getRotorStructure().toString()+"Engine.Rotor 1");
+        System.out.println(rotor2.getRotorStructure().toString()+"Engine.Rotor 2");
         System.out.println("AFTER");
-        List<Rotor> arrRotors=new ArrayList<>();
+        List<Engine.Rotor> arrRotors=new ArrayList<>();
         arrRotors.add(rotor);
         //arrRotors.add((rotor2));
         arrRotors.add((rotor3));
-        RotorsSet rotorsSet=new RotorsSet(arrRotors);
+        Engine.RotorsSet rotorsSet=new Engine.RotorsSet(arrRotors);
 
 
-        List<Pair> reflectorLisr=new ArrayList<>();
-        reflectorLisr.add(new Pair('1','4'));
-        reflectorLisr.add(new Pair('2','5'));
-        reflectorLisr.add( new Pair('3','6'));
-        Reflector  reflector=new Reflector("2",reflectorLisr);
-        System.out.println(reflector.getReflectorStructure() +"Reflector");
+        List<Engine.Pair> reflectorLisr=new ArrayList<>();
+        reflectorLisr.add(new Engine.Pair('1','4'));
+        reflectorLisr.add(new Engine.Pair('2','5'));
+        reflectorLisr.add( new Engine.Pair('3','6'));
+        Engine.Reflector  reflector=new Engine.Reflector("2",reflectorLisr);
+        System.out.println(reflector.getReflectorStructure() +"Engine.Reflector");
 
        //System.out.println(reflector.getExitIndexFromTheReflector(6)+ "ExitIndexFromTheReflector");
 
-        List<Pair> reflectorLisr2=new ArrayList<>();
-        reflectorLisr2.add(new Pair('1','2'));
-        reflectorLisr2.add(new Pair('3','4'));
-        reflectorLisr2.add(new Pair('5','6'));
-        Reflector  reflector2=new Reflector("2",reflectorLisr2);
+        List<Engine.Pair> reflectorLisr2=new ArrayList<>();
+        reflectorLisr2.add(new Engine.Pair('1','2'));
+        reflectorLisr2.add(new Engine.Pair('3','4'));
+        reflectorLisr2.add(new Engine.Pair('5','6'));
+        Engine.Reflector  reflector2=new Engine.Reflector("2",reflectorLisr2);
 
-        Keyboard keyboard=new Keyboard("ABCDEF");
+        Engine.Keyboard keyboard=new Engine.Keyboard("ABCDEF");
 
-        List<Pair> plugs=new ArrayList<>();
-        //plugs.add(new Pair('C','B'));
-        plugs.add(new Pair('A','F'));
-        PlugsBoard plugsBoard=new PlugsBoard(keyboard,plugs);
-       // PlugsBoard plugsBoard=new PlugsBoard(keyboard,plugs,amountToSwap);
+        List<Engine.Pair> plugs=new ArrayList<>();
+        //plugs.add(new Engine.Pair('C','B'));
+        plugs.add(new Engine.Pair('A','F'));
+        Engine.PlugsBoard plugsBoard=new Engine.PlugsBoard(keyboard,plugs);
+       // Engine.PlugsBoard plugsBoard=new Engine.PlugsBoard(keyboard,plugs,amountToSwap);
 
 
 
-        TheMachineEngine theMachineEngine=new TheMachineEngine(rotorsSet,reflector,keyboard,plugsBoard);
+        Engine.TheMachineEngine theMachineEngine=new Engine.TheMachineEngine(rotorsSet,reflector,keyboard,plugsBoard);
         Scanner scanner = new Scanner(System.in);
 
         char userIntegerInput = 0;
@@ -194,22 +206,22 @@ public class Main {
        // System.out.println(rotor.getValueFromRotorByIndex(keyboard.getIndexFromKeyboard('B')));
         //System.out.println(keyboard.getIndexFromKeyboard('C'));
 
-        //System.out.println(reflector2.getReflectorStructure() +"Reflector");
+        //System.out.println(reflector2.getReflectorStructure() +"Engine.Reflector");
 
         //System.out.println(reflector2.getExitIndexFromTheReflector(6)+ "ExitIndexFromTheReflector");
 
   /*      rotorsSet.manageSpins();
 
 
-        System.out.println(rotor.getRotorStructure().toString()+"Rotor 1");
-        System.out.println(rotor2.getRotorStructure().toString()+"Rotor 2");
+        System.out.println(rotor.getRotorStructure().toString()+"Engine.Rotor 1");
+        System.out.println(rotor2.getRotorStructure().toString()+"Engine.Rotor 2");
         System.out.println("AFTER TWO SPINS");
         rotorsSet.manageSpins();
-        System.out.println(rotor.getRotorStructure().toString()+"Rotor 1");
-        System.out.println(rotor2.getRotorStructure().toString()+"Rotor 2");
+        System.out.println(rotor.getRotorStructure().toString()+"Engine.Rotor 1");
+        System.out.println(rotor2.getRotorStructure().toString()+"Engine.Rotor 2");
 
         System.out.println("AFTER 3 SPINS");
         rotorsSet.manageSpins();
-        System.out.println(rotor.getRotorStructure().toString()+"Rotor 1");
-        System.out.println(rotor2.getRotorStructure().toString()+"Rotor 2");*/
+        System.out.println(rotor.getRotorStructure().toString()+"Engine.Rotor 1");
+        System.out.println(rotor2.getRotorStructure().toString()+"Engine.Rotor 2");*/
     //}

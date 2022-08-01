@@ -1,6 +1,11 @@
+package Engine;
+
 import java.util.*;
 
-import Enums.RomanNumerals;
+import Engine.Keyboard;
+import Engine.Pair;
+import Engine.Rotor;
+import com.sun.xml.internal.ws.api.pipe.Engine;
 import schemaGenerated.*;
 
 public class SchemaGenerated /*implements Serializable*/ {
@@ -11,23 +16,23 @@ public class SchemaGenerated /*implements Serializable*/ {
     public SchemaGenerated(CTEEnigma enigmaDescriptor) {
         this.enigmaDescriptor = enigmaDescriptor;
         this.keyboardInput = enigmaDescriptor.getCTEMachine().getABC().trim();
-        initRomanNumeralsList();
-  /*      Keyboard keyboard= new Keyboard(enigmaDescriptor.getCTEMachine().getABC().trim());
-        RotorsSet rotorsSet= createRotorsSet(enigmaDescriptor);
-        List<Rotor> rotorsFinal=new ArrayList<>();
+      //  initRomanNumeralsList();
+  /*      Engine.Keyboard keyboard= new Engine.Keyboard(enigmaDescriptor.getCTEMachine().getABC().trim());
+        Engine.RotorsSet rotorsSet= createRotorsSet(enigmaDescriptor);
+        List<Engine.Rotor> rotorsFinal=new ArrayList<>();
         rotorsFinal.add(rotorsSet.getRotorById("1"));
         rotorsFinal.add(rotorsSet.getRotorById("2"));
         //לשנות הכל פשוט לייצר רשימה של רוטרים ואז לבחור את הרוטור המתאים לפי ה-id שהתקבך
-         rotorsSet=new RotorsSet(rotorsFinal);
-        ReflectorsSet reflectorsSet=createReflectorsSet(enigmaDescriptor);
-        Reflector reflector=reflectorsSet.searchReflectorById("I");
+         rotorsSet=new Engine.RotorsSet(rotorsFinal);
+        Engine.ReflectorsSet reflectorsSet=createReflectorsSet(enigmaDescriptor);
+        Engine.Reflector reflector=reflectorsSet.searchReflectorById("I");
 
-        List<Pair> plugs=new ArrayList<>();
-        //plugs.add(new Pair("C","B"));
-        plugs.add(new Pair("A","F"));
-        PlugsBoard plugsBoard=new PlugsBoard(keyboard,plugs);
+        List<Engine.Pair> plugs=new ArrayList<>();
+        //plugs.add(new Engine.Pair("C","B"));
+        plugs.add(new Engine.Pair("A","F"));
+        Engine.PlugsBoard plugsBoard=new Engine.PlugsBoard(keyboard,plugs);
 
-        TheMachineEngine theMachineEngine=new TheMachineEngine(rotorsSet,reflector,keyboard,plugsBoard);
+        Engine.TheMachineEngine theMachineEngine=new Engine.TheMachineEngine(rotorsSet,reflector,keyboard,plugsBoard);
         Scanner scanner = new Scanner(System.in);
 
         String userIntegerInput ="";
@@ -49,7 +54,7 @@ public class SchemaGenerated /*implements Serializable*/ {
         if (isKeyboardIsNotEmpty == -10) {
             return -10;
         }
-        int isRotorsCountEqualsToExistsRotorsAmount = isRotorsCountEqualsToExistsRotorsAmount();
+    /*    int isRotorsCountEqualsToExistsRotorsAmount = isRotorsCountEqualsToExistsRotorsAmount();
         if (isRotorsCountEqualsToExistsRotorsAmount == -3) {
             return -3;
         }
@@ -60,8 +65,8 @@ public class SchemaGenerated /*implements Serializable*/ {
         int isEachRotorHasUniqId = isEachRotorHasUniqId();
         if (isEachRotorHasUniqId == -5) {
             return -5;
-        }
-        int isRotorsMappedIslegal = isRotorsMappedIslegal();
+        }*/
+   /*     int isRotorsMappedIslegal = isRotorsMappedIslegal();
         if (isRotorsMappedIslegal < 0) {
             return isRotorsMappedIslegal;
         }
@@ -76,8 +81,8 @@ public class SchemaGenerated /*implements Serializable*/ {
         int isNotchPositionLegal = isNotchPositionLegal();
         if (isNotchPositionLegal == -7) {
             return -7;
-        }
-        int isReflectorIdIsRomanNumerals=isReflectorIdIsRomanNumerals();
+        }*/
+      /*  int isReflectorIdIsRomanNumerals=isReflectorIdIsRomanNumerals();
         if(isReflectorIdIsRomanNumerals==-8){
             return -8;
         }
@@ -96,7 +101,7 @@ public class SchemaGenerated /*implements Serializable*/ {
         int amountOfReflectorMapped=amountOfReflectorMapped();
         if(amountOfReflectorMapped==-17){
             return -17;
-        }
+        }*/
 
         return 100;
     }
@@ -110,14 +115,15 @@ public class SchemaGenerated /*implements Serializable*/ {
         }
         return result;
     }
-    private void initRomanNumeralsList() {
+/*    private void initRomanNumeralsList() {
         romanNumeralsList.add("I");
         romanNumeralsList.add("II");
         romanNumeralsList.add("III");
         romanNumeralsList.add("IV");
         romanNumeralsList.add("V");
-    }
+    }*/
 
+/*
     private int isReflectorIdIsRomanNumerals() {
         List<CTEReflector> cteReflectorList = enigmaDescriptor.getCTEMachine().getCTEReflectors().getCTEReflector();
         String reflectorId;
@@ -130,8 +136,9 @@ public class SchemaGenerated /*implements Serializable*/ {
         }
         return 8;
     }
+*/
 
-    private int isEachReflectorHasUniqId() {
+/*    private int isEachReflectorHasUniqId() {
         HashMap<String, Integer> idHashMap = new HashMap<>();
         List<CTEReflector> cteReflectorList = enigmaDescriptor.getCTEMachine().getCTEReflectors().getCTEReflector();
         String reflectorId;
@@ -218,8 +225,8 @@ public class SchemaGenerated /*implements Serializable*/ {
             }
         }
         return 16;
-    }
-    private int amountOfReflectorMapped()
+    }*/
+  /*  private int amountOfReflectorMapped()
     {
         List<CTEReflector> cteReflectorList = enigmaDescriptor.getCTEMachine().getCTEReflectors().getCTEReflector();
        int counter;
@@ -235,7 +242,7 @@ public class SchemaGenerated /*implements Serializable*/ {
         }
         return 17;
 
-    }
+    }*/
     private ReflectorsSet createReflectorsSet(CTEEnigma enigmaDescriptor){
         List<Reflector> reflectorsList=new ArrayList<>();
         List<CTEReflector> cteReflectorList=enigmaDescriptor.getCTEMachine().getCTEReflectors().getCTEReflector();
@@ -263,7 +270,7 @@ public class SchemaGenerated /*implements Serializable*/ {
         }
         return  reflectorPairStructure;
     }
-    private int isNotchPositionLegal(){
+/*    private int isNotchPositionLegal(){
         List<CTERotor> cteRotors=enigmaDescriptor.getCTEMachine().getCTERotors().getCTERotor();
         for (CTERotor cteRotor:cteRotors) {
             int notchPosition = cteRotor.getNotch();
@@ -275,7 +282,7 @@ public class SchemaGenerated /*implements Serializable*/ {
             }
         }
         return 7;
-    }
+    }*/
     private int isKeyboardIsNotEmpty(){
         int result=-10;
         if(keyboardInput.length()!=0){
@@ -283,7 +290,7 @@ public class SchemaGenerated /*implements Serializable*/ {
         }
         return result;
     }
-    public int isRotorsMappedIslegal(){
+/*    public int isRotorsMappedIslegal(){
         List<CTERotor> cteRotors=enigmaDescriptor.getCTEMachine().getCTERotors().getCTERotor();
         for (CTERotor cteRotor:cteRotors) {
              if(isRotorhasDoubleMapping(cteRotor)==-6){
@@ -291,8 +298,8 @@ public class SchemaGenerated /*implements Serializable*/ {
              }
         }
         return 6;
-    }
-    public int isRotorsAmountOfSignalIsLegal(){
+    }*/
+/*    public int isRotorsAmountOfSignalIsLegal(){
         List<CTERotor> cteRotors=enigmaDescriptor.getCTEMachine().getCTERotors().getCTERotor();
         int amount=0;
         for (CTERotor cteRotor:cteRotors) {
@@ -306,8 +313,8 @@ public class SchemaGenerated /*implements Serializable*/ {
             }
         }
         return 12;
-    }
-    public int isRotorhasDoubleMapping(CTERotor cteRotor){
+    }*/
+  /*  public int isRotorhasDoubleMapping(CTERotor cteRotor){
         String left,right;
         HashMap<String, Integer> leftSignalMap = new HashMap<>();
         HashMap<String, Integer> rightSignalMap = new HashMap<>();
@@ -325,17 +332,9 @@ public class SchemaGenerated /*implements Serializable*/ {
             rightSignalMap.put(right,1);
         }
         return 6;
-    }
-    private int isRotorsSignalslAreValid(){
-        List<CTERotor> cteRotors=enigmaDescriptor.getCTEMachine().getCTERotors().getCTERotor();
-        for (CTERotor cteRotor:cteRotors) {
-            if(isRotorSignalsAreValid(cteRotor)==-11){
-                return -11;
-            }
-        }
-        return 11;
-    }
-    private int isRotorSignalsAreValid(CTERotor cteRotor){
+    }*/
+
+   /* private int isRotorSignalsAreValid(CTERotor cteRotor){
         String left,right;
         List<CTEPositioning> ctePositioning=cteRotor.getCTEPositioning();
         for (CTEPositioning positing:ctePositioning) {
@@ -346,18 +345,18 @@ public class SchemaGenerated /*implements Serializable*/ {
             }
         }
         return 11;
-    }
+    }*/
 
 
-    private int isRotorsAmountIslegal(){
+  /*  private int isRotorsAmountIslegal(){
         int rotorsAmountFromFile=enigmaDescriptor.getCTEMachine().getRotorsCount();
         int result=-4;
         if(rotorsAmountFromFile>=2){
             result=4;
         }
         return result;
-    }
-    private int isEachRotorHasUniqId(){
+    }*/
+/*    private int isEachRotorHasUniqId(){
         HashMap<Integer, Integer> idHashMap = new HashMap<>();
         List<CTERotor> cteRotors=enigmaDescriptor.getCTEMachine().getCTERotors().getCTERotor();
         int previousId=0;
@@ -377,8 +376,8 @@ public class SchemaGenerated /*implements Serializable*/ {
            }
         }
         return 5;
-    }
-    private int isRotorsCountEqualsToExistsRotorsAmount(){
+    }*/
+/*    private int isRotorsCountEqualsToExistsRotorsAmount(){
         int rotorsAmountFromFile=enigmaDescriptor.getCTEMachine().getRotorsCount();
         int countedRotors=countRotorsFromFile();
         int result=-3;
@@ -387,15 +386,15 @@ public class SchemaGenerated /*implements Serializable*/ {
         }
 
         return  result;
-    }
-    private int countRotorsFromFile(){
+    }*/
+/*    private int countRotorsFromFile(){
         List<CTERotor> cteRotors=enigmaDescriptor.getCTEMachine().getCTERotors().getCTERotor();
         int count=0;
         for (CTERotor cteRotor:cteRotors) {
            count++;
         }
         return count;
-    }
+    }*/
 
     private RotorsSet createRotorsSet(CTEEnigma enigmaDescriptor){
         List<Rotor> rotors =new ArrayList<>();

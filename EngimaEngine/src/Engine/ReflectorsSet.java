@@ -1,3 +1,5 @@
+package Engine;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class ReflectorsSet {
     public String toString()
     {
         String str="";
-        for (Reflector reflector:reflectors) {
+        for (Engine.Reflector reflector:reflectors) {
             //str+=;
             str= str+ "New reflector:"+ reflector.getReflectorStructure().toString() + "]";
         }

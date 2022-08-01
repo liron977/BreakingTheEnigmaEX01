@@ -1,3 +1,7 @@
+package Engine;
+
+import Engine.Rotor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +43,7 @@ public class RotorsSet {
     public String toString()
     {
         String str="";
-        for (Rotor rotor:rotors) {
+        for (Engine.Rotor rotor:rotors) {
             //str+=;
            str= str+ "New rotow:"+ rotor.getRotorStructure().toString() + "]";
         }

@@ -1,6 +1,6 @@
 package Exceptions;
 
-public class GeneralException {
+public class GeneralException extends Exception {
     protected String message;
 
     /* the function return the error information */

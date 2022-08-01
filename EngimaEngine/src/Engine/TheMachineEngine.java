@@ -1,3 +1,10 @@
+package Engine;
+
+import Engine.Keyboard;
+import Engine.PlugsBoard;
+import Engine.Rotor;
+import Engine.RotorsSet;
+
 import java.util.Collections;
 
 public class TheMachineEngine {
@@ -6,7 +13,7 @@ public class TheMachineEngine {
     private Keyboard keyboard;
     private PlugsBoard plugsBoard;
 
-    public TheMachineEngine(RotorsSet rotorsSet,Reflector reflector,Keyboard keyboard,PlugsBoard plugsBoard){
+    public TheMachineEngine(RotorsSet rotorsSet, Reflector reflector, Keyboard keyboard, PlugsBoard plugsBoard){
         this.rotorsSet=rotorsSet;
         this.reflector=reflector;
         this.keyboard=keyboard;
@@ -15,12 +22,12 @@ public class TheMachineEngine {
     }
 
 /*    public char manageDecode(char signal){
-        Rotor tmpRotor=null;
+        Engine.Rotor tmpRotor=null;
 
         char entryValue=plugsBoard.getSwappedCharacter(signal);
         rotorsSet.manageSpins();
         int indexOfSignal= keyboard.getIndexFromKeyboard(entryValue);
-        for (Rotor rotor: rotorsSet.getListOfRotors()) {
+        for (Engine.Rotor rotor: rotorsSet.getListOfRotors()) {
             entryValue=rotor.getEntryValueFromRotorByIndex(indexOfSignal);
 
             indexOfSignal=rotor.getIndexFromRotorByEntryValue(entryValue);
@@ -28,7 +35,7 @@ public class TheMachineEngine {
         indexOfSignal=reflector.getExitIndexFromTheReflector(indexOfSignal);
         Collections.reverse(rotorsSet.getListOfRotors());
 
-        for (Rotor rotor:rotorsSet.getListOfRotors()) {
+        for (Engine.Rotor rotor:rotorsSet.getListOfRotors()) {
             entryValue=rotor.getExitValueFromRotorByIndex(indexOfSignal);
             indexOfSignal=rotor.getIndexFromRotorByExitValue(entryValue);
             tmpRotor=rotor;
