@@ -44,7 +44,7 @@ public class SchemaGenerated /*implements Serializable*/ {
         } while (validInput == true);*/
     }
 
-    public int isXmlValid() {
+    /*public int isXmlValid() {
 
        int isKeyboardSizeIsEven = isKeyboardSizeIsEven();
         if (isKeyboardSizeIsEven == -2) {
@@ -54,7 +54,7 @@ public class SchemaGenerated /*implements Serializable*/ {
         if (isKeyboardIsNotEmpty == -10) {
             return -10;
         }
-    /*    int isRotorsCountEqualsToExistsRotorsAmount = isRotorsCountEqualsToExistsRotorsAmount();
+    *//*    int isRotorsCountEqualsToExistsRotorsAmount = isRotorsCountEqualsToExistsRotorsAmount();
         if (isRotorsCountEqualsToExistsRotorsAmount == -3) {
             return -3;
         }
@@ -65,8 +65,8 @@ public class SchemaGenerated /*implements Serializable*/ {
         int isEachRotorHasUniqId = isEachRotorHasUniqId();
         if (isEachRotorHasUniqId == -5) {
             return -5;
-        }*/
-   /*     int isRotorsMappedIslegal = isRotorsMappedIslegal();
+        }*//*
+   *//*     int isRotorsMappedIslegal = isRotorsMappedIslegal();
         if (isRotorsMappedIslegal < 0) {
             return isRotorsMappedIslegal;
         }
@@ -81,8 +81,8 @@ public class SchemaGenerated /*implements Serializable*/ {
         int isNotchPositionLegal = isNotchPositionLegal();
         if (isNotchPositionLegal == -7) {
             return -7;
-        }*/
-      /*  int isReflectorIdIsRomanNumerals=isReflectorIdIsRomanNumerals();
+        }*//*
+      *//*  int isReflectorIdIsRomanNumerals=isReflectorIdIsRomanNumerals();
         if(isReflectorIdIsRomanNumerals==-8){
             return -8;
         }
@@ -101,11 +101,11 @@ public class SchemaGenerated /*implements Serializable*/ {
         int amountOfReflectorMapped=amountOfReflectorMapped();
         if(amountOfReflectorMapped==-17){
             return -17;
-        }*/
+        }*//*
 
         return 100;
-    }
-    private void createKeyboard(){
+    }*/
+/*    private void createKeyboard(){
         Keyboard keyboard= new Keyboard(keyboardInput.toUpperCase());
     }
     private int isKeyboardSizeIsEven(){
@@ -114,7 +114,7 @@ public class SchemaGenerated /*implements Serializable*/ {
             result=2;
         }
         return result;
-    }
+    }*/
 /*    private void initRomanNumeralsList() {
         romanNumeralsList.add("I");
         romanNumeralsList.add("II");
@@ -243,33 +243,7 @@ public class SchemaGenerated /*implements Serializable*/ {
         return 17;
 
     }*/
-    private ReflectorsSet createReflectorsSet(CTEEnigma enigmaDescriptor){
-        List<Reflector> reflectorsList=new ArrayList<>();
-        List<CTEReflector> cteReflectorList=enigmaDescriptor.getCTEMachine().getCTEReflectors().getCTEReflector();
-        String reflectorId;
-        Reflector reflector;
 
-        for (CTEReflector cteReflector: cteReflectorList) {
-            List<CTEReflect> cteReflect=cteReflector.getCTEReflect();
-            reflectorId=cteReflector.getId();
-            reflector=new Reflector(reflectorId,crateNewReflector(cteReflect));
-            reflectorsList.add(reflector);
-        }
-        ReflectorsSet reflectorsSet=new ReflectorsSet(reflectorsList);
-        return reflectorsSet;
-    }
-    private List<Pair> crateNewReflector(List<CTEReflect> cteReflect) {
-        String left,right;
-        Pair pair;
-        List<Pair> reflectorPairStructure=new ArrayList<>();
-        for (CTEReflect reflect:cteReflect) {
-            left=Integer.toString(reflect.getInput());
-            right=Integer.toString(reflect.getOutput());
-            pair=new Pair(left,right);
-            reflectorPairStructure.add(pair);
-        }
-        return  reflectorPairStructure;
-    }
 /*    private int isNotchPositionLegal(){
         List<CTERotor> cteRotors=enigmaDescriptor.getCTEMachine().getCTERotors().getCTERotor();
         for (CTERotor cteRotor:cteRotors) {
@@ -283,13 +257,13 @@ public class SchemaGenerated /*implements Serializable*/ {
         }
         return 7;
     }*/
-    private int isKeyboardIsNotEmpty(){
+   /* private int isKeyboardIsNotEmpty(){
         int result=-10;
         if(keyboardInput.length()!=0){
             result=10;
         }
         return result;
-    }
+    }*/
 /*    public int isRotorsMappedIslegal(){
         List<CTERotor> cteRotors=enigmaDescriptor.getCTEMachine().getCTERotors().getCTERotor();
         for (CTERotor cteRotor:cteRotors) {
@@ -434,5 +408,32 @@ public class SchemaGenerated /*implements Serializable*/ {
         int startingPosition = userIntegerInput - 'A' + 1;
        newRoter.initRotorStructure(startingPosition);
         return newRoter;
+    }
+    private ReflectorsSet createReflectorsSet(CTEEnigma enigmaDescriptor){
+        List<Reflector> reflectorsList=new ArrayList<>();
+        List<CTEReflector> cteReflectorList=enigmaDescriptor.getCTEMachine().getCTEReflectors().getCTEReflector();
+        String reflectorId;
+        Reflector reflector;
+
+        for (CTEReflector cteReflector: cteReflectorList) {
+            List<CTEReflect> cteReflect=cteReflector.getCTEReflect();
+            reflectorId=cteReflector.getId();
+            reflector=new Reflector(reflectorId,crateNewReflector(cteReflect));
+            reflectorsList.add(reflector);
+        }
+        ReflectorsSet reflectorsSet=new ReflectorsSet(reflectorsList);
+        return reflectorsSet;
+    }
+    private List<Pair> crateNewReflector(List<CTEReflect> cteReflect) {
+        String left,right;
+        Pair pair;
+        List<Pair> reflectorPairStructure=new ArrayList<>();
+        for (CTEReflect reflect:cteReflect) {
+            left=Integer.toString(reflect.getInput());
+            right=Integer.toString(reflect.getOutput());
+            pair=new Pair(left,right);
+            reflectorPairStructure.add(pair);
+        }
+        return  reflectorPairStructure;
     }
 }

@@ -1,23 +1,13 @@
-import EngineManager.EngineManager;
-import Exceptions.XmlException;
-import schemaGenerated.CTEEnigma;
+public class Main2 {}
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import java.io.*;
-import java.util.Scanner;
+    //private final static String JAXB_XML_GAME_PACKAGE_NAME = "schemaGenerated";
 
-import static java.lang.System.in;
-
-public class Main {
-
-    private final static String JAXB_XML_GAME_PACKAGE_NAME = "schemaGenerated";
-
+/*
     public static void main(String[] args) {
 
 
-   /*     try {
+   */
+/*     try {
             InputStream inputStream = new FileInputStream(new File("C:\\Users\\97254\\IdeaProjects\\BreakingTheEnigma\\EngimaEngine\\src\\resources\\ex1-sanity-small.xml"));
             CTEEnigma descriptor = deserializeFrom(inputStream);
             System.out.println("name of first country is: " + descriptor.getCTEMachine().getABC());
@@ -25,27 +15,42 @@ public class Main {
             System.out.println(mediatorforSchema.xmlValidation()+"XML");
         } catch (JAXBException | FileNotFoundException e) {
             e.printStackTrace();
-        }*/
+        }*//*
+
 
         Start();
-
-
     }
+*/
 
-    private static void Start(){
+/*    private static void Start() {
         Scanner scanner = new Scanner(System.in);
         EngineManager engineManager = new EngineManager();
-        String loadStart;
-        loadStart = scanner.nextLine();
-        try {
-            engineManager.load(loadStart);
-            System.out.println("The xml was uploaded successfully");
-        } catch (XmlException e) {
-           // System.out.println(e.errorInfo() + e.getMessage());
+        String loadStart = scanner.nextLine();
+        if (fileNameValidation(loadStart,engineManager)) {
+            try {
+                engineManager.load(loadStart);
+                System.out.println("The xml was uploaded successfully");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
-
     }
 
+    public boolean fileNameValidation(String str,EngineManager engineManager) {
+
+        MachineDTO machineDTO= engineManager.getAllErrorsRelatedToFilePath(str);
+        if (machineDTO.getListOfException().size() == 0) {
+           return true;
+        }
+        else {
+            for (Exception exception : machineDTO.getListOfException()) {
+                System.out.println(exception.getMessage());
+                System.out.println("******************");
+            }
+            return false;
+        }
+    }
+}*/
 /*
         Scanner scanner = new Scanner(in);
 
@@ -64,7 +69,6 @@ public class Main {
 
 
 
-    }
 /*    private static CTEEnigma deserializeFrom(InputStream in) throws JAXBException {
         JAXBContext jc = JAXBContext.newInstance(JAXB_XML_GAME_PACKAGE_NAME);
         Unmarshaller u = jc.createUnmarshaller();
