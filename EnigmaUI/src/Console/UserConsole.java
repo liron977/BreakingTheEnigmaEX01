@@ -1,10 +1,10 @@
 package Console;
 
 import EngineManager.EngineManager;
+import MachineDTO.FileDTO;
 import MachineDTO.MachineDTO;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class UserConsole {
 
@@ -16,20 +16,20 @@ public UserConsole (EngineManager engineManager){
 
     public boolean fileNameValidation(String str) {
 
-        MachineDTO machineDTO = engineManager.getAllErrorsRelatedToFilePath(str);
-        if (machineDTO.getListOfException().size() == 0) {
+        FileDTO fileDTO = engineManager.getAllErrorsRelatedToFilePath(str);
+        if (fileDTO.getListOfException().size() == 0) {
             return true;
         } else {
-            printListOfException(machineDTO.getListOfException());
+            printListOfException(fileDTO.getListOfException());
             return false;
         }
     }
     public boolean isFileLoadSuccessfully(String str) throws Exception {
-        MachineDTO machineDTO = engineManager.load(str);
-        if (machineDTO.getListOfException().size() == 0) {
+        FileDTO fileDTO = engineManager.load(str);
+        if (fileDTO.getListOfException().size() == 0) {
             return true;
         } else {
-            printListOfException(machineDTO.getListOfException());
+            printListOfException(fileDTO.getListOfException());
               return false;
         }
 
@@ -38,6 +38,15 @@ public UserConsole (EngineManager engineManager){
         for (Exception exception : errors) {
             System.out.println(exception.getMessage());
             System.out.println("******************");
+        }
+    }
+    public boolean isInputValid(String str){
+    MachineDTO machineDTO= engineManager.initCodeConfigurationManually(str);
+        if (machineDTO.getListOfException().size() == 0) {
+            return true;
+        } else {
+            printListOfException(machineDTO.getListOfException());
+            return false;
         }
     }
 }

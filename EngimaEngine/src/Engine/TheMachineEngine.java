@@ -10,15 +10,23 @@ import java.util.Collections;
 public class TheMachineEngine {
     private RotorsSet rotorsSet;
     private Reflector reflector;
+    private ReflectorsSet reflectorsSet;
     private Keyboard keyboard;
     private PlugsBoard plugsBoard;
 
-    public TheMachineEngine(RotorsSet rotorsSet, Reflector reflector, Keyboard keyboard, PlugsBoard plugsBoard){
+    public TheMachineEngine(RotorsSet rotorsSet, ReflectorsSet reflectorsSet, Keyboard keyboard){
         this.rotorsSet=rotorsSet;
-        this.reflector=reflector;
+        //this.reflector=reflector;
         this.keyboard=keyboard;
+        this.reflectorsSet=reflectorsSet;
+        //this.plugsBoard=plugsBoard;
+    }
+    public void addPlugsBoardTOTheMachine(PlugsBoard plugsBoard){
         this.plugsBoard=plugsBoard;
+    }
+    public void  addSelectedReflector(String reflectorId){
 
+        this.reflector=reflectorsSet.searchReflectorById(reflectorId);
     }
 
 /*    public char manageDecode(char signal){

@@ -1,9 +1,19 @@
 package Menus;
 
+import Console.UserConsole;
+
+import java.util.Scanner;
+
 public class InitCodeConfigurationManually implements RunTheMenuInterface{
+    public UserConsole userConsole;
+
+    public InitCodeConfigurationManually(UserConsole userConsole){
+        this.userConsole=userConsole;
+    }
     @Override
     public void execution(int userChoice) {
         printDescription();
+        initCodeConfiguration();
     }
     public void printDescription() {
         String str="Please enter the requested details :\n" +"#1 -The selected rotors ID numbers + order between them (for " +
@@ -16,4 +26,57 @@ public class InitCodeConfigurationManually implements RunTheMenuInterface{
 
         System.out.println(str);
     }
-}
+    private void initCodeConfiguration(){
+        Scanner scanner = new Scanner(System.in);
+        String loadStart = scanner.nextLine();
+        boolean isUserInputDisplayIsValid=false;
+        boolean isUserInputIsValid=false;
+        //userConsole.isInputValid(loadStart);
+
+        while (!isUserInputDisplayIsValid){
+            if (userConsole.isInputValid(loadStart)) {
+                isUserInputIsValid = true;
+               /* while (!isUserInputIsValid) {
+                        if (userConsole.isInputValid(loadStart)) {
+                            isUserInputDisplayIsValid = true;
+                            break;
+                        }
+                        else {
+                            System.out.println("Please insert updated requested details");
+                            loadStart = scanner.nextLine();
+                        }
+                }*/
+            }
+            else {
+                System.out.println("Please insert updated requested details");
+                loadStart = scanner.nextLine();
+            }
+        }
+
+    }
+
+
+
+
+
+    }
+   /* private boolean isStrValid(String str){
+        char[] ch = new char[str.length()];
+        int countOfOpener=0,countOfBrackets=0;
+        for (int i = 0; i < str.length(); i++) {
+            ch[i] = str.charAt(i);
+        }
+        for (int i=0;i<ch.length;i++){
+          if(ch[i]=='<'){
+              countOfOpener++;
+          }
+         else if(ch[i]=='>'){
+             countOfBrackets++;
+          }
+        }
+        if(countOfOpener!=countOfBrackets){
+            return false;
+        }
+        return true;
+    }
+    */

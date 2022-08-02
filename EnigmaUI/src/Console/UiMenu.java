@@ -1,7 +1,6 @@
 package Console;
 
-import EngineManager.EngineManager;
-import MachineDTO.MachineDTO;
+import Menus.InitCodeConfigurationManually;
 import Menus.LoadNewFile;
 
 import java.util.Scanner;
@@ -58,13 +57,14 @@ public class UiMenu {
                 LoadNewFile loadNewFile = new LoadNewFile(userConsole);
                 loadNewFile.execution(userChoice);
                 break;
-      /*  case 2:
+       /*case 2:
             new TargetGraphInfoOption().start();
-            break;
+            break;*/
         case 3:
-            new TargetInfoOption().start();
+            InitCodeConfigurationManually initCodeConfigurationManually = new InitCodeConfigurationManually(userConsole);
+             initCodeConfigurationManually.execution(userChoice);
             break;
-        case 4:
+      /*   case 4:
             new TargetPathsOption().start();
             break;
         case 5:

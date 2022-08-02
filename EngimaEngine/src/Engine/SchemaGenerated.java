@@ -370,7 +370,7 @@ public class SchemaGenerated /*implements Serializable*/ {
         return count;
     }*/
 
-    private RotorsSet createRotorsSet(CTEEnigma enigmaDescriptor){
+    public RotorsSet createRotorsSet(){
         List<Rotor> rotors =new ArrayList<>();
         List<CTERotor> cteRotors=enigmaDescriptor.getCTEMachine().getCTERotors().getCTERotor();
         for (CTERotor cteRotor:cteRotors) {
@@ -384,8 +384,6 @@ public class SchemaGenerated /*implements Serializable*/ {
     private Pair createNewPair(CTEPositioning positing){
         String left=positing.getLeft();
         String right=positing.getRight();
-        /*char charLeft=left.charAt(0);
-        char charRight=right.charAt(0);*/
         Pair pair=new Pair(right,left);
 
         return pair;
@@ -401,15 +399,16 @@ public class SchemaGenerated /*implements Serializable*/ {
             rotorStructure.add(createNewPair(positing));
             entriesAmount++;
         }
-        Rotor newRoter=new Rotor(rotorIdString,notchPosition,entriesAmount,rotorStructure);
-        System.out.print("Enter an Char for position: ");
+        Rotor newRoter=new Rotor(rotorIdString,entriesAmount,rotorStructure);
+       // Rotor newRoter=new Rotor(rotorIdString,notchPosition,entriesAmount,rotorStructure);
+        /*System.out.print("Enter an Char for position: ");
         Scanner scanner = new Scanner(System.in);
         char userIntegerInput = scanner.next().charAt(0);
         int startingPosition = userIntegerInput - 'A' + 1;
-       newRoter.initRotorStructure(startingPosition);
+       newRoter.initRotorStructure(startingPosition);*/
         return newRoter;
     }
-    private ReflectorsSet createReflectorsSet(CTEEnigma enigmaDescriptor){
+    public ReflectorsSet createReflectorsSet(){
         List<Reflector> reflectorsList=new ArrayList<>();
         List<CTEReflector> cteReflectorList=enigmaDescriptor.getCTEMachine().getCTEReflectors().getCTEReflector();
         String reflectorId;
@@ -435,5 +434,9 @@ public class SchemaGenerated /*implements Serializable*/ {
             reflectorPairStructure.add(pair);
         }
         return  reflectorPairStructure;
+    }
+    public Keyboard createKeyboard()
+    {
+       return new Keyboard(enigmaDescriptor.getCTEMachine().getABC().trim());
     }
 }
