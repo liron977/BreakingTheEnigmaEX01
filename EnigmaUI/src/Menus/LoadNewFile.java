@@ -16,8 +16,9 @@ public class LoadNewFile implements RunTheMenuInterface {
     @Override
     public void execution(int userChoice) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please insert full xml path");
+        System.out.println("Please insert full xml path \n");
         String loadStart = scanner.nextLine();
+        loadStart="C:\\Users\\97254\\IdeaProjects\\BreakingTheEnigma\\EngimaEngine\\src\\resources\\ex1-sanity-small.xml";
         boolean isFileNameValid=false;
         boolean isisFileLoadSuccessfully=false;
         while (!isFileNameValid){

@@ -1,6 +1,8 @@
 package Engine.validator;
 
-import Engine.Pair;
+import Engine.TheEnigmaEngine.Pair;
+import Engine.TheEnigmaEngine.Rotor;
+import Engine.TheEnigmaEngine.TheMachineEngine;
 import schemaGenerated.CTEEnigma;
 
 import java.util.ArrayList;
@@ -12,11 +14,12 @@ public class UserInputValidator implements Validator {
     private List<Exception> listOfException;
     private CTEEnigma cteEnigma;
 
-    private String[] RotorsId;
-    private char[] RotorsPosition;
+    private TheMachineEngine theMachineEngine;
+    private String[] rotorsId;
+    private char[] rotorsPosition;
     private String reflectorId;
     private List<Pair> pairsOfSwappingCharacter = new ArrayList<>();
-    public UserInputValidator(String userInput, CTEEnigma cteEnigma) {
+    public UserInputValidator(String userInput, CTEEnigma cteEnigma,TheMachineEngine theMachineEngine) {
         this.cteEnigma = cteEnigma;
         this.listOfException = new ArrayList<>();
         this.userInput = new char[userInput.length()];
@@ -24,6 +27,7 @@ public class UserInputValidator implements Validator {
         for (int i = 0; i < userInput.length(); i++) {
             this.userInput[i] = userInput.charAt(i);
         }
+        this.theMachineEngine=theMachineEngine;
 
     }
 
@@ -31,9 +35,22 @@ public class UserInputValidator implements Validator {
     public void validate() {
         if (isStrFormatValid()) {
             splitTheUserInput();
+            isRotorsIdFromUserInputIsValid();
+            isRotorIDIsUniq();
+            isReflectorIdValid();
         }
     }
-
+    public void isRotorIDIsUniq(){
+       for(int i=0;i<rotorsId.length;i++) {
+            String str=rotorsId[i];
+           for(int j=i+1;j<rotorsId.length;j++){
+               if(str.equals(rotorsId[j])){
+                   listOfException.add(new Exception("You insert the same rotors id ["+str.toString()+"]"));
+                   break;
+               }
+            }
+        }
+    }
     @Override
     public List<Exception> getListOfException() {
         return listOfException;
@@ -57,7 +74,6 @@ public class UserInputValidator implements Validator {
         }
         return true;
     }
-
     private char[] deepCopy() {
         char[] tmp = new char[userInput.length];
         int countOfOpener = 0, countOfBrackets = 0;
@@ -66,11 +82,36 @@ public class UserInputValidator implements Validator {
         }
         return tmp;
     }
-
     private void isRotorsIdFromUserInputIsValid(){
-     // if(RotorsId.length()!=cteEnigma.getCTEMachine().getCTERotors())
+        int numberOfRotorsFromTheFile=cteEnigma.getCTEMachine().getRotorsCount();
+      if(rotorsId.length>numberOfRotorsFromTheFile){
+          listOfException.add(new Exception("The number of rotors you enter is more of the rotors amount exist in the machine,you can insert ["+numberOfRotorsFromTheFile+"] for maximum"));
+      }
+      else if(rotorsId.length==0){
+          listOfException.add(new Exception("You didn`t enter rotors id,you can insert for maximum ["+numberOfRotorsFromTheFile+"]"));
+      }
+        for (String rotorsId: rotorsId) {
+          if(!theMachineEngine.getRotorsSet().isRotorsIdExists(rotorsId)){
+              listOfException.add(new Exception("The rotor id ["+rotorsId+"] does not exists in the machine"));
+          }
+        }
     }
+    private void isReflectorIdValid(){
 
+        if(!theMachineEngine.getReflectorsSet().searchReflectorById(reflectorId)){
+        listOfException.add(new Exception("The reflector ID is not exist in the file"));
+        }
+        else {
+            char[] tmp=reflectorId.trim().toCharArray();
+            for(int i=0;i<reflectorId.trim().length();i++){
+                if((tmp[i]!='I')&&(tmp[i]!='V')){
+                    listOfException.add(new Exception("The reflector ID is not legal,you need to enter one option of {I,II,III,IV,V}"));
+                }
+            }
+
+        }
+
+    }
 
 
 
@@ -103,9 +144,9 @@ public class UserInputValidator implements Validator {
                     }
                     if (!flag) {
                         String subString = String.valueOf(sub);
-                        RotorsId = (subString.split(","));
-                        for (int ix = 0; ix < RotorsId.length; ix++) {
-                            RotorsId[ix] = RotorsId[ix].trim();
+                        rotorsId = (subString.split(","));
+                        for (int ix = 0; ix < rotorsId.length; ix++) {
+                            rotorsId[ix] = rotorsId[ix].trim();
                         }
                     }
                 } else if (counterOfOpenBrackets == 2) {
@@ -117,9 +158,9 @@ public class UserInputValidator implements Validator {
                         j++;
                         i++;
                     }
-                    RotorsPosition=new char[count];
+                    rotorsPosition=new char[count];
                     for(int ix=0;ix<count;ix++){
-                        RotorsPosition[ix]=rotorsPositionTmp[ix];
+                        rotorsPosition[ix]=rotorsPositionTmp[ix];
                     }
                 }
                 else if(counterOfOpenBrackets==3){

@@ -1,4 +1,6 @@
-package Engine;
+package Engine.TheEnigmaEngine;
+
+import Engine.TheEnigmaEngine.Reflector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,7 @@ public class ReflectorsSet {
     public List<Reflector> getListOfReflectors() {
         return reflectors;
     }
-    public Reflector searchReflectorById(String reflectorId){
+    public Reflector getReflectorById(String reflectorId){
         for (Reflector reflector:reflectors) {
             if(reflector.getReflectorId().equals(reflectorId)){
                 return reflector;
@@ -23,11 +25,20 @@ public class ReflectorsSet {
         }
         return null;
     }
+    public boolean searchReflectorById(String reflectorId){
+        for (Reflector reflector:reflectors) {
+            if(reflector.getReflectorId().equals(reflectorId)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 /*    @Override
     public String toString()
     {
         String str="";
-        for (Engine.Reflector reflector:reflectors) {
+        for (Engine.TheEnigmaEngine.Reflector reflector:reflectors) {
             //str+=;
             str= str+ "New reflector:"+ reflector.getReflectorStructure().toString() + "]";
         }

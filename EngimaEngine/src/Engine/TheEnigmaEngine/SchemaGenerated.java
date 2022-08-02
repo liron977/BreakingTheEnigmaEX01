@@ -1,11 +1,8 @@
-package Engine;
+package Engine.TheEnigmaEngine;
 
 import java.util.*;
 
-import Engine.Keyboard;
-import Engine.Pair;
-import Engine.Rotor;
-import com.sun.xml.internal.ws.api.pipe.Engine;
+import Engine.TheEnigmaEngine.*;
 import schemaGenerated.*;
 
 public class SchemaGenerated /*implements Serializable*/ {
@@ -17,22 +14,22 @@ public class SchemaGenerated /*implements Serializable*/ {
         this.enigmaDescriptor = enigmaDescriptor;
         this.keyboardInput = enigmaDescriptor.getCTEMachine().getABC().trim();
       //  initRomanNumeralsList();
-  /*      Engine.Keyboard keyboard= new Engine.Keyboard(enigmaDescriptor.getCTEMachine().getABC().trim());
-        Engine.RotorsSet rotorsSet= createRotorsSet(enigmaDescriptor);
-        List<Engine.Rotor> rotorsFinal=new ArrayList<>();
+  /*      Engine.TheEnigmaEngine.Keyboard keyboard= new Engine.TheEnigmaEngine.Keyboard(enigmaDescriptor.getCTEMachine().getABC().trim());
+        Engine.TheEnigmaEngine.RotorsSet rotorsSet= createRotorsSet(enigmaDescriptor);
+        List<Engine.TheEnigmaEngine.Rotor> rotorsFinal=new ArrayList<>();
         rotorsFinal.add(rotorsSet.getRotorById("1"));
         rotorsFinal.add(rotorsSet.getRotorById("2"));
         //לשנות הכל פשוט לייצר רשימה של רוטרים ואז לבחור את הרוטור המתאים לפי ה-id שהתקבך
-         rotorsSet=new Engine.RotorsSet(rotorsFinal);
-        Engine.ReflectorsSet reflectorsSet=createReflectorsSet(enigmaDescriptor);
-        Engine.Reflector reflector=reflectorsSet.searchReflectorById("I");
+         rotorsSet=new Engine.TheEnigmaEngine.RotorsSet(rotorsFinal);
+        Engine.TheEnigmaEngine.ReflectorsSet reflectorsSet=createReflectorsSet(enigmaDescriptor);
+        Engine.TheEnigmaEngine.Reflector reflector=reflectorsSet.searchReflectorById("I");
 
-        List<Engine.Pair> plugs=new ArrayList<>();
-        //plugs.add(new Engine.Pair("C","B"));
-        plugs.add(new Engine.Pair("A","F"));
-        Engine.PlugsBoard plugsBoard=new Engine.PlugsBoard(keyboard,plugs);
+        List<Engine.TheEnigmaEngine.Pair> plugs=new ArrayList<>();
+        //plugs.add(new Engine.TheEnigmaEngine.Pair("C","B"));
+        plugs.add(new Engine.TheEnigmaEngine.Pair("A","F"));
+        Engine.TheEnigmaEngine.PlugsBoard plugsBoard=new Engine.TheEnigmaEngine.PlugsBoard(keyboard,plugs);
 
-        Engine.TheMachineEngine theMachineEngine=new Engine.TheMachineEngine(rotorsSet,reflector,keyboard,plugsBoard);
+        Engine.TheEnigmaEngine.TheMachineEngine theMachineEngine=new Engine.TheEnigmaEngine.TheMachineEngine(rotorsSet,reflector,keyboard,plugsBoard);
         Scanner scanner = new Scanner(System.in);
 
         String userIntegerInput ="";

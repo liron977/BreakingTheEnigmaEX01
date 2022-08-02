@@ -1,7 +1,7 @@
 package EngineManager;
 
-import Engine.SchemaGenerated;
-import Engine.TheMachineEngine;
+import Engine.TheEnigmaEngine.SchemaGenerated;
+import Engine.TheEnigmaEngine.TheMachineEngine;
 import Engine.validator.*;
 import schemaGenerated.CTEEnigma;
 
@@ -20,6 +20,7 @@ public class EngineManager implements EngineManagerInterface {
     private MachineDTO machineDTO;
 
     private  CTEEnigma cteEnigma;
+    SchemaGenerated schemaGenerated;
 
     private final String JAXB_XML_GAME_PACKAGE_NAME = "schemaGenerated";
     @Override
@@ -40,16 +41,21 @@ public class EngineManager implements EngineManagerInterface {
     }
     public TheMachineEngine buildTheMachineEngine(){
 
-        SchemaGenerated schemaGenerated=new SchemaGenerated(cteEnigma);
-        return new TheMachineEngine(schemaGenerated.createRotorsSet(),schemaGenerated.createReflectorsSet(),schemaGenerated.createKeyboard());
+         schemaGenerated=new SchemaGenerated(cteEnigma);
+        TheMachineEngine theMachineEngine= new TheMachineEngine(schemaGenerated.createRotorsSet(),schemaGenerated.createReflectorsSet(),schemaGenerated.createKeyboard());
+        //machineDTO =new MachineDTO(new ArrayList<>(),cteEnigma.getCTEMachine().getRotorsCount(),theMachineEngine.getRotorsId(),theMachineEngine.getReflectorId(),theMachineEngine.getKeyboard(),0,"");
+        //return machineDTO;
+        return theMachineEngine;
+
     }
     public MachineDTO initCodeConfigurationManually(String str){
-        UserInputValidator userInputValidator=new UserInputValidator(str,cteEnigma);
+        TheMachineEngine theMachineEngine=buildTheMachineEngine();
+        UserInputValidator userInputValidator=new UserInputValidator(str,cteEnigma,theMachineEngine);
         List<Validator> validators=new ArrayList<>();
         validators.add(userInputValidator);
         ValidatorRunner validatorRunner=new ValidatorRunner(validators);
         List<Exception> exceptions=  validatorRunner.run(cteEnigma);
-        machineDTO =new MachineDTO(exceptions);
+        machineDTO =new MachineDTO(exceptions,0, new String[]{" "},new String[]{" "},"",0,"");
        return machineDTO;
     }
     public int getRotorsAmount(){

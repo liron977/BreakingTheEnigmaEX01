@@ -1,6 +1,5 @@
-package Engine;
+package Engine.TheEnigmaEngine;
 
-import Engine.SchemaGenerated;
 import schemaGenerated.CTEEnigma;
 
 public class MediatorforSchema {

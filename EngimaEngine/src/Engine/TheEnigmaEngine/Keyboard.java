@@ -1,4 +1,4 @@
-package Engine;
+package Engine.TheEnigmaEngine;
 
 public class Keyboard {
     private String keyboard;
@@ -15,5 +15,8 @@ public class Keyboard {
     }
     public int getKeyboardAmount(){
         return keyboardAmount;
+    }
+    public String getKeyboard(){
+        return keyboard ;
     }
 }

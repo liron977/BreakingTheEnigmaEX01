@@ -1,6 +1,4 @@
-package Engine;
-
-import Engine.Rotor;
+package Engine.TheEnigmaEngine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +21,15 @@ public class RotorsSet {
     public List<Rotor> getListOfRotors() {
        return rotors;
     }
+    public String[] getAllRotorsId(){
+        int i=0;
+        String[] rotorsId=new String[rotors.size()];
+        for (Rotor rotor:rotors) {
+            rotorsId[i]=rotor.getRotorId();
+              i++;
+        }
+        return rotorsId;
+    }
     public void manageSpins(){
 
         for(int i=0;i<rotorsAmount-1;i++) {
@@ -39,11 +46,19 @@ public class RotorsSet {
            }
         }
     }
+    public boolean isRotorsIdExists(String id){
+        for (Rotor rotor:rotors){
+            if(rotor.getRotorId().equals(id)){
+                return true;
+            }
+        }
+        return false;
+    }
  /*   @Override
     public String toString()
     {
         String str="";
-        for (Engine.Rotor rotor:rotors) {
+        for (Engine.TheEnigmaEngine.Rotor rotor:rotors) {
             //str+=;
            str= str+ "New rotow:"+ rotor.getRotorStructure().toString() + "]";
         }

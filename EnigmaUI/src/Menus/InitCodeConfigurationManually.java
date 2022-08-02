@@ -34,8 +34,9 @@ public class InitCodeConfigurationManually implements RunTheMenuInterface{
         //userConsole.isInputValid(loadStart);
 
         while (!isUserInputDisplayIsValid){
-            if (userConsole.isInputValid(loadStart)) {
-                isUserInputIsValid = true;
+            if (userConsole.isInputStructure(loadStart)) {
+                isUserInputDisplayIsValid = true;
+                System.out.println("The data is valid");
                /* while (!isUserInputIsValid) {
                         if (userConsole.isInputValid(loadStart)) {
                             isUserInputDisplayIsValid = true;

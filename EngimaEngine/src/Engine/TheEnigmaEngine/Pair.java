@@ -1,4 +1,4 @@
-package Engine;
+package Engine.TheEnigmaEngine;
 
 public class Pair {
     private String entry;

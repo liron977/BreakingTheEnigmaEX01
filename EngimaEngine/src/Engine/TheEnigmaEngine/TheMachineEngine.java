@@ -1,14 +1,12 @@
-package Engine;
+package Engine.TheEnigmaEngine;
 
-import Engine.Keyboard;
-import Engine.PlugsBoard;
-import Engine.Rotor;
-import Engine.RotorsSet;
+import Engine.TheEnigmaEngine.*;
 
 import java.util.Collections;
 
 public class TheMachineEngine {
     private RotorsSet rotorsSet;
+    private RotorsSet usedRotors;
     private Reflector reflector;
     private ReflectorsSet reflectorsSet;
     private Keyboard keyboard;
@@ -26,16 +24,45 @@ public class TheMachineEngine {
     }
     public void  addSelectedReflector(String reflectorId){
 
-        this.reflector=reflectorsSet.searchReflectorById(reflectorId);
+        this.reflector=reflectorsSet.getReflectorById(reflectorId);
+    }
+    public ReflectorsSet getReflectorsSet(){
+        return reflectorsSet;
+    }
+    public String[] getRotorsId(){
+        String[] rotorsId=new String[rotorsSet.getListOfRotors().size()];
+        int i=0;
+        for (Rotor rotor: rotorsSet.getListOfRotors()) {
+               rotorsId[i]=rotor.getRotorId();
+               i++;
+        }
+        return rotorsId;
+    }
+    public String[] getReflectorId(){
+        String[] reflectorsId=new String[]{};
+        int i=0;
+        for (Reflector reflector: reflectorsSet.getListOfReflectors()) {
+            reflectorsId[i]=reflector.getReflectorId();
+            i++;
+        }
+        return reflectorsId;
+    }
+    public String getKeyboard(){
+        return keyboard.getKeyboard();
+    }
+    public RotorsSet getRotorsSet(){
+        return rotorsSet;
     }
 
+
+
 /*    public char manageDecode(char signal){
-        Engine.Rotor tmpRotor=null;
+        Engine.TheEnigmaEngine.Rotor tmpRotor=null;
 
         char entryValue=plugsBoard.getSwappedCharacter(signal);
         rotorsSet.manageSpins();
         int indexOfSignal= keyboard.getIndexFromKeyboard(entryValue);
-        for (Engine.Rotor rotor: rotorsSet.getListOfRotors()) {
+        for (Engine.TheEnigmaEngine.Rotor rotor: rotorsSet.getListOfRotors()) {
             entryValue=rotor.getEntryValueFromRotorByIndex(indexOfSignal);
 
             indexOfSignal=rotor.getIndexFromRotorByEntryValue(entryValue);
@@ -43,7 +70,7 @@ public class TheMachineEngine {
         indexOfSignal=reflector.getExitIndexFromTheReflector(indexOfSignal);
         Collections.reverse(rotorsSet.getListOfRotors());
 
-        for (Engine.Rotor rotor:rotorsSet.getListOfRotors()) {
+        for (Engine.TheEnigmaEngine.Rotor rotor:rotorsSet.getListOfRotors()) {
             entryValue=rotor.getExitValueFromRotorByIndex(indexOfSignal);
             indexOfSignal=rotor.getIndexFromRotorByExitValue(entryValue);
             tmpRotor=rotor;

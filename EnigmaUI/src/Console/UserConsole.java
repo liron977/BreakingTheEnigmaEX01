@@ -40,7 +40,7 @@ public UserConsole (EngineManager engineManager){
             System.out.println("******************");
         }
     }
-    public boolean isInputValid(String str){
+    public boolean isInputStructure(String str){
     MachineDTO machineDTO= engineManager.initCodeConfigurationManually(str);
         if (machineDTO.getListOfException().size() == 0) {
             return true;
@@ -49,5 +49,9 @@ public UserConsole (EngineManager engineManager){
             return false;
         }
     }
+  /*  public boolean isInputValid(MachineDTO machineDTO){
+
+
+    }*/
 }
 

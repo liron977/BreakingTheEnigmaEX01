@@ -1,7 +1,7 @@
-package Engine;
+package Engine.TheEnigmaEngine;
 
-import Engine.Keyboard;
-import Engine.Pair;
+import Engine.TheEnigmaEngine.Keyboard;
+import Engine.TheEnigmaEngine.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
