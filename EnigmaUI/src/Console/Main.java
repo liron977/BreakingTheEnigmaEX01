@@ -1,7 +1,7 @@
 package Console;
 
-import Console.UiMenu;
 import EngineManager.EngineManager;
+import EngineManager.EngineManagerInterface;
 
 public class Main {
 
@@ -21,7 +21,9 @@ public class Main {
 
         }
 
-        EngineManager engineManager = new EngineManager();
+       EngineManagerInterface engineManager=new EngineManager();
+
+       // EngineManager engineManager = new EngineManagerInterface();
         UserConsole userConsole = new UserConsole(engineManager);
         UiMenu uiMenu=new UiMenu(userConsole);
         uiMenu.start();

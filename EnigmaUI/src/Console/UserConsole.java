@@ -1,16 +1,18 @@
 package Console;
 
-import EngineManager.EngineManager;
+//import EngineManager.EngineManager;
+//import  EngineManger.
 import MachineDTO.FileDTO;
 import MachineDTO.MachineDTO;
+import EngineManager.EngineManagerInterface;
 
 import java.util.List;
 
 public class UserConsole {
 
-EngineManager engineManager;
+    EngineManagerInterface engineManager;
 
-public UserConsole (EngineManager engineManager){
+public UserConsole (EngineManagerInterface engineManager){
     this.engineManager=engineManager;
 }
 
