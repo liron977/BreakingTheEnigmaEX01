@@ -37,6 +37,8 @@ public class InitCodeConfigurationManually implements RunTheMenuInterface{
             if (userConsole.isInputStructure(loadStart)) {
                 isUserInputDisplayIsValid = true;
                 System.out.println("The data is valid");
+                ///Create tne machine with the user data
+
                /* while (!isUserInputIsValid) {
                         if (userConsole.isInputValid(loadStart)) {
                             isUserInputDisplayIsValid = true;

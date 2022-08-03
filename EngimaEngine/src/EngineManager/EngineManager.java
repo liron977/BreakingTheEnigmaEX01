@@ -48,7 +48,7 @@ public class EngineManager implements EngineManagerInterface {
         return theMachineEngine;
 
     }
-    public MachineDTO initCodeConfigurationManually(String str){
+    public MachineDTO getAllErrorsRelatedToinitCodeConfigurationManually(String str){
         TheMachineEngine theMachineEngine=buildTheMachineEngine();
         UserInputValidator userInputValidator=new UserInputValidator(str,cteEnigma,theMachineEngine);
         List<Validator> validators=new ArrayList<>();

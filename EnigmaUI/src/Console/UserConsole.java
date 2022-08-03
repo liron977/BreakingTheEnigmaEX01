@@ -41,7 +41,17 @@ public UserConsole (EngineManager engineManager){
         }
     }
     public boolean isInputStructure(String str){
-    MachineDTO machineDTO= engineManager.initCodeConfigurationManually(str);
+    MachineDTO machineDTO= engineManager.getAllErrorsRelatedToinitCodeConfigurationManually(str);
+        if (machineDTO.getListOfException().size() == 0) {
+            return true;
+        } else {
+            printListOfException(machineDTO.getListOfException());
+            return false;
+        }
+    }
+    public boolean userInputValidation(String str) {
+
+        MachineDTO machineDTO = engineManager.getAllErrorsRelatedToinitCodeConfigurationManually(str);
         if (machineDTO.getListOfException().size() == 0) {
             return true;
         } else {
