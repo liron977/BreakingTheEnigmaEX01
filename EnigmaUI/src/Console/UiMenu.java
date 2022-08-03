@@ -2,6 +2,7 @@ package Console;
 
 import Menus.InitCodeConfigurationManually;
 import Menus.LoadNewFile;
+import Menus.RunTheMenuInterface;
 
 import java.util.Scanner;
 
@@ -54,14 +55,14 @@ public class UiMenu {
     public void executeMenu(int userChoice) {
         switch (userChoice) {
             case 1:
-                LoadNewFile loadNewFile = new LoadNewFile(userConsole);
+                RunTheMenuInterface loadNewFile = new LoadNewFile(userConsole);
                 loadNewFile.execution(userChoice);
                 break;
        /*case 2:
             new TargetGraphInfoOption().start();
             break;*/
         case 3:
-            InitCodeConfigurationManually initCodeConfigurationManually = new InitCodeConfigurationManually(userConsole);
+            RunTheMenuInterface initCodeConfigurationManually = new InitCodeConfigurationManually(userConsole);
              initCodeConfigurationManually.execution(userChoice);
             break;
       /*   case 4:
