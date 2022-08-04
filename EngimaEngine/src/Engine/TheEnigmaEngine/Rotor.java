@@ -14,17 +14,18 @@ public class Rotor {
 
     Rotor(String rotorId, int entriesAmount, List<Pair> rotorStructure) {
         this.rotorId = rotorId;
-        //this.startingPosition = startingPosition - 'A' + 1;
         this.entriesAmount = entriesAmount;
         this.rotorStructure = rotorStructure;
-
-        //initRotorStructure();
 
     }
     public void updateNitchPosition(int notchPosition){
         this.notchPair = this.rotorStructure.get((notchPosition) -1);
     }
-
+public void setRotorStartingPosition(char startingPosition){
+         this.startingPosition = startingPosition - 'A' + 1;
+        this.startingPosition=startingPosition;
+        initRotorStructure(startingPosition);
+}
     public void initRotorStructure(int startingPosition) {
         List<Pair> tmpRotorStructure = new ArrayList<>();
         tmpRotorStructure.addAll(rotorStructure);

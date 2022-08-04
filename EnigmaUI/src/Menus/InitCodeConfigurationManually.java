@@ -4,7 +4,7 @@ import Console.UserConsole;
 
 import java.util.Scanner;
 
-public class InitCodeConfigurationManually implements RunTheMenuInterface{
+public class InitCodeConfigurationManually implements MenuManager {
     public UserConsole userConsole;
 
     public InitCodeConfigurationManually(UserConsole userConsole){
@@ -59,10 +59,7 @@ public class InitCodeConfigurationManually implements RunTheMenuInterface{
     }
 
 
-
-
-
-    }
+}
    /* private boolean isStrValid(String str){
         char[] ch = new char[str.length()];
         int countOfOpener=0,countOfBrackets=0;

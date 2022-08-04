@@ -33,7 +33,6 @@ public class XmlFileValidator implements Validator{
                 }
             }
     }
-
     @Override
     public void validate() {
         isPathIsValid();

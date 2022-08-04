@@ -3,6 +3,7 @@ package Engine.TheEnigmaEngine;
 import Engine.TheEnigmaEngine.*;
 
 import java.util.Collections;
+import java.util.List;
 
 public class TheMachineEngine {
     private RotorsSet rotorsSet;
@@ -11,12 +12,14 @@ public class TheMachineEngine {
     private ReflectorsSet reflectorsSet;
     private Keyboard keyboard;
     private PlugsBoard plugsBoard;
+    private int amountOfUsedRotors;
 
-    public TheMachineEngine(RotorsSet rotorsSet, ReflectorsSet reflectorsSet, Keyboard keyboard){
+    public TheMachineEngine(RotorsSet rotorsSet, ReflectorsSet reflectorsSet, Keyboard keyboard,int amountOfUsedRotors){
         this.rotorsSet=rotorsSet;
         //this.reflector=reflector;
         this.keyboard=keyboard;
         this.reflectorsSet=reflectorsSet;
+        this.amountOfUsedRotors=amountOfUsedRotors;
         //this.plugsBoard=plugsBoard;
     }
     public void addPlugsBoardTOTheMachine(PlugsBoard plugsBoard){
@@ -52,6 +55,18 @@ public class TheMachineEngine {
     }
     public RotorsSet getRotorsSet(){
         return rotorsSet;
+    }
+    public void setUsedRotors(Rotor usedRotor){
+        this.usedRotors=usedRotors;
+    }
+    public int getAmountOfUsedRotors(){
+        return amountOfUsedRotors;
+    }
+    public void createUsedRotorsSet(List<Rotor> listOfRotors) {
+        RotorsSet usedRotorsSet=new RotorsSet(listOfRotors);
+    }
+    public RotorsSet getUsedRotors(){
+        return usedRotors;
     }
 
 

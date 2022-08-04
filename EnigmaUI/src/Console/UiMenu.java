@@ -2,7 +2,7 @@ package Console;
 
 import Menus.InitCodeConfigurationManually;
 import Menus.LoadNewFile;
-import Menus.RunTheMenuInterface;
+import Menus.MenuManager;
 
 import java.util.Scanner;
 
@@ -47,7 +47,6 @@ public class UiMenu {
                 System.out.println("Insert only numbers between [" + FIRST_OPTION + "-" + LAST_OPTION + "]");
                 scanner.nextLine();
             }
-
         } while (userChoice != EXIT_OPTION);
         System.out.println("Thanks,bye");
     }
@@ -55,14 +54,14 @@ public class UiMenu {
     public void executeMenu(int userChoice) {
         switch (userChoice) {
             case 1:
-                RunTheMenuInterface loadNewFile = new LoadNewFile(userConsole);
+                MenuManager loadNewFile = new LoadNewFile(userConsole);
                 loadNewFile.execution(userChoice);
                 break;
        /*case 2:
             new TargetGraphInfoOption().start();
             break;*/
         case 3:
-            RunTheMenuInterface initCodeConfigurationManually = new InitCodeConfigurationManually(userConsole);
+            MenuManager initCodeConfigurationManually = new InitCodeConfigurationManually(userConsole);
              initCodeConfigurationManually.execution(userChoice);
             break;
       /*   case 4:

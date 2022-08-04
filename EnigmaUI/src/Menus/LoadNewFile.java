@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 //public UserConsole userConsole;
 
-public class LoadNewFile implements RunTheMenuInterface {
+public class LoadNewFile implements MenuManager {
 
     public UserConsole userConsole;
     public LoadNewFile(UserConsole userConsole){
@@ -20,14 +20,14 @@ public class LoadNewFile implements RunTheMenuInterface {
         String loadStart = scanner.nextLine();
         loadStart="C:\\Users\\97254\\IdeaProjects\\BreakingTheEnigma\\EngimaEngine\\src\\resources\\ex1-sanity-small.xml";
         boolean isFileNameValid=false;
-        boolean isisFileLoadSuccessfully=false;
+        boolean isFileLoadSuccessfully=false;
         while (!isFileNameValid){
             if (userConsole.fileNameValidation(loadStart)) {
                 isFileNameValid = true;
-                while (!isisFileLoadSuccessfully) {
+                while (!isFileLoadSuccessfully) {
                     try {
                         if (userConsole.isFileLoadSuccessfully(loadStart)) {
-                            isisFileLoadSuccessfully = true;
+                            isFileLoadSuccessfully = true;
                             System.out.println("The xml was uploaded successfully");
                             break;
                         }

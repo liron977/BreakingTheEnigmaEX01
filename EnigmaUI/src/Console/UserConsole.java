@@ -1,7 +1,5 @@
 package Console;
 
-//import EngineManager.EngineManager;
-//import  EngineManger.
 import MachineDTO.FileDTO;
 import MachineDTO.MachineDTO;
 import EngineManager.EngineManagerInterface;
@@ -61,9 +59,5 @@ public UserConsole (EngineManagerInterface engineManager){
             return false;
         }
     }
-  /*  public boolean isInputValid(MachineDTO machineDTO){
-
-
-    }*/
 }
 

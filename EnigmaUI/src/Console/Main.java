@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String str ="<45,27,94><AO!><III><A|Z,D|E>";
+/*        String str ="<45,27,94><AO!><III><A|Z,D|E>";
         String[] out=str.split("<");
         for (int i=0;i< out.length;i++){
 
@@ -17,12 +17,8 @@ public class Main {
                 System.out.println(out3[j]);
 
             }
-
-
-        }
+        }*/
        EngineManagerInterface engineManager=new EngineManager();
-
-       // EngineManager engineManager = new EngineManagerInterface();
         UserConsole userConsole = new UserConsole(engineManager);
         UiMenu uiMenu=new UiMenu(userConsole);
         uiMenu.start();

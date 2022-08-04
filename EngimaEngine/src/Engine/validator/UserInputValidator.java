@@ -36,12 +36,12 @@ public class UserInputValidator implements Validator {
         if (isStrFormatValid()) {
             splitTheUserInput();
             isRotorsIdFromUserInputIsValid();
-            isRotorIDIsUniq();
-            isRotorsIdIsANumber();
-            isRotorsStartPositionSignalsAreValid();
-            isRototsPositionAmountIsValid();
-            isReflectorIdValid();
-            isPlugsBoardsIsValid();
+                isRotorIDIsUniq();
+                isRotorsIdIsANumber();
+                isRotorsStartPositionSignalsAreValid();
+                isRototsPositionAmountIsValid();
+                isReflectorIdValid();
+                isPlugsBoardsIsValid();
         }
     }
     private void isRotorIDIsUniq(){
@@ -86,21 +86,25 @@ public class UserInputValidator implements Validator {
         }
         return tmp;
     }
-    private void isRotorsIdFromUserInputIsValid(){
+    private boolean isRotorsIdFromUserInputIsValid(){
         int numberOfRotorsFromTheFile=cteEnigma.getCTEMachine().getRotorsCount();
       if(rotorsId.length>numberOfRotorsFromTheFile){
           listOfException.add(new Exception("The number of rotors you enter is more of the rotors amount exist in the machine,you can insert ["+numberOfRotorsFromTheFile+"] for maximum"));
+          return false;
       }
       else if(rotorsId.length==0){
           listOfException.add(new Exception("You didn`t enter rotors id,you can insert for maximum ["+numberOfRotorsFromTheFile+"]"));
+          return false;
       }
       else {
           for (String rotorsId : rotorsId) {
               if (!theMachineEngine.getRotorsSet().isRotorsIdExists(rotorsId)) {
                   listOfException.add(new Exception("The rotor id [" + rotorsId + "] does not exists in the machine"));
+                  return false;
               }
           }
       }
+        return true;
     }
     private void isRotorsIdIsANumber(){
         boolean isNumeric;
@@ -204,7 +208,7 @@ public class UserInputValidator implements Validator {
                 if (counterOfOpenBrackets == 1) {
                     while (tmp[i] != '>') {
                         count++;
-                        if ((tmp[i] > '9') && (tmp[i] != ',')) {
+                        if ((!Character.isDigit(tmp[i])) && (tmp[i] != ',')) {
                             listOfException.add(new Exception("The input is not valid,in the first <> you need to enter numbers separated by a comma"));
                         }
                         sub[j] = tmp[i];

@@ -432,6 +432,9 @@ public class SchemaGenerated /*implements Serializable*/ {
         }
         return  reflectorPairStructure;
     }
+    public int getAmountOfUsedRotors(){
+        return enigmaDescriptor.getCTEMachine().getRotorsCount();
+    }
     public Keyboard createKeyboard()
     {
        return new Keyboard(enigmaDescriptor.getCTEMachine().getABC().trim());

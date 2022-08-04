@@ -13,7 +13,7 @@ public class ValidatorRunner {
         this.validators = validators;
     }
 
-    public  List<Exception> run(CTEEnigma cteEnigma) {
+    public  List<Exception> run() {
         List<Exception> errors = new ArrayList<>();
         for (Validator validator : validators) {
             validator.validate();
