@@ -11,7 +11,7 @@ public class InitCodeConfigurationManually implements MenuManager {
         this.userConsole=userConsole;
     }
     @Override
-    public void execution(int userChoice) {
+    public void execution() {
         printDescription();
         initCodeConfiguration();
     }

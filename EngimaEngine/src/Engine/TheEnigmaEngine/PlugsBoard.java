@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlugsBoard {
- private Keyboard keybord;
- private int amountOfSwappingPairs;
+ private String keybord;
+ private int amountOfMaximumSwappingPairs;
  private List<Pair> pairsOfSwappingCharacter = new ArrayList<>();
 
- public PlugsBoard(Keyboard keybord,List<Pair> pairsOfSwappingLetters){
+ public PlugsBoard(String keybord,List<Pair> pairsOfSwappingLetters){
   this.keybord=keybord;
-  amountOfSwappingPairs=keybord.getKeyboardAmount();
+  amountOfMaximumSwappingPairs=keybord.length()/2;
   this.pairsOfSwappingCharacter=pairsOfSwappingLetters;
-  this.amountOfSwappingPairs=amountOfSwappingPairs;
+
  }
  public String getSwappedCharacter(String str) {
   for (Pair pair: pairsOfSwappingCharacter) {
@@ -27,5 +27,8 @@ public class PlugsBoard {
    }
   }
   return str;
+ }
+ public void setPairsOfSwappingCharacter(List<Pair> pairsOfSwappingCharacter){
+  this.pairsOfSwappingCharacter=pairsOfSwappingCharacter;
  }
 }

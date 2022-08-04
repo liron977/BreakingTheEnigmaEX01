@@ -1,6 +1,6 @@
 package Console;
 
-import Menus.InitCodeConfigurationManually;
+import Menus.InitCodeConfigurationAutomatically;
 import Menus.LoadNewFile;
 import Menus.MenuManager;
 
@@ -55,19 +55,19 @@ public class UiMenu {
         switch (userChoice) {
             case 1:
                 MenuManager loadNewFile = new LoadNewFile(userConsole);
-                loadNewFile.execution(userChoice);
+                loadNewFile.execution();
                 break;
        /*case 2:
             new TargetGraphInfoOption().start();
             break;*/
-        case 3:
-            MenuManager initCodeConfigurationManually = new InitCodeConfigurationManually(userConsole);
-             initCodeConfigurationManually.execution(userChoice);
+       /* case 3:
+
+            break;*/
+      case 4:
+          MenuManager initCodeConfigurationAutomatically=new InitCodeConfigurationAutomatically(userConsole);
+          initCodeConfigurationAutomatically.execution();
             break;
-      /*   case 4:
-            new TargetPathsOption().start();
-            break;
-        case 5:
+         /*  case 5:
             new RunTaskOption().start();
             break;
         case 6:

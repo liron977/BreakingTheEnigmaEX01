@@ -59,5 +59,12 @@ public UserConsole (EngineManagerInterface engineManager){
             return false;
         }
     }
+    public void InitCodeConfigurationAutomatically(){
+      //  FileDTO fileDTO=engineManager.initCodeAutomatically();
+        engineManager.initCodeAutomatically();
+        System.out.println("VALID");
+
+
+    }
 }
 

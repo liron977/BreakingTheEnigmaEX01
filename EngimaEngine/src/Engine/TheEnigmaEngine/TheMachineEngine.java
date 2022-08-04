@@ -64,7 +64,7 @@ public class TheMachineEngine {
         return amountOfUsedRotors;
     }
     public void createUsedRotorsSet(List<Rotor> listOfRotors) {
-        RotorsSet usedRotorsSet=new RotorsSet(listOfRotors);
+         this.usedRotors=new RotorsSet(listOfRotors);
     }
     public RotorsSet getUsedRotors(){
         return usedRotors;

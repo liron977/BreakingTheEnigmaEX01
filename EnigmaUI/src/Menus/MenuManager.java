@@ -2,5 +2,5 @@ package Menus;
 
 public interface MenuManager {
 
-    public void execution(int userChoice);
+    public void execution();
 }

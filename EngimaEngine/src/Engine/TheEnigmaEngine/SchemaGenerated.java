@@ -396,7 +396,7 @@ public class SchemaGenerated /*implements Serializable*/ {
             rotorStructure.add(createNewPair(positing));
             entriesAmount++;
         }
-        Rotor newRoter=new Rotor(rotorIdString,entriesAmount,rotorStructure,"C");
+        Rotor newRoter=new Rotor(rotorIdString,entriesAmount,rotorStructure,notchPosition);
        // Rotor newRoter=new Rotor(rotorIdString,notchPosition,entriesAmount,rotorStructure);
         /*System.out.print("Enter an Char for position: ");
         Scanner scanner = new Scanner(System.in);

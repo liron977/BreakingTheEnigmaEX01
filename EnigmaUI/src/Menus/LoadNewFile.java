@@ -14,7 +14,7 @@ public class LoadNewFile implements MenuManager {
     }
 
     @Override
-    public void execution(int userChoice) {
+    public void execution() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please insert full xml path \n");
         String loadStart = scanner.nextLine();

@@ -13,20 +13,16 @@ public class Rotor {
     private Pair notchPair;
     private int entriesAmount;
 
-    public Rotor(String rotorId, int entriesAmount, List<Pair> rotorStructure, String StartingCharInTheWindow) {
+    public Rotor(String rotorId, int entriesAmount, List<Pair> rotorStructure,int notchPosition) {
         this.rotorId = rotorId;
         this.entriesAmount = entriesAmount;
         this.rotorStructure = rotorStructure;
-        this.startingCharInTheWindow=StartingCharInTheWindow;
         initRotorStructure();
-
-    }
-
-    public void updateNotchPosition(int notchPosition){
         this.notchPair = this.rotorStructure.get((notchPosition) -1);
+
     }
+
 public void setRotorStartingPosition(String startingPosition){
-         //this.startingPosition = startingPosition - 'A' + 1;
         this.startingCharInTheWindow=startingPosition;
         initRotorStructure();
 }
