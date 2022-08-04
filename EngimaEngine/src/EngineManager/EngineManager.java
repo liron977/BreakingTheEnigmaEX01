@@ -65,9 +65,12 @@ public class EngineManager implements EngineManagerInterface {
     public int getRotorsAmount(){
         return cteEnigma.getCTEMachine().getRotorsCount();
     }
-    public void initCodeAutomatically() {
+    public void initCodeAutomatically(){
+
         TheMachineEngine theMachineEngine = buildTheMachineEngine();
         createAutomaticallyRotors(theMachineEngine);
+        initRotorsPositionAutomatically(theMachineEngine);
+
     }
     private void createAutomaticallyRotors(TheMachineEngine theMachineEngine){
         List<Rotor> listOfRotors = theMachineEngine.getRotorsSet().getListOfRotors();
@@ -90,11 +93,12 @@ public class EngineManager implements EngineManagerInterface {
     private void initRotorsPositionAutomatically(TheMachineEngine theMachineEngine){
       String keyboard=theMachineEngine.getKeyboard();
         Random randomGenerator = new Random();
-         char randomSelectedRotor = keyboard.charAt((toUpperCase(randomGenerator.nextInt(keyboard.length()))));
-   /*       RotorsSet rotorsSet=theMachineEngine.getUsedRotors().getListOfRotors();
+         String randomSelectedPosition = String.valueOf(keyboard.charAt((toUpperCase(randomGenerator.nextInt(keyboard.length())))));
+         List<Rotor> rotorsSet=theMachineEngine.getUsedRotors().getListOfRotors();
         for (Rotor rotor: rotorsSet) {
+            rotor.setRotorStartingPosition(randomSelectedPosition);
+        }
 
-        }*/
 
     }
 

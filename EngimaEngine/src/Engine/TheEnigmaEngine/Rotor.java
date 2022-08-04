@@ -8,36 +8,45 @@ import java.util.List;
 public class Rotor {
     private List<Pair> rotorStructure = new ArrayList<>();
     private String rotorId;
-    private int startingPosition;
+    //private int startingPosition;
+    private String startingCharInTheWindow;
     private Pair notchPair;
     private int entriesAmount;
 
-    Rotor(String rotorId, int entriesAmount, List<Pair> rotorStructure) {
+    public Rotor(String rotorId, int entriesAmount, List<Pair> rotorStructure, String StartingCharInTheWindow) {
         this.rotorId = rotorId;
         this.entriesAmount = entriesAmount;
         this.rotorStructure = rotorStructure;
+        this.startingCharInTheWindow=StartingCharInTheWindow;
+        initRotorStructure();
 
     }
-    public void updateNitchPosition(int notchPosition){
+
+    public void updateNotchPosition(int notchPosition){
         this.notchPair = this.rotorStructure.get((notchPosition) -1);
     }
-public void setRotorStartingPosition(char startingPosition){
-         this.startingPosition = startingPosition - 'A' + 1;
-        this.startingPosition=startingPosition;
-        initRotorStructure(startingPosition);
+public void setRotorStartingPosition(String startingPosition){
+         //this.startingPosition = startingPosition - 'A' + 1;
+        this.startingCharInTheWindow=startingPosition;
+        initRotorStructure();
 }
-    public void initRotorStructure(int startingPosition) {
+    public void initRotorStructure() {
         List<Pair> tmpRotorStructure = new ArrayList<>();
         tmpRotorStructure.addAll(rotorStructure);
         int newPosition;
-        for (int i = 0; i < entriesAmount; i++) {
-            newPosition = i - startingPosition + 1;
-            if (newPosition < 0) {
-                newPosition = newPosition + entriesAmount;
+        int numberToMove=getEntryIndexFromRotorByValue(startingCharInTheWindow)+1;
+        if(numberToMove!=0) {
+            for (int i = 0; i < entriesAmount; i++) {
+                newPosition = i - numberToMove + 1;
+                if (newPosition < 0) {
+                    newPosition = newPosition + entriesAmount;
+                }
+
+                tmpRotorStructure.set(newPosition, rotorStructure.get(i));
+
             }
-            tmpRotorStructure.set(newPosition, rotorStructure.get(i));
+            this.rotorStructure = tmpRotorStructure;
         }
-        this.rotorStructure = tmpRotorStructure;
     }
 
     public List<Pair> getRotorStructure() {
@@ -76,7 +85,8 @@ public void setRotorStartingPosition(char startingPosition){
         }
         return -1;
     }
-    public int getIndexFromRotorByExitValue(String str){
+
+    public int getEntryIndexFromRotorByValue(String str){
         for(int i=0;i<rotorStructure.size();i++){
             if(rotorStructure.get(i).getEntry().equals(str)){
                 return i;

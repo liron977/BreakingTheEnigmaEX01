@@ -25,6 +25,7 @@ public class TheMachineEngine {
     public void addPlugsBoardTOTheMachine(PlugsBoard plugsBoard){
         this.plugsBoard=plugsBoard;
     }
+
     public void  addSelectedReflector(String reflectorId){
 
         this.reflector=reflectorsSet.getReflectorById(reflectorId);
@@ -127,12 +128,12 @@ public String manageDecode(String signal){
         Collections.reverse(rotorsSet.getListOfRotors());
         for (Rotor rotor:rotorsSet.getListOfRotors()) {
             entryValue=rotor.getExitValueFromRotorByIndex(indexOfSignal);
-            indexOfSignal=rotor.getIndexFromRotorByExitValue(entryValue);
+            indexOfSignal=rotor.getEntryIndexFromRotorByValue(entryValue);
             tmpRotor=rotor;
         }
         Collections.reverse(rotorsSet.getListOfRotors());
         if(tmpRotor!=null){
-            indexOfSignal=tmpRotor.getIndexFromRotorByExitValue(entryValue);
+            indexOfSignal=tmpRotor.getEntryIndexFromRotorByValue(entryValue);
             entryValue=keyboard.getCharacterFromKeyboardByIndex(indexOfSignal);
             entryValue=plugsBoard.getSwappedCharacter(entryValue);
         }
