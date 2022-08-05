@@ -25,6 +25,7 @@ public class EngineManager implements EngineManagerInterface {
     private TheMachineEngine theMachineEngine;
     private  CTEEnigma cteEnigma;
     SchemaGenerated schemaGenerated;
+    boolean isCodeConfigurationSet=false;
 
     private final String JAXB_XML_GAME_PACKAGE_NAME = "schemaGenerated";
 
@@ -59,6 +60,7 @@ public class EngineManager implements EngineManagerInterface {
         userInputValidator.validate();
         List<Exception> exceptions=  userInputValidator.getListOfException();
         ListOfExceptionsDTO  listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
+        isCodeConfigurationSet=true;
         return listOfExceptionsDTO;
     }
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyRotors(String str){
@@ -78,6 +80,7 @@ public class EngineManager implements EngineManagerInterface {
         initRotorsPositionAutomatically(theMachineEngine);
         chooseAutomaticallyReflector(theMachineEngine);
         choosePlugBoardSettings(theMachineEngine);
+        isCodeConfigurationSet=true;
     }
     private void chooseAutomaticallyRotors(TheMachineEngine theMachineEngine){
         List<Rotor> listOfRotors = theMachineEngine.getRotorsSet().getListOfRotors();
@@ -117,6 +120,8 @@ public class EngineManager implements EngineManagerInterface {
         for (Rotor rotor: rotorsSet) {
             randomSelectedPosition = String.valueOf(keyboard.charAt((toUpperCase(randomGenerator.nextInt(keyboard.length())))));
             rotor.setRotorStartingPosition(randomSelectedPosition);
+
+            System.out.println("rotor id:" + rotor.getRotorId()+" starting position: "+randomSelectedPosition);
         }
         /*rotorsSet.get(0).setRotorStartingPosition("F");
         rotorsSet.get(1).setRotorStartingPosition("D");*/
@@ -129,6 +134,7 @@ public class EngineManager implements EngineManagerInterface {
         List<Pair> pairsOfSwappingLetters=new ArrayList<>();
         int amountOfSwappingPairs=randomGenerator.nextInt(keyboard.length()/2);
         String firstSignal,secondSignal;
+        System.out.println("amount of swapping pairs: "+amountOfSwappingPairs);
         if(amountOfSwappingPairs>0) {
             /*amountOfSwappingPairs=0;*/
             for (int i = 0; i < amountOfSwappingPairs; i++) {
@@ -144,6 +150,7 @@ public class EngineManager implements EngineManagerInterface {
                 plugBoardHashMap.put(secondSignal, 1);
                 Pair pair = new Pair(firstSignal, secondSignal);
                 pairsOfSwappingLetters.add(pair);
+                System.out.printf("swapping pairs:"+pair);
             }
 
         }
@@ -188,6 +195,7 @@ public class EngineManager implements EngineManagerInterface {
     public ConvertedStringDTO getConvertedString(String userInputString){
 
         String convertedString="";
+        userInputString=userInputString.toUpperCase();
         for (int i=0;i<userInputString.length();i++){
             String userInputByString =String.valueOf(userInputString.charAt(i));
             String convertedCharByString=theMachineEngine.manageDecode(userInputByString);
@@ -198,5 +206,30 @@ public class EngineManager implements EngineManagerInterface {
         return convertedStringDTO;
 
 
+    }
+    public void resetCurrentCode(){
+        theMachineEngine.resetCurrentRotorSetCode();
+    }
+    public TheMachineSettingsDTO getTheMachineSettingsDTO(){
+        int amountOfUsedRotors=theMachineEngine.getAmountOfUsedRotors();
+        int maxAmountOfRotors=theMachineEngine.getMaxAmountOfRotors();
+        List<String> notchPosition=theMachineEngine.getListOfNotch();
+       int amountOfReflectors= theMachineEngine.getReflectorsAmount();
+        int amountOfProcessedMessages=theMachineEngine.getProcessedMessagesAmount();
+        CurrentCodeDescriptionDTO currentCodeDescriptionDTO=createCurrentCodeDescriptionDTO();
+        TheMachineSettingsDTO theMachineSettingsDTO=new TheMachineSettingsDTO(amountOfUsedRotors,maxAmountOfRotors,notchPosition,amountOfReflectors,amountOfProcessedMessages,currentCodeDescriptionDTO);
+        return theMachineSettingsDTO;
+    }
+    public  CurrentCodeDescriptionDTO createCurrentCodeDescriptionDTO(){
+        CurrentCodeDescriptionDTO currentCodeDescriptionDTO=null;
+        if(isCodeConfigurationSet) {
+            String[] usedRotorsId = theMachineEngine.getArrayOfRotorsId();
+            String chosenStartingPosition = theMachineEngine.getUsedRotors().getRotorsStartingPositions();
+            String reflectorId = theMachineEngine.getReflector().getReflectorId();
+            List<String> pairsOfSwappingCharacter = theMachineEngine.getStringPairsOfSwappingCharacter();
+          currentCodeDescriptionDTO = new CurrentCodeDescriptionDTO(pairsOfSwappingCharacter, reflectorId, chosenStartingPosition, usedRotorsId);
+        }
+
+        return currentCodeDescriptionDTO;
     }
 }

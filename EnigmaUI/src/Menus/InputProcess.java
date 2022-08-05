@@ -19,9 +19,9 @@ public class InputProcess implements MenuManager{
         userInput = scanner.nextLine();
         while(!isValidInputProcess){
 
-           isValidInputProcess=userConsole.isUserStringToProcessIsValid(userInput.toUpperCase());
+           isValidInputProcess=userConsole.isUserStringToProcessIsValid(userInput);
            if(isValidInputProcess) {
-               System.out.println("The converted string is: "+userConsole.getConvertedString(userInput.toUpperCase()));
+               System.out.println("The converted string is: "+userConsole.getConvertedString(userInput));
 
            }
           else{

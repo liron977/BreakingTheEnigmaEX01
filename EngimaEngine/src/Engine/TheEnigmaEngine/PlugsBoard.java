@@ -28,6 +28,14 @@ public class PlugsBoard {
   }
   return str;
  }
+
+ public List<String> getStringPairsOfSwappingCharacter(){
+  List<String> StringPairsOfSwappingCharacter=new ArrayList<>();
+  for (Pair pair:pairsOfSwappingCharacter) {
+   StringPairsOfSwappingCharacter.add(pair.toString());
+  }
+  return StringPairsOfSwappingCharacter;
+ }
  public void setPairsOfSwappingCharacter(List<Pair> pairsOfSwappingCharacter){
   this.pairsOfSwappingCharacter=pairsOfSwappingCharacter;
  }

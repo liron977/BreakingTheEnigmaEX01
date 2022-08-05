@@ -70,10 +70,11 @@ public class UiMenu {
               MenuManager inputProcess=new InputProcess(userConsole);
               inputProcess.execution();
               break;
-       /* case 6:
-            new TargetCircleOption().start();
-            break;
-        case 7:
+       case 6:
+           MenuManager resetCurrentCode=new ResetCurrentCode(userConsole);
+           resetCurrentCode.execution();
+           break;
+        /*case 7:
             new SavaSystemStatus().start();
             break;*/
 

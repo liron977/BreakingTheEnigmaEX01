@@ -1,7 +1,5 @@
 package Engine.TheEnigmaEngine;
 
-import Engine.TheEnigmaEngine.Pair;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +7,7 @@ public class Rotor {
     private List<Pair> rotorStructure = new ArrayList<>();
     private String rotorId;
     //private int startingPosition;
-    private String startingCharInTheWindow;
+    private String startingPosition;
     private Pair notchPair;
     private int entriesAmount;
 
@@ -22,15 +20,23 @@ public class Rotor {
 
     }
 
-public void setRotorStartingPosition(String startingPosition){
-        this.startingCharInTheWindow=startingPosition;
+    public String getStartingPosition() {
+        return startingPosition;
+    }
+
+    public Pair getNotchPair() {
+        return notchPair;
+    }
+
+    public void setRotorStartingPosition(String startingPosition){
+        this.startingPosition =startingPosition;
         initRotorStructure();
 }
     public void initRotorStructure() {
         List<Pair> tmpRotorStructure = new ArrayList<>();
         tmpRotorStructure.addAll(rotorStructure);
         int newPosition;
-        int numberToMove=getEntryIndexFromRotorByValue(startingCharInTheWindow)+1;
+        int numberToMove=getEntryIndexFromRotorByValue(startingPosition)+1;
         if(numberToMove!=0) {
             for (int i = 0; i < entriesAmount; i++) {
                 newPosition = i - numberToMove + 1;

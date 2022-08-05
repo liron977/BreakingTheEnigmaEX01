@@ -1,7 +1,5 @@
 package Engine.TheEnigmaEngine;
 
-import Engine.TheEnigmaEngine.*;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -14,13 +12,30 @@ public class TheMachineEngine {
     private PlugsBoard plugsBoard;
     private int amountOfUsedRotors;
 
-    public TheMachineEngine(RotorsSet rotorsSet, ReflectorsSet reflectorsSet, Keyboard keyboard,int amountOfUsedRotors){
+    private int amountOfProcessedMessages;
+
+    public Reflector getReflector() {
+        return reflector;
+    }
+
+    public TheMachineEngine(RotorsSet rotorsSet, ReflectorsSet reflectorsSet, Keyboard keyboard, int amountOfUsedRotors){
         this.rotorsSet=rotorsSet;
+        amountOfProcessedMessages=0;
         //this.reflector=reflector;
         this.keyboard=keyboard;
         this.reflectorsSet=reflectorsSet;
         this.amountOfUsedRotors=amountOfUsedRotors;
         //this.plugsBoard=plugsBoard;
+    }
+ public List<String> getStringPairsOfSwappingCharacter(){
+        return plugsBoard.getStringPairsOfSwappingCharacter();
+ }
+    public List<String> getListOfNotch(){
+       return rotorsSet.getNotchList();
+
+    }
+    public String[] getArrayOfRotorsId(){
+        return usedRotors.getAllRotorsId();
     }
     public void addPlugsBoardTOTheMachine(PlugsBoard plugsBoard){
         this.plugsBoard=plugsBoard;
@@ -33,6 +48,17 @@ public class TheMachineEngine {
     public ReflectorsSet getReflectorsSet(){
         return reflectorsSet;
     }
+    public int getReflectorsAmount(){
+        return reflectorsSet.getReflectorsAmount();
+    }
+    public int getProcessedMessagesAmount(){
+        return amountOfProcessedMessages;
+    }
+
+    public int getMaxAmountOfRotors() {
+        return rotorsSet.getMaxAmountOfRotors();
+    }
+
     public String[] getRotorsId(){
         String[] rotorsId=new String[rotorsSet.getListOfRotors().size()];
         int i=0;
@@ -70,7 +96,9 @@ public class TheMachineEngine {
         return usedRotors;
     }
 
-
+public void resetCurrentRotorSetCode(){
+    usedRotors.resetCurrentRotorsCode();
+}
 
 /*    public char manageDecode(char signal){
         Engine.TheEnigmaEngine.Rotor tmpRotor=null;
@@ -106,7 +134,7 @@ public String manageDecode(String signal){
     usedRotors.manageSpins();
     indexOfSignal=theProcessFromTheRotorsToReflecter(signal);
     result=theProcessFromTheReflectorToRotors(indexOfSignal);
-
+    amountOfProcessedMessages++;
     return result;
 }
     private int theProcessFromTheRotorsToReflecter(String signal){

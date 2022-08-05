@@ -89,5 +89,9 @@ public UserConsole (EngineManagerInterface engineManager){
 
 
     }
+    public void resetCurrentCode(){
+        engineManager.resetCurrentCode();
+        System.out.println("The reset code succeeded");
+    }
 
 }

@@ -13,4 +13,5 @@ public interface EngineManagerInterface {
 
    public ListOfExceptionsDTO getAllErrorsConvertingInputProcess(String str);
    public ConvertedStringDTO getConvertedString(String str);
+    public void resetCurrentCode();
 }

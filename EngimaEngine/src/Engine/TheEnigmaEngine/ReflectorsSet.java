@@ -16,6 +16,9 @@ public class ReflectorsSet {
     public List<Reflector> getListOfReflectors() {
         return reflectors;
     }
+    public int getReflectorsAmount() {
+        return reflectors.size();
+    }
     public Reflector getReflectorById(String reflectorId){
         for (Reflector reflector:reflectors) {
             if(reflector.getReflectorId().equals(reflectorId)){

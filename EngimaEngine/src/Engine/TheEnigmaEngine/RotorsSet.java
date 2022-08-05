@@ -21,6 +21,15 @@ public class RotorsSet {
     public List<Rotor> getListOfRotors() {
        return rotors;
     }
+
+    public String getRotorsStartingPositions(){
+        String rotorsStartingPositions="";
+        for (Rotor rotor:rotors) {
+
+            rotorsStartingPositions.concat(rotor.getStartingPosition());
+        }
+        return rotorsStartingPositions;
+    }
     public String[] getAllRotorsId(){
         int i=0;
         String[] rotorsId=new String[rotors.size()];
@@ -46,6 +55,19 @@ public class RotorsSet {
            }
         }
     }
+    public int getMaxAmountOfRotors() {
+return rotors.size();
+    }
+
+    public List<String> getNotchList(){
+        List<String> notchList=new ArrayList<>();
+        for (Rotor rotor:rotors) {
+            notchList.add(rotor.getNotchPair().toString());
+
+        }
+       return notchList;
+    }
+
     public boolean isRotorsIdExists(String id){
         for (Rotor rotor:rotors){
             if(rotor.getRotorId().equals(id)){
@@ -53,6 +75,12 @@ public class RotorsSet {
             }
         }
         return false;
+    }
+    public void resetCurrentRotorsCode(){
+        for (Rotor rotor:rotors) {
+            rotor.initRotorStructure();
+
+        }
     }
  /*   @Override
     public String toString()
@@ -66,5 +94,3 @@ public class RotorsSet {
     }*/
 
 }
-
-
