@@ -110,6 +110,7 @@ public String manageDecode(String signal){
     return result;
 }
     private int theProcessFromTheRotorsToReflecter(String signal){
+
         String entryValue=plugsBoard.getSwappedCharacter(signal);
         int indexOfSignal= keyboard.getIndexFromKeyboard(entryValue);
         for (Rotor rotor: usedRotors.getListOfRotors()) {

@@ -114,12 +114,12 @@ public class EngineManager implements EngineManagerInterface {
         Random randomGenerator = new Random();
          String randomSelectedPosition;
          List<Rotor> rotorsSet=theMachineEngine.getUsedRotors().getListOfRotors();
-       /* for (Rotor rotor: rotorsSet) {
+        for (Rotor rotor: rotorsSet) {
             randomSelectedPosition = String.valueOf(keyboard.charAt((toUpperCase(randomGenerator.nextInt(keyboard.length())))));
             rotor.setRotorStartingPosition(randomSelectedPosition);
-        }*/
-        rotorsSet.get(0).setRotorStartingPosition("F");
-        rotorsSet.get(1).setRotorStartingPosition("D");
+        }
+        /*rotorsSet.get(0).setRotorStartingPosition("F");
+        rotorsSet.get(1).setRotorStartingPosition("D");*/
 
     }
     private void choosePlugBoardSettings(TheMachineEngine theMachineEngine){
@@ -130,6 +130,7 @@ public class EngineManager implements EngineManagerInterface {
         int amountOfSwappingPairs=randomGenerator.nextInt(keyboard.length()/2);
         String firstSignal,secondSignal;
         if(amountOfSwappingPairs>0) {
+            /*amountOfSwappingPairs=0;*/
             for (int i = 0; i < amountOfSwappingPairs; i++) {
                 firstSignal = String.valueOf(keyboard.charAt(randomGenerator.nextInt(keyboard.length())));
                 while (((plugBoardHashMap.get(firstSignal)) != null) && (plugBoardHashMap.get(firstSignal) == 1)) {
@@ -144,9 +145,10 @@ public class EngineManager implements EngineManagerInterface {
                 Pair pair = new Pair(firstSignal, secondSignal);
                 pairsOfSwappingLetters.add(pair);
             }
-            PlugsBoard plugsBoard=new PlugsBoard(keyboard,pairsOfSwappingLetters);
-             theMachineEngine.addPlugsBoardTOTheMachine(plugsBoard);
+
         }
+        PlugsBoard plugsBoard=new PlugsBoard(keyboard,pairsOfSwappingLetters);
+        theMachineEngine.addPlugsBoardTOTheMachine(plugsBoard);
     }
 
     public ListOfExceptionsDTO getAllErrorsRelatedToFilePath(String filePath) {
