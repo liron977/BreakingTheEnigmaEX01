@@ -103,7 +103,7 @@ public String manageDecode(String signal){
     int indexOfSignal;
     String result;
 
-    rotorsSet.manageSpins();
+    usedRotors.manageSpins();
     indexOfSignal=theProcessFromTheRotorsToReflecter(signal);
     result=theProcessFromTheReflectorToRotors(indexOfSignal);
 
@@ -112,7 +112,7 @@ public String manageDecode(String signal){
     private int theProcessFromTheRotorsToReflecter(String signal){
         String entryValue=plugsBoard.getSwappedCharacter(signal);
         int indexOfSignal= keyboard.getIndexFromKeyboard(entryValue);
-        for (Rotor rotor: rotorsSet.getListOfRotors()) {
+        for (Rotor rotor: usedRotors.getListOfRotors()) {
             entryValue=rotor.getEntryValueFromRotorByIndex(indexOfSignal);
 
             indexOfSignal=rotor.getIndexFromRotorByEntryValue(entryValue);
@@ -125,13 +125,13 @@ public String manageDecode(String signal){
         String entryValue="";
 
         indexOfSignal=reflector.getExitIndexFromTheReflector(indexOfSignal);
-        Collections.reverse(rotorsSet.getListOfRotors());
-        for (Rotor rotor:rotorsSet.getListOfRotors()) {
+        Collections.reverse(usedRotors.getListOfRotors());
+        for (Rotor rotor:usedRotors.getListOfRotors()) {
             entryValue=rotor.getExitValueFromRotorByIndex(indexOfSignal);
             indexOfSignal=rotor.getEntryIndexFromRotorByValue(entryValue);
             tmpRotor=rotor;
         }
-        Collections.reverse(rotorsSet.getListOfRotors());
+        Collections.reverse(usedRotors.getListOfRotors());
         if(tmpRotor!=null){
             indexOfSignal=tmpRotor.getEntryIndexFromRotorByValue(entryValue);
             entryValue=keyboard.getCharacterFromKeyboardByIndex(indexOfSignal);

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class UserInputValidator implements Validator {
+public class UserInputValidator2 implements Validator {
 
     private char[] userInput;
     private List<Exception> listOfException;
@@ -19,7 +19,7 @@ public class UserInputValidator implements Validator {
     private char[] rotorsPosition;
     private String reflectorId;
     private List<Pair> pairsOfSwappingCharacter = new ArrayList<>();
-    public UserInputValidator(String userInput, CTEEnigma cteEnigma,TheMachineEngine theMachineEngine) {
+    public UserInputValidator2(String userInput, CTEEnigma cteEnigma, TheMachineEngine theMachineEngine) {
         this.cteEnigma = cteEnigma;
         this.listOfException = new ArrayList<>();
         this.userInput = new char[userInput.length()];

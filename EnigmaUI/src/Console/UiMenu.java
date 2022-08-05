@@ -1,9 +1,6 @@
 package Console;
 
-import Menus.InitCodeConfigurationAutomatically;
-import Menus.InitCodeConfigurationManually;
-import Menus.LoadNewFile;
-import Menus.MenuManager;
+import Menus.*;
 
 import java.util.Scanner;
 
@@ -69,10 +66,11 @@ public class UiMenu {
           MenuManager initCodeConfigurationAutomatically=new InitCodeConfigurationAutomatically(userConsole);
           initCodeConfigurationAutomatically.execution();
             break;
-         /*  case 5:
-            new RunTaskOption().start();
-            break;
-        case 6:
+          case 5:
+              MenuManager inputProcess=new InputProcess(userConsole);
+              inputProcess.execution();
+              break;
+       /* case 6:
             new TargetCircleOption().start();
             break;
         case 7:
@@ -116,6 +114,3 @@ public class UiMenu {
 
     }
 }
-
-
-

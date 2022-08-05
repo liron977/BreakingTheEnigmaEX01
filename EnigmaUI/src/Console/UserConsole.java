@@ -40,7 +40,7 @@ public UserConsole (EngineManagerInterface engineManager){
         }
     }
     public boolean isInitCodeManuallyStructureIsValid(String str){
-    ListOfExceptionsDTO listOfExceptionsDTO= engineManager.getAllErrorsRelatedToinitCodeManuallyInputStructure(str);
+    ListOfExceptionsDTO listOfExceptionsDTO= engineManager.getAllErrorsRelatedToInitCodeManuallyInputStructure(str);
         if (listOfExceptionsDTO.getListOfException().size() == 0) {
             return true;
         } else {
@@ -56,6 +56,21 @@ public UserConsole (EngineManagerInterface engineManager){
             printListOfException(listOfExceptionsDTO.getListOfException());
             return false;
         }
+    }
+
+    public boolean isUserStringToProcessIsValid(String str){
+        ListOfExceptionsDTO listOfExceptionsDTO= engineManager.getAllErrorsConvertingInputProcess(str);
+        if (listOfExceptionsDTO.getListOfException().size() == 0) {
+            return true;
+        } else {
+            printListOfException(listOfExceptionsDTO.getListOfException());
+            return false;
+        }
+    }
+    public String getConvertedString(String userInput){
+
+        return engineManager.getConvertedString(userInput).getConvertedString();
+
     }
 /*    public boolean userInputValidation(String str) {
 
@@ -75,4 +90,3 @@ public UserConsole (EngineManagerInterface engineManager){
 
     }
 }
-

@@ -22,7 +22,7 @@ public class EngineManager implements EngineManagerInterface {
 
     private ListOfExceptionsDTO listOfExceptionsDTO;
     private MachineDTO machineDTO;
-
+    private TheMachineEngine theMachineEngine;
     private  CTEEnigma cteEnigma;
     SchemaGenerated schemaGenerated;
 
@@ -53,9 +53,9 @@ public class EngineManager implements EngineManagerInterface {
         return theMachineEngine;
 
     }
-    public ListOfExceptionsDTO getAllErrorsRelatedToinitCodeManuallyInputStructure(String str){
+    public ListOfExceptionsDTO getAllErrorsRelatedToInitCodeManuallyInputStructure(String str){
         TheMachineEngine theMachineEngine=buildTheMachineEngine();
-        UserInputValidator userInputValidator=new UserInputValidator(str,cteEnigma,theMachineEngine);
+        UserInputValidator2 userInputValidator=new UserInputValidator2(str,cteEnigma,theMachineEngine);
         userInputValidator.validate();
         List<Exception> exceptions=  userInputValidator.getListOfException();
         ListOfExceptionsDTO  listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
@@ -73,7 +73,7 @@ public class EngineManager implements EngineManagerInterface {
         return cteEnigma.getCTEMachine().getRotorsCount();
     }
     public void initCodeAutomatically(){
-        TheMachineEngine theMachineEngine = buildTheMachineEngine();
+        theMachineEngine = buildTheMachineEngine();
         chooseAutomaticallyRotors(theMachineEngine);
         initRotorsPositionAutomatically(theMachineEngine);
         chooseAutomaticallyReflector(theMachineEngine);
@@ -92,7 +92,10 @@ public class EngineManager implements EngineManagerInterface {
             while (((rotorsHashMap.get(rotorId))!=null)&&(rotorsHashMap.get(rotorId)>=1)){
                 randomSelectedRotor = listOfRotors.get((randomGenerator.nextInt(listOfRotors.size())));
                 rotorId=randomSelectedRotor.getRotorId();
+
+
             }
+            System.out.println(randomSelectedRotor.getRotorId());
             rotorsHashMap.put(rotorId,1);
             listOfRandomRotors.add(randomSelectedRotor);
         }
@@ -103,6 +106,7 @@ public class EngineManager implements EngineManagerInterface {
         Random randomGenerator = new Random();
         Reflector randomSelectedReflector= listOfReflectors.get((randomGenerator.nextInt(listOfReflectors.size())));
         theMachineEngine.addSelectedReflector(randomSelectedReflector.getReflectorId());
+        System.out.println(randomSelectedReflector.getReflectorId());
     }
 
     private void initRotorsPositionAutomatically(TheMachineEngine theMachineEngine){
@@ -110,10 +114,13 @@ public class EngineManager implements EngineManagerInterface {
         Random randomGenerator = new Random();
          String randomSelectedPosition;
          List<Rotor> rotorsSet=theMachineEngine.getUsedRotors().getListOfRotors();
-        for (Rotor rotor: rotorsSet) {
+       /* for (Rotor rotor: rotorsSet) {
             randomSelectedPosition = String.valueOf(keyboard.charAt((toUpperCase(randomGenerator.nextInt(keyboard.length())))));
             rotor.setRotorStartingPosition(randomSelectedPosition);
-        }
+        }*/
+        rotorsSet.get(0).setRotorStartingPosition("F");
+        rotorsSet.get(1).setRotorStartingPosition("D");
+
     }
     private void choosePlugBoardSettings(TheMachineEngine theMachineEngine){
         String keyboard=theMachineEngine.getKeyboard();
@@ -165,6 +172,29 @@ public class EngineManager implements EngineManagerInterface {
         catch (FileNotFoundException e) {
             throw new Exception("The file did not find in this path"+ filePath);
         }
+
+    }
+    public ListOfExceptionsDTO getAllErrorsConvertingInputProcess(String userInput){
+        List<Exception> inputListOfException;
+        Validator userInputValidator=new UserStringProcessorValidator(userInput,theMachineEngine);
+        userInputValidator.validate();
+        inputListOfException=userInputValidator.getListOfException();
+        ListOfExceptionsDTO inputListOfExceptionDTO=new ListOfExceptionsDTO(inputListOfException);
+        return inputListOfExceptionDTO;
+
+    }
+    public ConvertedStringDTO getConvertedString(String userInputString){
+
+        String convertedString="";
+        for (int i=0;i<userInputString.length();i++){
+            String userInputByString =String.valueOf(userInputString.charAt(i));
+            String convertedCharByString=theMachineEngine.manageDecode(userInputByString);
+            convertedString=convertedString.concat(convertedCharByString);
+            //convertedString=convertedString.concat(theMachineEngine.manageDecode(String.valueOf(userInputString.charAt(i))));
+        }
+        ConvertedStringDTO convertedStringDTO=new ConvertedStringDTO(convertedString);
+        return convertedStringDTO;
+
 
     }
 }
