@@ -30,17 +30,15 @@ public class InitCodeConfigurationManually implements MenuManager {
         Scanner scanner = new Scanner(System.in);
         String loadStart = scanner.nextLine();
         boolean isUserInputDisplayIsValid=false;
-        boolean isUserInputIsValid=false;
+        boolean isRotorsIdAreValid=false;
         //userConsole.isInputValid(loadStart);
 
         while (!isUserInputDisplayIsValid){
-            if (userConsole.isInputStructure(loadStart)) {
+            if (userConsole.isInitCodeManuallyStructureIsValid(loadStart)) {
                 isUserInputDisplayIsValid = true;
-                System.out.println("The data is valid");
                 ///Create tne machine with the user data
-
-               /* while (!isUserInputIsValid) {
-                        if (userConsole.isInputValid(loadStart)) {
+                while (!isRotorsIdAreValid) {
+                        if (userConsole.isRotorsIDinInitCodeManuallyIsValid(loadStart)) {
                             isUserInputDisplayIsValid = true;
                             break;
                         }
@@ -48,7 +46,7 @@ public class InitCodeConfigurationManually implements MenuManager {
                             System.out.println("Please insert updated requested details");
                             loadStart = scanner.nextLine();
                         }
-                }*/
+                }
             }
             else {
                 System.out.println("Please insert updated requested details");

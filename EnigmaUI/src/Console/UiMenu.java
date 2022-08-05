@@ -1,6 +1,7 @@
 package Console;
 
 import Menus.InitCodeConfigurationAutomatically;
+import Menus.InitCodeConfigurationManually;
 import Menus.LoadNewFile;
 import Menus.MenuManager;
 
@@ -60,9 +61,10 @@ public class UiMenu {
        /*case 2:
             new TargetGraphInfoOption().start();
             break;*/
-       /* case 3:
-
-            break;*/
+        case 3:
+            MenuManager initCodeConfigurationManually  =new InitCodeConfigurationManually(userConsole);
+            initCodeConfigurationManually.execution();
+            break;
       case 4:
           MenuManager initCodeConfigurationAutomatically=new InitCodeConfigurationAutomatically(userConsole);
           initCodeConfigurationAutomatically.execution();

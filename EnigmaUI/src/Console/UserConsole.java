@@ -1,7 +1,6 @@
 package Console;
 
-import MachineDTO.FileDTO;
-import MachineDTO.MachineDTO;
+import MachineDTO.ListOfExceptionsDTO;
 import EngineManager.EngineManagerInterface;
 
 import java.util.List;
@@ -16,20 +15,20 @@ public UserConsole (EngineManagerInterface engineManager){
 
     public boolean fileNameValidation(String str) {
 
-        FileDTO fileDTO = engineManager.getAllErrorsRelatedToFilePath(str);
-        if (fileDTO.getListOfException().size() == 0) {
+        ListOfExceptionsDTO listOfExceptionsDTO = engineManager.getAllErrorsRelatedToFilePath(str);
+        if (listOfExceptionsDTO.getListOfException().size() == 0) {
             return true;
         } else {
-            printListOfException(fileDTO.getListOfException());
+            printListOfException(listOfExceptionsDTO.getListOfException());
             return false;
         }
     }
     public boolean isFileLoadSuccessfully(String str) throws Exception {
-        FileDTO fileDTO = engineManager.load(str);
-        if (fileDTO.getListOfException().size() == 0) {
+        ListOfExceptionsDTO listOfExceptionsDTO = engineManager.load(str);
+        if (listOfExceptionsDTO.getListOfException().size() == 0) {
             return true;
         } else {
-            printListOfException(fileDTO.getListOfException());
+            printListOfException(listOfExceptionsDTO.getListOfException());
               return false;
         }
 
@@ -40,25 +39,34 @@ public UserConsole (EngineManagerInterface engineManager){
             System.out.println("******************");
         }
     }
-    public boolean isInputStructure(String str){
-    MachineDTO machineDTO= engineManager.getAllErrorsRelatedToinitCodeConfigurationManually(str);
-        if (machineDTO.getListOfException().size() == 0) {
+    public boolean isInitCodeManuallyStructureIsValid(String str){
+    ListOfExceptionsDTO listOfExceptionsDTO= engineManager.getAllErrorsRelatedToinitCodeManuallyInputStructure(str);
+        if (listOfExceptionsDTO.getListOfException().size() == 0) {
             return true;
         } else {
-            printListOfException(machineDTO.getListOfException());
+            printListOfException(listOfExceptionsDTO.getListOfException());
             return false;
         }
     }
-    public boolean userInputValidation(String str) {
+    public boolean isRotorsIDinInitCodeManuallyIsValid(String str){
+        ListOfExceptionsDTO listOfExceptionsDTO= engineManager.getAllErrorsRelatedToChosenManuallyRotors(str);
+        if (listOfExceptionsDTO.getListOfException().size() == 0) {
+            return true;
+        } else {
+            printListOfException(listOfExceptionsDTO.getListOfException());
+            return false;
+        }
+    }
+/*    public boolean userInputValidation(String str) {
 
-        MachineDTO machineDTO = engineManager.getAllErrorsRelatedToinitCodeConfigurationManually(str);
+        MachineDTO machineDTO = engineManager.getAllErrorsRelatedToinitCodeManuallyInputStructure(str);
         if (machineDTO.getListOfException().size() == 0) {
             return true;
         } else {
             printListOfException(machineDTO.getListOfException());
             return false;
         }
-    }
+    }*/
     public void InitCodeConfigurationAutomatically(){
       //  FileDTO fileDTO=engineManager.initCodeAutomatically();
         engineManager.initCodeAutomatically();

@@ -2,12 +2,12 @@ package MachineDTO;
 
 import java.util.List;
 
-public class FileDTO {
+public class ListOfExceptionsDTO {
 
     private List<Exception> errors;
 
 
-    public FileDTO(List<Exception> errors){
+    public ListOfExceptionsDTO(List<Exception> errors){
         this.errors=errors;
 
     }

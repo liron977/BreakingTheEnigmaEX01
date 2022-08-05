@@ -1,12 +1,7 @@
 package Console;
 
-import Engine.TheEnigmaEngine.Pair;
 import EngineManager.EngineManager;
 import EngineManager.EngineManagerInterface;
-import MachineDTO.FileDTO;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
 

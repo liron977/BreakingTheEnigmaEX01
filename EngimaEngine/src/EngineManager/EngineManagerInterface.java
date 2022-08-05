@@ -1,14 +1,14 @@
 package EngineManager;
 
-import Engine.TheEnigmaEngine.TheMachineEngine;
-import MachineDTO.FileDTO;
+import MachineDTO.ListOfExceptionsDTO;
 import MachineDTO.MachineDTO;
 
 public interface EngineManagerInterface {
 
-    FileDTO load(String filePath) throws Exception; //throws XmlException;
-    FileDTO getAllErrorsRelatedToFilePath(String filePath);
-    public MachineDTO getAllErrorsRelatedToinitCodeConfigurationManually(String str);
+    ListOfExceptionsDTO load(String filePath) throws Exception; //throws XmlException;
+    ListOfExceptionsDTO getAllErrorsRelatedToFilePath(String filePath);
+    public ListOfExceptionsDTO getAllErrorsRelatedToinitCodeManuallyInputStructure(String str);
+    public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyRotors(String str);
     public void initCodeAutomatically();
 
 }

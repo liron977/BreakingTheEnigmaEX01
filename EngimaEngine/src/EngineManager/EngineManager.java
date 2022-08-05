@@ -20,7 +20,7 @@ import static java.lang.Character.toUpperCase;
 
 public class EngineManager implements EngineManagerInterface {
 
-    private FileDTO fileDTO;
+    private ListOfExceptionsDTO listOfExceptionsDTO;
     private MachineDTO machineDTO;
 
     private  CTEEnigma cteEnigma;
@@ -29,7 +29,7 @@ public class EngineManager implements EngineManagerInterface {
     private final String JAXB_XML_GAME_PACKAGE_NAME = "schemaGenerated";
 
     @Override
-    public FileDTO load(String filePath) throws Exception
+    public ListOfExceptionsDTO load(String filePath) throws Exception
     {
         CTEEnigma cteEnigma =readFromXmlFile(filePath);
         XmlReflectorValidator xmlReflectorValidator =new XmlReflectorValidator(cteEnigma);
@@ -41,8 +41,8 @@ public class EngineManager implements EngineManagerInterface {
         validators.add((xmlRotorValidator));
         ValidatorRunner validatorRunner=new ValidatorRunner(validators);
         List<Exception> exceptions=  validatorRunner.run();
-          fileDTO =new FileDTO(exceptions);
-          return fileDTO;
+          listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
+          return listOfExceptionsDTO;
     }
     public TheMachineEngine buildTheMachineEngine(){
 
@@ -53,15 +53,21 @@ public class EngineManager implements EngineManagerInterface {
         return theMachineEngine;
 
     }
-    public MachineDTO getAllErrorsRelatedToinitCodeConfigurationManually(String str){
+    public ListOfExceptionsDTO getAllErrorsRelatedToinitCodeManuallyInputStructure(String str){
         TheMachineEngine theMachineEngine=buildTheMachineEngine();
         UserInputValidator userInputValidator=new UserInputValidator(str,cteEnigma,theMachineEngine);
-        List<Validator> validators=new ArrayList<>();
-        validators.add(userInputValidator);
-        ValidatorRunner validatorRunner=new ValidatorRunner(validators);
-        List<Exception> exceptions=  validatorRunner.run();
-        machineDTO =new MachineDTO(exceptions,0, new String[]{" "},new String[]{" "},"",0,"");
-       return machineDTO;
+        userInputValidator.validate();
+        List<Exception> exceptions=  userInputValidator.getListOfException();
+        ListOfExceptionsDTO  listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
+        return listOfExceptionsDTO;
+    }
+    public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyRotors(String str){
+        TheMachineEngine theMachineEngine=buildTheMachineEngine();
+        UserInputRotorsValidator userInputRotorsValidator=new UserInputRotorsValidator(str,cteEnigma,theMachineEngine);
+        userInputRotorsValidator.validate();
+        List<Exception> exceptions=  userInputRotorsValidator.getListOfException();
+        ListOfExceptionsDTO  listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
+        return listOfExceptionsDTO;
     }
     public int getRotorsAmount(){
         return cteEnigma.getCTEMachine().getRotorsCount();
@@ -136,12 +142,12 @@ public class EngineManager implements EngineManagerInterface {
         }
     }
 
-    public FileDTO getAllErrorsRelatedToFilePath(String filePath) {
+    public ListOfExceptionsDTO getAllErrorsRelatedToFilePath(String filePath) {
         XmlFileValidator xmlFileValidator = new XmlFileValidator(filePath);
         xmlFileValidator.validate();
         List<Exception> exceptions=  xmlFileValidator.getListOfException();
-        fileDTO =new FileDTO(exceptions);
-        return fileDTO;
+        listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
+        return listOfExceptionsDTO;
     }
     public CTEEnigma readFromXmlFile(String filePath) throws Exception {
         File file = new File(filePath);

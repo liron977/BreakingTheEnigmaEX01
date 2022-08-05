@@ -33,16 +33,17 @@ public class UserInputValidator implements Validator {
 
     @Override
     public void validate() {
-        if (isStrFormatValid()) {
+        isStrFormatValid();
+      /*  if (isStrFormatValid()) {
             splitTheUserInput();
-            isRotorsIdFromUserInputIsValid();
-                isRotorIDIsUniq();
-                isRotorsIdIsANumber();
+           // isRotorsIdFromUserInputIsValid();
+               // isRotorIDIsUniq();
+                //isRotorsIdIsANumber();
                 isRotorsStartPositionSignalsAreValid();
                 isRototsPositionAmountIsValid();
                 isReflectorIdValid();
                 isPlugsBoardsIsValid();
-        }
+        }*/
     }
     private void isRotorIDIsUniq(){
        for(int i=0;i<rotorsId.length;i++) {
@@ -86,7 +87,7 @@ public class UserInputValidator implements Validator {
         }
         return tmp;
     }
-    private boolean isRotorsIdFromUserInputIsValid(){
+    /*private boolean isRotorsIdFromUserInputIsValid(){
         int numberOfRotorsFromTheFile=cteEnigma.getCTEMachine().getRotorsCount();
       if(rotorsId.length>numberOfRotorsFromTheFile){
           listOfException.add(new Exception("The number of rotors you enter is more of the rotors amount exist in the machine,you can insert ["+numberOfRotorsFromTheFile+"] for maximum"));
@@ -114,8 +115,8 @@ public class UserInputValidator implements Validator {
                 listOfException.add(new Exception("The rotors id can be numbers only,the rotor id: [" +id +"] is not valid"));
             }
         }
-    }
-    private void isReflectorIdValid(){
+    }*/
+/*    private void isReflectorIdValid(){
 
         if(!theMachineEngine.getReflectorsSet().searchReflectorById(reflectorId)){
         listOfException.add(new Exception("The reflector ID is not exist in the file"));
@@ -129,7 +130,7 @@ public class UserInputValidator implements Validator {
             }
 
         }
-    }
+    }*/
     private void isRotorsStartPositionSignalsAreValid(){
         for (char signal:rotorsPosition) {
            if(!theMachineEngine.getKeyboard().contains(String.valueOf(signal))){
