@@ -2,6 +2,7 @@ package EngineManager;
 
 import MachineDTO.ConvertedStringDTO;
 import MachineDTO.ListOfExceptionsDTO;
+import MachineDTO.TheMachineSettingsDTO;
 
 public interface EngineManagerInterface {
 
@@ -10,6 +11,7 @@ public interface EngineManagerInterface {
     public ListOfExceptionsDTO getAllErrorsRelatedToInitCodeManuallyInputStructure(String str);
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyRotors(String str);
     public void initCodeAutomatically();
+    public TheMachineSettingsDTO getTheMachineSettingsDTO();
 
    public ListOfExceptionsDTO getAllErrorsConvertingInputProcess(String str);
    public ConvertedStringDTO getConvertedString(String str);

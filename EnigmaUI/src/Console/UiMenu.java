@@ -55,9 +55,10 @@ public class UiMenu {
                 MenuManager loadNewFile = new LoadNewFile(userConsole);
                 loadNewFile.execution();
                 break;
-       /*case 2:
-            new TargetGraphInfoOption().start();
-            break;*/
+       case 2:
+           MenuManager displayMachineConfiguration=new DisplayMachineConfiguration(userConsole);
+           displayMachineConfiguration.execution();
+           break;
         case 3:
             MenuManager initCodeConfigurationManually  =new InitCodeConfigurationManually(userConsole);
             initCodeConfigurationManually.execution();

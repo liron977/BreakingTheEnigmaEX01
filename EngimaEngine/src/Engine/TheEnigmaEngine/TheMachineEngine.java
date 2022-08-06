@@ -12,7 +12,7 @@ public class TheMachineEngine {
     private PlugsBoard plugsBoard;
     private int amountOfUsedRotors;
 
-    private int amountOfProcessedMessages;
+
 
     public Reflector getReflector() {
         return reflector;
@@ -20,7 +20,7 @@ public class TheMachineEngine {
 
     public TheMachineEngine(RotorsSet rotorsSet, ReflectorsSet reflectorsSet, Keyboard keyboard, int amountOfUsedRotors){
         this.rotorsSet=rotorsSet;
-        amountOfProcessedMessages=0;
+
         //this.reflector=reflector;
         this.keyboard=keyboard;
         this.reflectorsSet=reflectorsSet;
@@ -51,9 +51,7 @@ public class TheMachineEngine {
     public int getReflectorsAmount(){
         return reflectorsSet.getReflectorsAmount();
     }
-    public int getProcessedMessagesAmount(){
-        return amountOfProcessedMessages;
-    }
+
 
     public int getMaxAmountOfRotors() {
         return rotorsSet.getMaxAmountOfRotors();
@@ -134,7 +132,7 @@ public String manageDecode(String signal){
     usedRotors.manageSpins();
     indexOfSignal=theProcessFromTheRotorsToReflecter(signal);
     result=theProcessFromTheReflectorToRotors(indexOfSignal);
-    amountOfProcessedMessages++;
+
     return result;
 }
     private int theProcessFromTheRotorsToReflecter(String signal){

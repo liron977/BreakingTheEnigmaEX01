@@ -43,4 +43,6 @@ this.amountOfUsedRotors=amountOfUsedRotors;
     public List<String> getNotchPosition() {
         return notchPosition;
     }
+
+
 }

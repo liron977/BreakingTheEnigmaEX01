@@ -26,7 +26,7 @@ public class EngineManager implements EngineManagerInterface {
     private  CTEEnigma cteEnigma;
     SchemaGenerated schemaGenerated;
     boolean isCodeConfigurationSet=false;
-
+    private int amountOfProcessedMessages=0;
     private final String JAXB_XML_GAME_PACKAGE_NAME = "schemaGenerated";
 
     @Override
@@ -185,7 +185,7 @@ public class EngineManager implements EngineManagerInterface {
     }
     public ListOfExceptionsDTO getAllErrorsConvertingInputProcess(String userInput){
         List<Exception> inputListOfException;
-        Validator userInputValidator=new UserStringProcessorValidator(userInput,theMachineEngine);
+        Validator userInputValidator=new UserStringProcessorValidator(userInput.toUpperCase(),theMachineEngine);
         userInputValidator.validate();
         inputListOfException=userInputValidator.getListOfException();
         ListOfExceptionsDTO inputListOfExceptionDTO=new ListOfExceptionsDTO(inputListOfException);
@@ -202,6 +202,7 @@ public class EngineManager implements EngineManagerInterface {
             convertedString=convertedString.concat(convertedCharByString);
             //convertedString=convertedString.concat(theMachineEngine.manageDecode(String.valueOf(userInputString.charAt(i))));
         }
+        amountOfProcessedMessages++;
         ConvertedStringDTO convertedStringDTO=new ConvertedStringDTO(convertedString);
         return convertedStringDTO;
 
@@ -215,7 +216,7 @@ public class EngineManager implements EngineManagerInterface {
         int maxAmountOfRotors=theMachineEngine.getMaxAmountOfRotors();
         List<String> notchPosition=theMachineEngine.getListOfNotch();
        int amountOfReflectors= theMachineEngine.getReflectorsAmount();
-        int amountOfProcessedMessages=theMachineEngine.getProcessedMessagesAmount();
+
         CurrentCodeDescriptionDTO currentCodeDescriptionDTO=createCurrentCodeDescriptionDTO();
         TheMachineSettingsDTO theMachineSettingsDTO=new TheMachineSettingsDTO(amountOfUsedRotors,maxAmountOfRotors,notchPosition,amountOfReflectors,amountOfProcessedMessages,currentCodeDescriptionDTO);
         return theMachineSettingsDTO;

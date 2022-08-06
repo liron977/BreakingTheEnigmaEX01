@@ -9,4 +9,5 @@ public class ConvertedStringDTO {
     public String getConvertedString() {
         return convertedString;
     }
+
 }
