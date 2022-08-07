@@ -71,10 +71,12 @@ public class EngineManager implements EngineManagerInterface {
         UserInputRotorsValidator userInputRotorsValidator=new UserInputRotorsValidator(str,theMachineEngine);
         userInputRotorsValidator.validate();
         List<Rotor> listOfRotors=new ArrayList<>();
-        for (String rotorId:userInputRotorsValidator.getFilteredUserInput()) {
-            listOfRotors.add(theMachineEngine.getRotorsSet().getRotorById(rotorId));
+        if(listOfRotors.size()>0) {
+            for (String rotorId : userInputRotorsValidator.getFilteredUserInput()) {
+                listOfRotors.add(theMachineEngine.getRotorsSet().getRotorById(rotorId));
+            }
+            chooseManuallyRotors(listOfRotors);
         }
-        chooseManuallyRotors(listOfRotors);
         List<Exception> exceptions=  userInputRotorsValidator.getListOfException();
         ListOfExceptionsDTO  listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
         return listOfExceptionsDTO;
@@ -168,7 +170,6 @@ public class EngineManager implements EngineManagerInterface {
 
 
             }
-            System.out.println(randomSelectedRotor.getRotorId());
             rotorsHashMap.put(rotorId,1);
             listOfRandomRotors.add(randomSelectedRotor);
         }
@@ -190,9 +191,6 @@ public class EngineManager implements EngineManagerInterface {
             randomSelectedPosition = String.valueOf(keyboard.charAt((toUpperCase(randomGenerator.nextInt(keyboard.length())))));
             rotor.setRotorStartingPosition(randomSelectedPosition);
         }
-        /*rotorsSet.get(0).setRotorStartingPosition("F");
-        rotorsSet.get(1).setRotorStartingPosition("D");*/
-
     }
     private void choosePlugBoardSettings(TheMachineEngine theMachineEngine){
         String keyboard=theMachineEngine.getKeyboard();
@@ -202,7 +200,6 @@ public class EngineManager implements EngineManagerInterface {
         int amountOfSwappingPairs=randomGenerator.nextInt(keyboard.length()/2);
         String firstSignal,secondSignal;
         if(amountOfSwappingPairs>0) {
-            /*amountOfSwappingPairs=0;*/
             for (int i = 0; i < amountOfSwappingPairs; i++) {
                 firstSignal = String.valueOf(keyboard.charAt(randomGenerator.nextInt(keyboard.length())));
                 while (((plugBoardHashMap.get(firstSignal)) != null) && (plugBoardHashMap.get(firstSignal) == 1)) {
@@ -216,7 +213,6 @@ public class EngineManager implements EngineManagerInterface {
                 plugBoardHashMap.put(secondSignal, 1);
                 Pair pair = new Pair(firstSignal, secondSignal);
                 pairsOfSwappingLetters.add(pair);
-                System.out.printf("swapping pairs:"+pair);
             }
 
         }
