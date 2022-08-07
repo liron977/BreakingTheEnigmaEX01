@@ -1,7 +1,9 @@
 package MachineDTO;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class CurrentCodeDescriptionDTO {
     private String[] usedRotorsId;
@@ -30,5 +32,20 @@ this.usedRotorsId=usedRotorsId;
 
     public String[] getUsedRotorsId() {
         return usedRotorsId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CurrentCodeDescriptionDTO that = (CurrentCodeDescriptionDTO) o;
+        return Arrays.equals(usedRotorsId, that.usedRotorsId) && Objects.equals(chosenStartingPosition, that.chosenStartingPosition) && Objects.equals(reflectorId, that.reflectorId) && Objects.equals(pairsOfSwappingCharacter, that.pairsOfSwappingCharacter);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(chosenStartingPosition, reflectorId, pairsOfSwappingCharacter);
+        result = 31 * result + Arrays.hashCode(usedRotorsId);
+        return result;
     }
 }

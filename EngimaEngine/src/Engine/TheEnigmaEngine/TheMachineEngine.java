@@ -27,6 +27,11 @@ public class TheMachineEngine {
         this.amountOfUsedRotors=amountOfUsedRotors;
         //this.plugsBoard=plugsBoard;
     }
+
+    public void reverseUsedRotors(){
+        Collections.reverse(usedRotors.getListOfRotors());
+
+    }
  public List<String> getStringPairsOfSwappingCharacter(){
         return plugsBoard.getStringPairsOfSwappingCharacter();
  }
@@ -51,7 +56,6 @@ public class TheMachineEngine {
     public int getReflectorsAmount(){
         return reflectorsSet.getReflectorsAmount();
     }
-
 
     public int getMaxAmountOfRotors() {
         return rotorsSet.getMaxAmountOfRotors();

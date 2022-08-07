@@ -1,6 +1,7 @@
 package Engine.TheEnigmaEngine;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class RotorsSet {
@@ -9,7 +10,9 @@ public class RotorsSet {
     public RotorsSet(List<Rotor> rotors){
         this.rotors=rotors;
         this.rotorsAmount=rotors.size();
+
     }
+
     public Rotor getRotorById(String rotorId){
         for (Rotor rotor:rotors) {
             if(rotor.getRotorId().equals(rotorId)){

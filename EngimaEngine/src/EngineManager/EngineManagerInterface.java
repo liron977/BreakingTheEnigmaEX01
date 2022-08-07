@@ -2,7 +2,10 @@ package EngineManager;
 
 import MachineDTO.ConvertedStringDTO;
 import MachineDTO.ListOfExceptionsDTO;
+import MachineDTO.MachineHistoryAndStatisticsDTO;
 import MachineDTO.TheMachineSettingsDTO;
+
+import java.util.List;
 
 public interface EngineManagerInterface {
 
@@ -19,7 +22,8 @@ public interface EngineManagerInterface {
    public ListOfExceptionsDTO getAllErrorsConvertingInputProcess(String str);
    public ConvertedStringDTO getConvertedString(String str);
     public void resetCurrentCode();
-    public void chooseManuallyStartingPosition(String userInput);
+    public List<MachineHistoryAndStatisticsDTO> getHistoryAndStatisticsDTO();
+        public void chooseManuallyStartingPosition(String userInput);
     public void chooseManuallyPlugBoard(String userInput);
     public void DefineIsCodeConfigurationSetValueToTrue();
 }

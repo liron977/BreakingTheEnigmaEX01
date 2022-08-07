@@ -75,9 +75,10 @@ public class UiMenu {
            MenuManager resetCurrentCode=new ResetCurrentCode(userConsole);
            resetCurrentCode.execution();
            break;
-        /*case 7:
-            new SavaSystemStatus().start();
-            break;*/
+        case 7:
+            MenuManager historyAndStatistics=new DisplayHistoryAndStatistics(userConsole);
+            historyAndStatistics.execution();
+            break;
 
         }
 

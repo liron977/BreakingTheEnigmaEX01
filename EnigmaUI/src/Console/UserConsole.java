@@ -3,6 +3,7 @@ package Console;
 import MachineDTO.CurrentCodeDescriptionDTO;
 import MachineDTO.ListOfExceptionsDTO;
 import EngineManager.EngineManagerInterface;
+import MachineDTO.MachineHistoryAndStatisticsDTO;
 import MachineDTO.TheMachineSettingsDTO;
 
 import java.util.List;
@@ -155,6 +156,27 @@ public UserConsole (EngineManagerInterface engineManager){
         }
         return currentCodeDescription;
 
+
+    }
+    public void getHistoryAndStatistics(){
+       List<MachineHistoryAndStatisticsDTO> listOfMachineHistory= engineManager.getHistoryAndStatisticsDTO();
+        for (MachineHistoryAndStatisticsDTO machineHistory:listOfMachineHistory) {
+            if(machineHistory.getCurrentCodeDescriptionDTO()!=null) {
+                System.out.printf("The the strings that proceeded for "+getCurrentCodeDescription(machineHistory.getCurrentCodeDescriptionDTO()) + " are :\n");
+                String[] userInput = machineHistory.getHistoryAndStatisticsDTO().getUserInput();
+                String[] convertedStrings = machineHistory.getHistoryAndStatisticsDTO().getConvertedString();
+                String[] timeToProcess = machineHistory.getHistoryAndStatisticsDTO().getTimeToProcess();
+                if(userInput.length==0) {
+                    System.out.println("none");
+
+                }
+            else {
+                for (int i = 0; i < userInput.length; i++) {
+                    System.out.println("<" + userInput[i] + "> --> <" + convertedStrings[i] + "> (" + timeToProcess[i] + " nano-seconds)");
+                }
+            }
+            }
+        }
 
     }
     public String getPairsOfSwappingCharacter(List<String> pairsOfSwappingCharacter){

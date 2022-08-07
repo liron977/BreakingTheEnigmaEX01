@@ -8,10 +8,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import MachineDTO.*;
 
@@ -21,8 +18,10 @@ import static java.lang.Character.toUpperCase;
 public class EngineManager implements EngineManagerInterface {
 
     private ListOfExceptionsDTO listOfExceptionsDTO;
+    private CurrentCodeDescriptionDTO currentCodeDescriptionDTO;
     private MachineDTO machineDTO;
     private TheMachineEngine theMachineEngine;
+    private  MachineHistoryAndStatistics machineHistoryAndStatistics=new MachineHistoryAndStatistics();
     private  CTEEnigma cteEnigma;
     SchemaGenerated schemaGenerated;
     boolean isCodeConfigurationSet=false;
@@ -51,6 +50,7 @@ public class EngineManager implements EngineManagerInterface {
         TheMachineEngine theMachineEngine= new TheMachineEngine(schemaGenerated.createRotorsSet(),schemaGenerated.createReflectorsSet(),schemaGenerated.createKeyboard(),schemaGenerated.getAmountOfUsedRotors());
         //machineDTO =new MachineDTO(new ArrayList<>(),cteEnigma.getCTEMachine().getRotorsCount(),theMachineEngine.getRotorsId(),theMachineEngine.getReflectorId(),theMachineEngine.getKeyboard(),0,"");
         //return machineDTO;
+
         return theMachineEngine;
 
     }
@@ -65,6 +65,12 @@ public class EngineManager implements EngineManagerInterface {
     }
     public void DefineIsCodeConfigurationSetValueToTrue(){
         this.isCodeConfigurationSet=true;
+        reverseUsedRotors(theMachineEngine);
+        machineHistoryAndStatistics.addNewMachineSettings(createCurrentCodeDescriptionDTO());
+    }
+    private void reverseUsedRotors(TheMachineEngine theMachineEngine){
+        theMachineEngine.reverseUsedRotors();
+
     }
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyRotors(String str){
          theMachineEngine=buildTheMachineEngine();
@@ -114,6 +120,7 @@ public class EngineManager implements EngineManagerInterface {
         userInput=userInput.toUpperCase();
         String startingPosition;
         int i=0;
+
         List<Rotor> rotorsSet=theMachineEngine.getUsedRotors().getListOfRotors();
         for (Rotor rotor: rotorsSet) {
             startingPosition=String.valueOf(userInput.charAt(i));
@@ -141,6 +148,7 @@ public class EngineManager implements EngineManagerInterface {
         }
         PlugsBoard plugsBoard=new PlugsBoard(theMachineEngine.getKeyboard(),pairsOfSwappingLetters);
         theMachineEngine.addPlugsBoardTOTheMachine(plugsBoard);
+
     }
 
 
@@ -154,6 +162,10 @@ public class EngineManager implements EngineManagerInterface {
         chooseAutomaticallyReflector(theMachineEngine);
         choosePlugBoardSettings(theMachineEngine);
         isCodeConfigurationSet=true;
+        reverseUsedRotors(theMachineEngine);
+        machineHistoryAndStatistics.addNewMachineSettings(createCurrentCodeDescriptionDTO());
+
+
     }
     private void chooseAutomaticallyRotors(TheMachineEngine theMachineEngine){
         List<Rotor> listOfRotors = theMachineEngine.getRotorsSet().getListOfRotors();
@@ -219,6 +231,7 @@ public class EngineManager implements EngineManagerInterface {
         }
         PlugsBoard plugsBoard=new PlugsBoard(keyboard,pairsOfSwappingLetters);
         theMachineEngine.addPlugsBoardTOTheMachine(plugsBoard);
+
     }
 
     public ListOfExceptionsDTO getAllErrorsRelatedToFilePath(String filePath) {
@@ -256,6 +269,7 @@ public class EngineManager implements EngineManagerInterface {
 
     }
     public ConvertedStringDTO getConvertedString(String userInputString){
+        long begin = System.nanoTime();
 
         String convertedString="";
         userInputString=userInputString.toUpperCase();
@@ -265,13 +279,50 @@ public class EngineManager implements EngineManagerInterface {
             convertedString=convertedString.concat(convertedCharByString);
             //convertedString=convertedString.concat(theMachineEngine.manageDecode(String.valueOf(userInputString.charAt(i))));
         }
+        long end = System.nanoTime();
         amountOfProcessedMessages++;
         ConvertedStringDTO convertedStringDTO=new ConvertedStringDTO(convertedString);
+        machineHistoryAndStatistics.addNewProcess(currentCodeDescriptionDTO,new HistoryOfProcess(userInputString,convertedString,end-begin));
+
         return convertedStringDTO;
 
 
+
     }
-    public void resetCurrentCode(){
+    public List<MachineHistoryAndStatisticsDTO> getHistoryAndStatisticsDTO() {
+        List<MachineHistoryAndStatisticsDTO> listOfMachineHistoryAndStatisticsDTO=new ArrayList<>();
+        Map<CurrentCodeDescriptionDTO, List<HistoryOfProcess>> machineHistory= machineHistoryAndStatistics.getMachineHistory();
+
+
+        int j=0;
+         for (Map.Entry<CurrentCodeDescriptionDTO,List<HistoryOfProcess>> entry : machineHistory.entrySet()) {
+             String[] userInput=new String[entry.getValue().size()];
+             String[] convertedString=new String[entry.getValue().size()];;
+             String[] timeToProcess=new String[entry.getValue().size()];;
+
+            for (int i=0;i<entry.getValue().size();i++) {
+                userInput[i]=entry.getValue().get(i).getUserInput();
+                convertedString[i]=entry.getValue().get(i).getConvertedInput();
+                timeToProcess[i]=String.valueOf(entry.getValue().get(i).getTimeToProcess());
+
+
+            }
+             HistoryAndStatisticsDTO historyAndStatisticsDTO=new HistoryAndStatisticsDTO(userInput,convertedString,timeToProcess);
+             MachineHistoryAndStatisticsDTO machineHistoryAndStatisticsDTO=new MachineHistoryAndStatisticsDTO(entry.getKey(),historyAndStatisticsDTO);
+             listOfMachineHistoryAndStatisticsDTO.add(machineHistoryAndStatisticsDTO);
+
+
+        }
+         return listOfMachineHistoryAndStatisticsDTO;
+
+
+    }
+
+
+
+
+
+        public void resetCurrentCode(){
         theMachineEngine.resetCurrentRotorSetCode();
     }
     public TheMachineSettingsDTO getTheMachineSettingsDTO(){
@@ -293,6 +344,7 @@ public class EngineManager implements EngineManagerInterface {
             List<String> pairsOfSwappingCharacter = theMachineEngine.getStringPairsOfSwappingCharacter();
           currentCodeDescriptionDTO = new CurrentCodeDescriptionDTO(pairsOfSwappingCharacter, reflectorId, chosenStartingPosition, usedRotorsId);
         }
+        this.currentCodeDescriptionDTO=currentCodeDescriptionDTO;
 
         return currentCodeDescriptionDTO;
     }
