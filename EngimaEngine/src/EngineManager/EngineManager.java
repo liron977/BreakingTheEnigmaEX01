@@ -71,8 +71,9 @@ public class EngineManager implements EngineManagerInterface {
         UserInputRotorsValidator userInputRotorsValidator=new UserInputRotorsValidator(str,theMachineEngine);
         userInputRotorsValidator.validate();
         List<Rotor> listOfRotors=new ArrayList<>();
-        if(listOfRotors.size()>0) {
-            for (String rotorId : userInputRotorsValidator.getFilteredUserInput()) {
+        String[] rotorsId=userInputRotorsValidator.getFilteredUserInput();
+          if(rotorsId!=null) {
+            for (String rotorId : rotorsId) {
                 listOfRotors.add(theMachineEngine.getRotorsSet().getRotorById(rotorId));
             }
             chooseManuallyRotors(listOfRotors);
