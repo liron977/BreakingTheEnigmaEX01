@@ -42,6 +42,9 @@ public class RotorsSet {
         }
         return rotorsId;
     }
+    public void reverseRotors(){
+        Collections.reverse(rotors);
+    }
     public void manageSpins(){
 
         for(int i=0;i<rotorsAmount-1;i++) {

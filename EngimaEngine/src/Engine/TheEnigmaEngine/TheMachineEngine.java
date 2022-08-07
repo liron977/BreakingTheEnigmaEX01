@@ -29,7 +29,7 @@ public class TheMachineEngine {
     }
 
     public void reverseUsedRotors(){
-        Collections.reverse(usedRotors.getListOfRotors());
+        usedRotors.reverseRotors();
 
     }
  public List<String> getStringPairsOfSwappingCharacter(){

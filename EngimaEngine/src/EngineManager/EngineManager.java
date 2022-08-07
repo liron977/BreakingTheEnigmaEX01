@@ -54,6 +54,9 @@ public class EngineManager implements EngineManagerInterface {
         return theMachineEngine;
 
     }
+    public boolean getIsCodeConfigurationSet(){
+        return isCodeConfigurationSet;
+    }
     public ListOfExceptionsDTO getAllErrorsRelatedToInitCodeManuallyInputStructure(String str){
          theMachineEngine=buildTheMachineEngine();
         UserInputValidator2 userInputValidator=new UserInputValidator2(str,cteEnigma,theMachineEngine);
@@ -232,6 +235,7 @@ public class EngineManager implements EngineManagerInterface {
         PlugsBoard plugsBoard=new PlugsBoard(keyboard,pairsOfSwappingLetters);
         theMachineEngine.addPlugsBoardTOTheMachine(plugsBoard);
 
+
     }
 
     public ListOfExceptionsDTO getAllErrorsRelatedToFilePath(String filePath) {
@@ -348,4 +352,5 @@ public class EngineManager implements EngineManagerInterface {
 
         return currentCodeDescriptionDTO;
     }
+
 }

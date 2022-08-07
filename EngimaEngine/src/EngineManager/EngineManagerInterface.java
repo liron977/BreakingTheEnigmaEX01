@@ -1,5 +1,6 @@
 package EngineManager;
 
+import Engine.TheEnigmaEngine.TheMachineEngine;
 import MachineDTO.ConvertedStringDTO;
 import MachineDTO.ListOfExceptionsDTO;
 import MachineDTO.MachineHistoryAndStatisticsDTO;
@@ -22,8 +23,10 @@ public interface EngineManagerInterface {
    public ListOfExceptionsDTO getAllErrorsConvertingInputProcess(String str);
    public ConvertedStringDTO getConvertedString(String str);
     public void resetCurrentCode();
+    public boolean getIsCodeConfigurationSet();
     public List<MachineHistoryAndStatisticsDTO> getHistoryAndStatisticsDTO();
         public void chooseManuallyStartingPosition(String userInput);
     public void chooseManuallyPlugBoard(String userInput);
     public void DefineIsCodeConfigurationSetValueToTrue();
-}
+    public TheMachineEngine buildTheMachineEngine();
+    }

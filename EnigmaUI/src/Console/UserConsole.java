@@ -29,6 +29,7 @@ public UserConsole (EngineManagerInterface engineManager){
     public boolean isFileLoadSuccessfully(String str) throws Exception {
         ListOfExceptionsDTO listOfExceptionsDTO = engineManager.load(str);
         if (listOfExceptionsDTO.getListOfException().size() == 0) {
+
             return true;
         } else {
             printListOfException(listOfExceptionsDTO.getListOfException());
@@ -139,7 +140,9 @@ public UserConsole (EngineManagerInterface engineManager){
         currentCodeConfigurations=currentCodeConfigurations+"2.The notch positions for each rotor: \n"+getNotchPositionByPairs(theMachineSettingsDTO.getNotchPosition());
         currentCodeConfigurations=currentCodeConfigurations+"3.The amount of reflectors is: "+theMachineSettingsDTO.getAmountOfReflectors()+"\n";
         currentCodeConfigurations=currentCodeConfigurations+"4.The current amount of proceeded messages: "+theMachineSettingsDTO.getAmountOfProcessedMessages()+"\n";
-        currentCodeConfigurations=currentCodeConfigurations+"5.The current code description: \n"+getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO())+"\n";
+        if(engineManager.getIsCodeConfigurationSet()) {
+            currentCodeConfigurations = currentCodeConfigurations + "5.The current code description: \n" + getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO()) + "\n";
+        }
         return currentCodeConfigurations;
 
     }
@@ -182,7 +185,7 @@ public UserConsole (EngineManagerInterface engineManager){
     public String getPairsOfSwappingCharacter(List<String> pairsOfSwappingCharacter){
         String seperatedPairsOfSwappingCharacter="";
         for (String pairOfSwappingCharacter:pairsOfSwappingCharacter) {
-            seperatedPairsOfSwappingCharacter=seperatedPairsOfSwappingCharacter+pairOfSwappingCharacter.charAt(1)+"|"+pairOfSwappingCharacter.charAt(3);
+            seperatedPairsOfSwappingCharacter=seperatedPairsOfSwappingCharacter+pairOfSwappingCharacter.charAt(3)+"|"+pairOfSwappingCharacter.charAt(1);
             seperatedPairsOfSwappingCharacter=seperatedPairsOfSwappingCharacter+",";
         }
         seperatedPairsOfSwappingCharacter=seperatedPairsOfSwappingCharacter.substring(0,seperatedPairsOfSwappingCharacter.length()-1);
