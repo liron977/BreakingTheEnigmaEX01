@@ -55,7 +55,7 @@ public class EngineManager implements EngineManagerInterface {
 
     }
     public ListOfExceptionsDTO getAllErrorsRelatedToInitCodeManuallyInputStructure(String str){
-        TheMachineEngine theMachineEngine=buildTheMachineEngine();
+         theMachineEngine=buildTheMachineEngine();
         UserInputValidator2 userInputValidator=new UserInputValidator2(str,cteEnigma,theMachineEngine);
         userInputValidator.validate();
         List<Exception> exceptions=  userInputValidator.getListOfException();
@@ -63,14 +63,84 @@ public class EngineManager implements EngineManagerInterface {
         isCodeConfigurationSet=true;
         return listOfExceptionsDTO;
     }
+    public void DefineIsCodeConfigurationSetValueToTrue(){
+        this.isCodeConfigurationSet=true;
+    }
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyRotors(String str){
-        TheMachineEngine theMachineEngine=buildTheMachineEngine();
-        UserInputRotorsValidator userInputRotorsValidator=new UserInputRotorsValidator(str,cteEnigma,theMachineEngine);
+         theMachineEngine=buildTheMachineEngine();
+        UserInputRotorsValidator userInputRotorsValidator=new UserInputRotorsValidator(str,theMachineEngine);
         userInputRotorsValidator.validate();
+        List<Rotor> listOfRotors=new ArrayList<>();
+        for (String rotorId:userInputRotorsValidator.getFilteredUserInput()) {
+            listOfRotors.add(theMachineEngine.getRotorsSet().getRotorById(rotorId));
+        }
+        chooseManuallyRotors(listOfRotors);
         List<Exception> exceptions=  userInputRotorsValidator.getListOfException();
         ListOfExceptionsDTO  listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
         return listOfExceptionsDTO;
     }
+    public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyStartingPosition(String str){
+        Validator userInputStartingPositionValidator=new UserInputStartingPositionValidator(str,theMachineEngine);
+        userInputStartingPositionValidator.validate();
+        List<Exception> exceptions= userInputStartingPositionValidator.getListOfException();
+        ListOfExceptionsDTO  listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
+        return listOfExceptionsDTO;
+    }
+    public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyReflectorId(String str){
+        UserInputReflectorValidator userInputReflectorValidator=new UserInputReflectorValidator(str,theMachineEngine);
+        userInputReflectorValidator.validate();
+        String reflectorId=userInputReflectorValidator.getReflectorId();
+        chooseManuallyReflect(reflectorId);
+        List<Exception> exceptions= userInputReflectorValidator.getListOfException();
+        ListOfExceptionsDTO  listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
+        return listOfExceptionsDTO;
+    }
+    public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyPlagBoard(String str){
+        Validator userInputPlugBoardValidator=new UserInputPlugBoardValidator(str,theMachineEngine);
+        userInputPlugBoardValidator.validate();
+        List<Exception> exceptions= userInputPlugBoardValidator.getListOfException();
+        ListOfExceptionsDTO  listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
+        return listOfExceptionsDTO;
+    }
+    public void chooseManuallyRotors(List<Rotor> rotors){
+        if(rotors.size()>0){
+            theMachineEngine.createUsedRotorsSet(rotors);
+        }
+    }
+    public void chooseManuallyStartingPosition(String userInput){
+        userInput=userInput.toUpperCase();
+        String startingPosition;
+        int i=0;
+        List<Rotor> rotorsSet=theMachineEngine.getUsedRotors().getListOfRotors();
+        for (Rotor rotor: rotorsSet) {
+            startingPosition=String.valueOf(userInput.charAt(i));
+            rotor.setRotorStartingPosition(startingPosition);
+            i++;
+        }
+    }
+    public void chooseManuallyReflect(String reflectorId){
+       if(reflectorId!="") {
+           theMachineEngine.addSelectedReflector(reflectorId);
+       }
+    }
+    public void chooseManuallyPlugBoard(String userInput){
+        userInput=userInput.toUpperCase();
+        List<Pair> pairsOfSwappingLetters=new ArrayList<>();
+        String firstSignal,secondSignal;
+        int amountOfSwappingPairs=userInput.length()/2;
+        if(amountOfSwappingPairs>0) {
+            for (int i = 0; i < userInput.length()-1; i++) {
+                firstSignal = String.valueOf(userInput.charAt(i));
+                secondSignal = String.valueOf(userInput.charAt(i+1));
+                Pair pair = new Pair(firstSignal, secondSignal);
+                pairsOfSwappingLetters.add(pair);
+            }
+        }
+        PlugsBoard plugsBoard=new PlugsBoard(theMachineEngine.getKeyboard(),pairsOfSwappingLetters);
+        theMachineEngine.addPlugsBoardTOTheMachine(plugsBoard);
+    }
+
+
     public int getRotorsAmount(){
         return cteEnigma.getCTEMachine().getRotorsCount();
     }
@@ -109,7 +179,6 @@ public class EngineManager implements EngineManagerInterface {
         Random randomGenerator = new Random();
         Reflector randomSelectedReflector= listOfReflectors.get((randomGenerator.nextInt(listOfReflectors.size())));
         theMachineEngine.addSelectedReflector(randomSelectedReflector.getReflectorId());
-        System.out.println(randomSelectedReflector.getReflectorId());
     }
 
     private void initRotorsPositionAutomatically(TheMachineEngine theMachineEngine){
@@ -120,8 +189,6 @@ public class EngineManager implements EngineManagerInterface {
         for (Rotor rotor: rotorsSet) {
             randomSelectedPosition = String.valueOf(keyboard.charAt((toUpperCase(randomGenerator.nextInt(keyboard.length())))));
             rotor.setRotorStartingPosition(randomSelectedPosition);
-
-            System.out.println("rotor id:" + rotor.getRotorId()+" starting position: "+randomSelectedPosition);
         }
         /*rotorsSet.get(0).setRotorStartingPosition("F");
         rotorsSet.get(1).setRotorStartingPosition("D");*/
@@ -134,7 +201,6 @@ public class EngineManager implements EngineManagerInterface {
         List<Pair> pairsOfSwappingLetters=new ArrayList<>();
         int amountOfSwappingPairs=randomGenerator.nextInt(keyboard.length()/2);
         String firstSignal,secondSignal;
-        System.out.println("amount of swapping pairs: "+amountOfSwappingPairs);
         if(amountOfSwappingPairs>0) {
             /*amountOfSwappingPairs=0;*/
             for (int i = 0; i < amountOfSwappingPairs; i++) {

@@ -131,28 +131,28 @@ public class UserInputValidator2 implements Validator {
 
         }
     }*/
-    private void isRotorsStartPositionSignalsAreValid(){
+/*    private void isRotorsStartPositionSignalsAreValid(){
         for (char signal:rotorsPosition) {
            if(!theMachineEngine.getKeyboard().contains(String.valueOf(signal))){
                listOfException.add(new Exception("The rotors position must be signal from the machine keyboard,the signal ["+signal+"] is not valid"));
            }
         }
-    }
-    private void isRototsPositionAmountIsValid(){
+    }*/
+/*    private void isRototsPositionAmountIsValid(){
          if(rotorsPosition.length>rotorsId.length){
              listOfException.add(new Exception("You have too much signal for stating position,you need to have ["+rotorsId.length+"] signals"));
          }
          else if(rotorsPosition.length<rotorsId.length){
             listOfException.add(new Exception("You need to insert amount of starting position as the amount of rotors,you need to have ["+rotorsId.length+"] signals"));
         }
-    }
-    private void isPlugsBoardsIsValid(){
+    }*/
+/*    private void isPlugsBoardsIsValid(){
         if(pairsOfSwappingCharacter.size()!=0){
             isSwappingPairsAreValid();
             isPlugsBoardAmountIsValid();
             isPlugsBoardHasDoubleMapping();
         }
-    }
+    }*/
     private void isPlugsBoardHasDoubleMapping(){
         HashMap<String, Integer> pairsHashMap = new HashMap<>();
         for (Pair pair:pairsOfSwappingCharacter) {
@@ -177,14 +177,14 @@ public class UserInputValidator2 implements Validator {
         }
     }
 
-    private void isSwappingPairsAreValid(){
+   /* private void isSwappingPairsAreValid(){
         for (Pair pair:pairsOfSwappingCharacter) {
             String right=pair.getEntry();
             String left=pair.getExit();
             isSwappingCharacterPairsIsValid(right);
             isSwappingCharacterPairsIsValid(left);
         }
-    }
+    }*/
     private void isSwappingCharacterPairsIsValid(String str) {
         if(str.length()!=1){
             listOfException.add(new Exception("The character pairs for swapping should be one char for example(A|D)the signal ["+str+"] is not valid"));

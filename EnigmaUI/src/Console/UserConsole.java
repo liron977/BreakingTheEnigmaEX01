@@ -5,7 +5,6 @@ import MachineDTO.ListOfExceptionsDTO;
 import EngineManager.EngineManagerInterface;
 import MachineDTO.TheMachineSettingsDTO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserConsole {
@@ -60,6 +59,33 @@ public UserConsole (EngineManagerInterface engineManager){
             return false;
         }
     }
+    public boolean isStartingPositionInitCodeManuallyIsValid(String str){
+        ListOfExceptionsDTO listOfExceptionsDTO= engineManager.getAllErrorsRelatedToChosenManuallyStartingPosition(str);
+        if (listOfExceptionsDTO.getListOfException().size() == 0) {
+            return true;
+        } else {
+            printListOfException(listOfExceptionsDTO.getListOfException());
+            return false;
+        }
+    }
+    public boolean isReflectoIDinInitCodeManuallyIsValid(String str){
+        ListOfExceptionsDTO listOfExceptionsDTO= engineManager.getAllErrorsRelatedToChosenManuallyReflectorId(str);
+        if (listOfExceptionsDTO.getListOfException().size() == 0) {
+            return true;
+        } else {
+            printListOfException(listOfExceptionsDTO.getListOfException());
+            return false;
+        }
+    }
+    public boolean isPlagBoardinInitCodeManuallyIsValid(String str){
+        ListOfExceptionsDTO listOfExceptionsDTO= engineManager.getAllErrorsRelatedToChosenManuallyPlagBoard(str);
+        if (listOfExceptionsDTO.getListOfException().size() == 0) {
+            return true;
+        } else {
+            printListOfException(listOfExceptionsDTO.getListOfException());
+            return false;
+        }
+    }
 
     public boolean isUserStringToProcessIsValid(String str){
         ListOfExceptionsDTO listOfExceptionsDTO= engineManager.getAllErrorsConvertingInputProcess(str);
@@ -85,12 +111,18 @@ public UserConsole (EngineManagerInterface engineManager){
             return false;
         }
     }*/
-    public void InitCodeConfigurationAutomatically(){
+    public void initCodeConfigurationAutomatically(){
       //  FileDTO fileDTO=engineManager.initCodeAutomatically();
         engineManager.initCodeAutomatically();
         System.out.println("VALID");
 
 
+    }
+    public void  initStartingPositionConfigurationManually(String userInput){
+        engineManager.chooseManuallyStartingPosition(userInput);
+    }
+    public void  initPlugBoardConfigurationManually(String userInput){
+        engineManager.chooseManuallyPlugBoard(userInput);
     }
     public void resetCurrentCode(){
         engineManager.resetCurrentCode();
@@ -103,7 +135,7 @@ public UserConsole (EngineManagerInterface engineManager){
         TheMachineSettingsDTO theMachineSettingsDTO=engineManager.getTheMachineSettingsDTO();
         String currentCodeConfigurations="Current Code Configurations:\n";
         currentCodeConfigurations=currentCodeConfigurations+"1.Amount of wheels in use out of possible amount of wheels: "+theMachineSettingsDTO.getAmountOfUsedRotors()+"\\"+theMachineSettingsDTO.getMaxAmountOfRotors()+"\n";
-        currentCodeConfigurations=currentCodeConfigurations+"2.The notch positions for each rotor: \n"+getNotchPositionByPairs(theMachineSettingsDTO.getNotchPosition())+"\n";
+        currentCodeConfigurations=currentCodeConfigurations+"2.The notch positions for each rotor: \n"+getNotchPositionByPairs(theMachineSettingsDTO.getNotchPosition());
         currentCodeConfigurations=currentCodeConfigurations+"3.The amount of reflectors is: "+theMachineSettingsDTO.getAmountOfReflectors()+"\n";
         currentCodeConfigurations=currentCodeConfigurations+"4.The current amount of proceeded messages: "+theMachineSettingsDTO.getAmountOfProcessedMessages()+"\n";
         currentCodeConfigurations=currentCodeConfigurations+"5.The current code description: \n"+getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO())+"\n";
@@ -157,6 +189,7 @@ public UserConsole (EngineManagerInterface engineManager){
         return notchPositionByPairs;
     }
 
-
-
+    public void setIsCodeConfigurationWasdefine() {
+        this.engineManager.DefineIsCodeConfigurationSetValueToTrue();
     }
+}

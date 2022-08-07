@@ -11,7 +11,7 @@ public class InitCodeConfigurationAutomatically implements MenuManager {
     @Override
     public void execution() {
 
-        userConsole.InitCodeConfigurationAutomatically();
+        userConsole.initCodeConfigurationAutomatically();
 
     }
 }
