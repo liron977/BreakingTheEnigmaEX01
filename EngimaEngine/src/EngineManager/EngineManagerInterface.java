@@ -25,8 +25,9 @@ public interface EngineManagerInterface {
     public void resetCurrentCode();
     public boolean getIsCodeConfigurationSet();
     public List<MachineHistoryAndStatisticsDTO> getHistoryAndStatisticsDTO();
-        public void chooseManuallyStartingPosition(String userInput);
+    public void chooseManuallyStartingPosition(String userInput);
     public void chooseManuallyPlugBoard(String userInput);
     public void DefineIsCodeConfigurationSetValueToTrue();
     public TheMachineEngine buildTheMachineEngine();
+    public ListOfExceptionsDTO getAllErrorsRelatedToUserDefinePlugBoard(String userInput);
     }

@@ -33,7 +33,10 @@ public class TheMachineEngine {
 
     }
  public List<String> getStringPairsOfSwappingCharacter(){
-        return plugsBoard.getStringPairsOfSwappingCharacter();
+        if(plugsBoard!=null){
+            return plugsBoard.getStringPairsOfSwappingCharacter();
+        }
+       return null;
  }
     public List<String> getListOfNotch(){
        return rotorsSet.getNotchList();
@@ -140,8 +143,10 @@ public String manageDecode(String signal){
     return result;
 }
     private int theProcessFromTheRotorsToReflecter(String signal){
-
-        String entryValue=plugsBoard.getSwappedCharacter(signal);
+        String entryValue=signal;
+    if(plugsBoard!=null) {
+        entryValue = plugsBoard.getSwappedCharacter(signal);
+    }
         int indexOfSignal= keyboard.getIndexFromKeyboard(entryValue);
         for (Rotor rotor: usedRotors.getListOfRotors()) {
             entryValue=rotor.getEntryValueFromRotorByIndex(indexOfSignal);
@@ -166,7 +171,9 @@ public String manageDecode(String signal){
         if(tmpRotor!=null){
             indexOfSignal=tmpRotor.getEntryIndexFromRotorByValue(entryValue);
             entryValue=keyboard.getCharacterFromKeyboardByIndex(indexOfSignal);
-            entryValue=plugsBoard.getSwappedCharacter(entryValue);
+            if(plugsBoard!=null) {
+                entryValue = plugsBoard.getSwappedCharacter(entryValue);
+            }
         }
 
         return  entryValue;

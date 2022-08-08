@@ -1,7 +1,6 @@
 package Xml;
 
 import Engine.validator.XmlFileValidator;
-import Exceptions.XmlException;
 import schemaGenerated.CTEEnigma;
 
 import javax.xml.bind.JAXBContext;

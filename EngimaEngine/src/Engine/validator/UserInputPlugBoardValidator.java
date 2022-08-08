@@ -14,6 +14,26 @@ public class UserInputPlugBoardValidator implements Validator{
         this.theMachineEngine=theMachineEngine;
        this.listOfException=new ArrayList<>();
     }
+    public void isUserChosenInputToDefineAPlugBoardIsValid() {
+        boolean flag = false;
+        for (char signal : userInput.toCharArray()) {
+            if (!Character.isDigit(signal)) {
+                flag = true;
+                listOfException.add(new Exception("Insert only numbers between 1-2,the character [" + signal + "] is not valid!"));
+            }
+        }
+        if (!flag) {
+            if ((userInput.length() > 1) || (userInput.length() < 1)) {
+                listOfException.add(new Exception("Insert only numbers between 1-2"));
+            } else {
+                char signal = userInput.charAt(0);
+                if ((signal > '2') || (signal < '1')) {
+                    listOfException.add(new Exception("Insert only numbers between 1-2"));
+                }
+            }
+        }
+    }
+
     private void isPlugsBoardsIsValid(){
         isPlugsBoardAmountIsValid();
         isSwappingPairsAreValid();

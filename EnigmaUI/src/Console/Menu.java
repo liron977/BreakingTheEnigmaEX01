@@ -4,14 +4,14 @@ import Menus.*;
 
 import java.util.Scanner;
 
-public class UiMenu {
+public class Menu {
 
     private final int FIRST_OPTION = 1;
     private final int EXIT_OPTION = 8;
     final int LAST_OPTION = 7;
     UserConsole userConsole;
 
-    public UiMenu(UserConsole userConsole) {
+    public Menu(UserConsole userConsole) {
         this.userConsole = userConsole;
     }
 
@@ -81,39 +81,5 @@ public class UiMenu {
             break;
 
         }
-
-        //public void Case1_LoadNewFile() {
-      /*  Scanner scanner = new Scanner(System.in);
-        System.out.println("Please insert full xml path");
-        String loadStart = scanner.nextLine();
-        boolean isFileNameValid=false;
-        boolean isisFileLoadSuccessfully=false;
-        while (!isFileNameValid){
-            if (userConsole.fileNameValidation(loadStart)) {
-                isFileNameValid = true;
-                while (!isisFileLoadSuccessfully) {
-                    try {
-                        if (userConsole.isFileLoadSuccessfully(loadStart)) {
-                            isisFileLoadSuccessfully = true;
-                            System.out.println("The xml was uploaded successfully");
-                            break;
-                        }
-                        else {
-                            System.out.println("Please insert updated xml path");
-                            loadStart = scanner.nextLine();
-                        }
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                    }
-                }
-
-            }
-            else {
-                System.out.println("Please insert full xml path");
-                loadStart = scanner.nextLine();
-            }
-            }*/
-        //}
-
     }
 }

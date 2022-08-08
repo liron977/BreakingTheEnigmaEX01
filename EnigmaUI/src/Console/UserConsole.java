@@ -118,7 +118,7 @@ public UserConsole (EngineManagerInterface engineManager){
     public void initCodeConfigurationAutomatically(){
       //  FileDTO fileDTO=engineManager.initCodeAutomatically();
         engineManager.initCodeAutomatically();
-        System.out.println("VALID");
+        System.out.println("4. Selection of initial code configuration (automatically) performed successfully");
 
 
     }
@@ -156,7 +156,7 @@ public UserConsole (EngineManagerInterface engineManager){
         currentCodeDescription=currentCodeDescription+"<"+currentCodeDescriptionDTO.getChosenStartingPosition()+">";
         currentCodeDescription=currentCodeDescription+"<"+currentCodeDescriptionDTO.getReflectorId()+">";
         List<String> pairsOfSwappingCharacter =currentCodeDescriptionDTO.getPairsOfSwappingCharacter();
-        if(pairsOfSwappingCharacter.size()!=0) {
+        if((pairsOfSwappingCharacter!=null)&&(pairsOfSwappingCharacter.size()!=0)) {
             currentCodeDescription=currentCodeDescription+"<" + getPairsOfSwappingCharacter(currentCodeDescriptionDTO.getPairsOfSwappingCharacter()) + ">";
         }
         return currentCodeDescription;
@@ -173,7 +173,6 @@ public UserConsole (EngineManagerInterface engineManager){
                 String[] timeToProcess = machineHistory.getHistoryAndStatisticsDTO().getTimeToProcess();
                 if(userInput.length==0) {
                     System.out.println("none");
-
                 }
             else {
                 for (int i = 0; i < userInput.length; i++) {
@@ -182,7 +181,6 @@ public UserConsole (EngineManagerInterface engineManager){
             }
             }
         }
-
     }
     public String getPairsOfSwappingCharacter(List<String> pairsOfSwappingCharacter){
         String seperatedPairsOfSwappingCharacter="";
@@ -224,4 +222,15 @@ public UserConsole (EngineManagerInterface engineManager){
     public void setIsCodeConfigurationWasdefine() {
         this.engineManager.DefineIsCodeConfigurationSetValueToTrue();
     }
+
+    public Boolean isPlayerDefinePlugBoardIsValid(String str){
+        ListOfExceptionsDTO listOfExceptionsDTO= engineManager.getAllErrorsRelatedToUserDefinePlugBoard(str);
+        if (listOfExceptionsDTO.getListOfException().size() == 0) {
+            return true;
+        } else {
+            printListOfException(listOfExceptionsDTO.getListOfException());
+            return false;
+        }
+    }
+
 }

@@ -21,7 +21,6 @@ public class EngineManager implements EngineManagerInterface {
 
     private ListOfExceptionsDTO listOfExceptionsDTO;
     private CurrentCodeDescriptionDTO currentCodeDescriptionDTO;
-    private MachineDTO machineDTO;
     private TheMachineEngine theMachineEngine;
     private MachineHistoryAndStatistics machineHistoryAndStatistics=new MachineHistoryAndStatistics();
     private  CTEEnigma cteEnigma;
@@ -33,6 +32,10 @@ public class EngineManager implements EngineManagerInterface {
     @Override
     public ListOfExceptionsDTO load(String filePath) throws Exception
     {
+        isCodeConfigurationSet=false;
+        amountOfProcessedMessages=0;
+        machineHistoryAndStatistics=new MachineHistoryAndStatistics();
+
         CTEEnigma cteEnigma =readFromXmlFile(filePath);
         XmlReflectorValidator xmlReflectorValidator =new XmlReflectorValidator(cteEnigma);
         XmlRotorValidator xmlRotorValidator=new XmlRotorValidator((cteEnigma));
@@ -322,18 +325,19 @@ public class EngineManager implements EngineManagerInterface {
 
         }
          return listOfMachineHistoryAndStatisticsDTO;
-
-
     }
-
-
-
-
-
+    public ListOfExceptionsDTO getAllErrorsRelatedToUserDefinePlugBoard(String userInput){
+        UserInputPlugBoardValidator userInputPlugBoardValidator=new UserInputPlugBoardValidator(userInput,theMachineEngine);
+         userInputPlugBoardValidator.isUserChosenInputToDefineAPlugBoardIsValid();
+        List<Exception> exceptions= userInputPlugBoardValidator.getListOfException();
+        listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
+        return listOfExceptionsDTO;
+    }
         public void resetCurrentCode(){
         theMachineEngine.resetCurrentRotorSetCode();
     }
     public TheMachineSettingsDTO getTheMachineSettingsDTO(){
+        theMachineEngine=buildTheMachineEngine();
         int amountOfUsedRotors=theMachineEngine.getAmountOfUsedRotors();
         int maxAmountOfRotors=theMachineEngine.getMaxAmountOfRotors();
         List<String> notchPosition=theMachineEngine.getListOfNotch();
