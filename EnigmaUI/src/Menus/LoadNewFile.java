@@ -18,8 +18,8 @@ public class LoadNewFile implements MenuManager {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please insert full xml path \n");
         String loadStart = scanner.nextLine();
-        //loadStart="C:\\Users\\97254\\IdeaProjects\\BreakingTheEnigma\\EngimaEngine\\src\\resources\\ex1-sanity-small.xml";
-        loadStart="C:\\Users\\chen3\\IdeaProjects\\BreakingTheEnigma\\EngimaEngine\\src\\resources\\small.xml";
+        loadStart="C:\\Users\\97254\\IdeaProjects\\BreakingTheEnigma\\EngimaEngine\\src\\resources\\ex1-sanity-small.xml";
+        //loadStart="C:\\Users\\chen3\\IdeaProjects\\BreakingTheEnigma\\EngimaEngine\\src\\resources\\small.xml";
         //loadStart="C:\\Users\\97254\\IdeaProjects\\BreakingTheEnigma\\EngimaEngine\\src\\resources\\ex1-error-3.xml";
         boolean isFileNameValid=false;
         boolean isFileLoadSuccessfully=false;

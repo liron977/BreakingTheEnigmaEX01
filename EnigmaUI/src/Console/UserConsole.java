@@ -167,7 +167,7 @@ public UserConsole (EngineManagerInterface engineManager){
        List<MachineHistoryAndStatisticsDTO> listOfMachineHistory= engineManager.getHistoryAndStatisticsDTO();
         for (MachineHistoryAndStatisticsDTO machineHistory:listOfMachineHistory) {
             if(machineHistory.getCurrentCodeDescriptionDTO()!=null) {
-                System.out.printf("The the strings that proceeded for "+getCurrentCodeDescription(machineHistory.getCurrentCodeDescriptionDTO()) + " are :\n");
+                System.out.printf("The strings that proceeded for "+getCurrentCodeDescription(machineHistory.getCurrentCodeDescriptionDTO()) + " are :\n");
                 String[] userInput = machineHistory.getHistoryAndStatisticsDTO().getUserInput();
                 String[] convertedStrings = machineHistory.getHistoryAndStatisticsDTO().getConvertedString();
                 String[] timeToProcess = machineHistory.getHistoryAndStatisticsDTO().getTimeToProcess();
