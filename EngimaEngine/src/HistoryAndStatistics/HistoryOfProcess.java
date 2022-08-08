@@ -1,4 +1,4 @@
-package Engine.TheEnigmaEngine;
+package HistoryAndStatistics;
 
 public class HistoryOfProcess {
 

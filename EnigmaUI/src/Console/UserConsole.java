@@ -6,6 +6,8 @@ import EngineManager.EngineManagerInterface;
 import MachineDTO.MachineHistoryAndStatisticsDTO;
 import MachineDTO.TheMachineSettingsDTO;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class UserConsole {
@@ -196,6 +198,7 @@ public UserConsole (EngineManagerInterface engineManager){
 
     public String getUsedRotorsId(String[] usedRotorsId) {
         String usedRotors="";
+        Collections.reverse(Arrays.asList(usedRotorsId));
         for (String RotorId:usedRotorsId) {
 
             usedRotors=usedRotors+RotorId+",";

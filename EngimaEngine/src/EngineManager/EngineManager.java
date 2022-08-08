@@ -2,6 +2,8 @@ package EngineManager;
 
 import Engine.TheEnigmaEngine.*;
 import Engine.validator.*;
+import HistoryAndStatistics.HistoryOfProcess;
+import HistoryAndStatistics.MachineHistoryAndStatistics;
 import schemaGenerated.CTEEnigma;
 
 import javax.xml.bind.JAXBContext;
@@ -21,7 +23,7 @@ public class EngineManager implements EngineManagerInterface {
     private CurrentCodeDescriptionDTO currentCodeDescriptionDTO;
     private MachineDTO machineDTO;
     private TheMachineEngine theMachineEngine;
-    private  MachineHistoryAndStatistics machineHistoryAndStatistics=new MachineHistoryAndStatistics();
+    private MachineHistoryAndStatistics machineHistoryAndStatistics=new MachineHistoryAndStatistics();
     private  CTEEnigma cteEnigma;
     SchemaGenerated schemaGenerated;
     boolean isCodeConfigurationSet=false;
