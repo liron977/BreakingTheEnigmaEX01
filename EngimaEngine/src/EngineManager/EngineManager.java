@@ -71,7 +71,8 @@ public class EngineManager implements EngineManagerInterface {
     public void DefineIsCodeConfigurationSetValueToTrue(){
         this.isCodeConfigurationSet=true;
         reverseUsedRotors(theMachineEngine);
-        machineHistoryAndStatistics.addNewMachineSettings(createCurrentCodeDescriptionDTO());
+        createCurrentCodeDescriptionDTO();
+        machineHistoryAndStatistics.addNewMachineSettings(currentCodeDescriptionDTO);
     }
     private void reverseUsedRotors(TheMachineEngine theMachineEngine){
         theMachineEngine.reverseUsedRotors();
@@ -168,7 +169,8 @@ public class EngineManager implements EngineManagerInterface {
         choosePlugBoardSettings(theMachineEngine);
         isCodeConfigurationSet=true;
         reverseUsedRotors(theMachineEngine);
-        machineHistoryAndStatistics.addNewMachineSettings(createCurrentCodeDescriptionDTO());
+        createCurrentCodeDescriptionDTO();
+        machineHistoryAndStatistics.addNewMachineSettings(currentCodeDescriptionDTO);
 
 
     }
@@ -337,11 +339,11 @@ public class EngineManager implements EngineManagerInterface {
         List<String> notchPosition=theMachineEngine.getListOfNotch();
        int amountOfReflectors= theMachineEngine.getReflectorsAmount();
 
-        CurrentCodeDescriptionDTO currentCodeDescriptionDTO=createCurrentCodeDescriptionDTO();
+      //createCurrentCodeDescriptionDTO();
         TheMachineSettingsDTO theMachineSettingsDTO=new TheMachineSettingsDTO(amountOfUsedRotors,maxAmountOfRotors,notchPosition,amountOfReflectors,amountOfProcessedMessages,currentCodeDescriptionDTO);
         return theMachineSettingsDTO;
     }
-    public  CurrentCodeDescriptionDTO createCurrentCodeDescriptionDTO(){
+    public  void  createCurrentCodeDescriptionDTO(){
         CurrentCodeDescriptionDTO currentCodeDescriptionDTO=null;
         if(isCodeConfigurationSet) {
             String[] usedRotorsId = theMachineEngine.getArrayOfRotorsId();
@@ -352,7 +354,7 @@ public class EngineManager implements EngineManagerInterface {
         }
         this.currentCodeDescriptionDTO=currentCodeDescriptionDTO;
 
-        return currentCodeDescriptionDTO;
+
     }
 
 }

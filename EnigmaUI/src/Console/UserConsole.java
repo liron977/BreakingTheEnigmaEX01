@@ -198,13 +198,17 @@ public UserConsole (EngineManagerInterface engineManager){
 
     public String getUsedRotorsId(String[] usedRotorsId) {
         String usedRotors="";
-        Collections.reverse(Arrays.asList(usedRotorsId));
+        //Collections.reverse(Arrays.asList(usedRotorsId));
         for (String RotorId:usedRotorsId) {
 
             usedRotors=usedRotors+RotorId+",";
         }
         usedRotors=usedRotors.substring(0,usedRotors.length()-1);
-        return usedRotors;
+
+        StringBuffer userReversedRotors = new StringBuffer(usedRotors);
+        // To reverse the string
+        userReversedRotors.reverse();
+        return userReversedRotors.toString();
 
     }
 
