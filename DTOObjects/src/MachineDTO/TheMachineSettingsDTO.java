@@ -9,6 +9,7 @@ public class TheMachineSettingsDTO {
     private List<String> notchPosition=new ArrayList<>();
     private int amountOfReflectors;
     private int amountOfProcessedMessages;
+
     private CurrentCodeDescriptionDTO currentCodeDescriptionDTO;
 
      public TheMachineSettingsDTO(int amountOfUsedRotors,int maxAmountOfRotors, List<String> notchPosition,int amountOfReflectors,int amountOfProcessedMessages,CurrentCodeDescriptionDTO currentCodeDescriptionDTO){

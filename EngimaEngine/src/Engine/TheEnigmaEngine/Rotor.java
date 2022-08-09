@@ -27,6 +27,11 @@ public class Rotor {
     public Pair getNotchPair() {
         return notchPair;
     }
+    public int getNotchPosition(){
+        String entry=notchPair.getEntry();
+        int index=getEntryIndexFromRotorByValue(entry)+1;
+        return index;
+    }
 
     public void setRotorStartingPosition(String startingPosition){
         this.startingPosition =startingPosition;

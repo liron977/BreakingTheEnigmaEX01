@@ -303,9 +303,6 @@ public class EngineManager implements EngineManagerInterface {
     public List<MachineHistoryAndStatisticsDTO> getHistoryAndStatisticsDTO() {
         List<MachineHistoryAndStatisticsDTO> listOfMachineHistoryAndStatisticsDTO=new ArrayList<>();
         Map<CurrentCodeDescriptionDTO, List<HistoryOfProcess>> machineHistory= machineHistoryAndStatistics.getMachineHistory();
-
-
-        int j=0;
          for (Map.Entry<CurrentCodeDescriptionDTO,List<HistoryOfProcess>> entry : machineHistory.entrySet()) {
              String[] userInput=new String[entry.getValue().size()];
              String[] convertedString=new String[entry.getValue().size()];;
@@ -315,14 +312,10 @@ public class EngineManager implements EngineManagerInterface {
                 userInput[i]=entry.getValue().get(i).getUserInput();
                 convertedString[i]=entry.getValue().get(i).getConvertedInput();
                 timeToProcess[i]=String.valueOf(entry.getValue().get(i).getTimeToProcess());
-
-
             }
              HistoryAndStatisticsDTO historyAndStatisticsDTO=new HistoryAndStatisticsDTO(userInput,convertedString,timeToProcess);
              MachineHistoryAndStatisticsDTO machineHistoryAndStatisticsDTO=new MachineHistoryAndStatisticsDTO(entry.getKey(),historyAndStatisticsDTO);
              listOfMachineHistoryAndStatisticsDTO.add(machineHistoryAndStatisticsDTO);
-
-
         }
          return listOfMachineHistoryAndStatisticsDTO;
     }
@@ -337,7 +330,9 @@ public class EngineManager implements EngineManagerInterface {
         theMachineEngine.resetCurrentRotorSetCode();
     }
     public TheMachineSettingsDTO getTheMachineSettingsDTO(){
-        theMachineEngine=buildTheMachineEngine();
+        if(theMachineEngine==null){
+            theMachineEngine=buildTheMachineEngine();
+        }
         int amountOfUsedRotors=theMachineEngine.getAmountOfUsedRotors();
         int maxAmountOfRotors=theMachineEngine.getMaxAmountOfRotors();
         List<String> notchPosition=theMachineEngine.getListOfNotch();
