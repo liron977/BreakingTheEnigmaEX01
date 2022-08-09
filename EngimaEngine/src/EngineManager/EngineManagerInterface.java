@@ -12,7 +12,7 @@ public interface EngineManagerInterface {
 
     ListOfExceptionsDTO load(String filePath) throws Exception; //throws XmlException;
     ListOfExceptionsDTO getAllErrorsRelatedToFilePath(String filePath);
-    public ListOfExceptionsDTO getAllErrorsRelatedToInitCodeManuallyInputStructure(String str);
+   // public ListOfExceptionsDTO getAllErrorsRelatedToInitCodeManuallyInputStructure(String str);
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyRotors(String str);
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyStartingPosition(String str);
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyReflectorId(String str);
@@ -30,4 +30,7 @@ public interface EngineManagerInterface {
     public void DefineIsCodeConfigurationSetValueToTrue();
     public TheMachineEngine buildTheMachineEngine();
     public ListOfExceptionsDTO getAllErrorsRelatedToUserDefinePlugBoard(String userInput);
+    public ListOfExceptionsDTO getAllErrorsRelatedToMachineMenuValidator();
+    public void updateExceptionListMenuValidator();
+    public ListOfExceptionsDTO getAllErrorsRelatedToInitCodeMenuValidator();
     }

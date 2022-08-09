@@ -10,8 +10,8 @@ public class InitCodeConfigurationAutomatically implements MenuManager {
     }
     @Override
     public void execution() {
-
-        userConsole.initCodeConfigurationAutomatically();
-
+        if (userConsole.isMachineWasDefined()) {
+            userConsole.initCodeConfigurationAutomatically();
+        }
     }
 }

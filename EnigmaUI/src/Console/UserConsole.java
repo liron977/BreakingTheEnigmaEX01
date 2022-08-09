@@ -29,7 +29,6 @@ public UserConsole (EngineManagerInterface engineManager){
     public boolean isFileLoadSuccessfully(String str) throws Exception {
         ListOfExceptionsDTO listOfExceptionsDTO = engineManager.load(str);
         if (listOfExceptionsDTO.getListOfException().size() == 0) {
-
             return true;
         } else {
             printListOfException(listOfExceptionsDTO.getListOfException());
@@ -43,7 +42,7 @@ public UserConsole (EngineManagerInterface engineManager){
             System.out.println("******************");
         }
     }
-    public boolean isInitCodeManuallyStructureIsValid(String str){
+/*    public boolean isInitCodeManuallyStructureIsValid(String str){
     ListOfExceptionsDTO listOfExceptionsDTO= engineManager.getAllErrorsRelatedToInitCodeManuallyInputStructure(str);
         if (listOfExceptionsDTO.getListOfException().size() == 0) {
             return true;
@@ -51,15 +50,15 @@ public UserConsole (EngineManagerInterface engineManager){
             printListOfException(listOfExceptionsDTO.getListOfException());
             return false;
         }
-    }
+    }*/
     public boolean isRotorsIDinInitCodeManuallyIsValid(String str){
-        ListOfExceptionsDTO listOfExceptionsDTO= engineManager.getAllErrorsRelatedToChosenManuallyRotors(str);
-        if (listOfExceptionsDTO.getListOfException().size() == 0) {
-            return true;
-        } else {
-            printListOfException(listOfExceptionsDTO.getListOfException());
-            return false;
-        }
+            ListOfExceptionsDTO listOfExceptionsDTO = engineManager.getAllErrorsRelatedToChosenManuallyRotors(str);
+            if (listOfExceptionsDTO.getListOfException().size() == 0) {
+                return true;
+            } else {
+                printListOfException(listOfExceptionsDTO.getListOfException());
+                return false;
+            }
     }
     public boolean isStartingPositionInitCodeManuallyIsValid(String str){
         ListOfExceptionsDTO listOfExceptionsDTO= engineManager.getAllErrorsRelatedToChosenManuallyStartingPosition(str);
@@ -116,7 +115,7 @@ public UserConsole (EngineManagerInterface engineManager){
     public void initCodeConfigurationAutomatically(){
       //  FileDTO fileDTO=engineManager.initCodeAutomatically();
         engineManager.initCodeAutomatically();
-        System.out.println("4. Selection of initial code configuration (automatically) performed successfully");
+        System.out.println("Selection of initial code configuration (automatically) performed successfully");
 
 
     }
@@ -130,21 +129,45 @@ public UserConsole (EngineManagerInterface engineManager){
         engineManager.resetCurrentCode();
         System.out.println("The reset code succeeded");
     }
+    public Boolean isMachineWasDefined(){
+        ListOfExceptionsDTO listOfExceptionsDTO=engineManager.getAllErrorsRelatedToMachineMenuValidator();
+        if(listOfExceptionsDTO.getListOfException().size()==0){
+            return true;
+        }
+        else {
+            printListOfException(listOfExceptionsDTO.getListOfException());
+            engineManager.updateExceptionListMenuValidator();
+            return false;
+        }
+    }
+    public Boolean isCodeWasDefined(){
+        ListOfExceptionsDTO listOfExceptionsDTO=engineManager.getAllErrorsRelatedToInitCodeMenuValidator();
+        if(listOfExceptionsDTO.getListOfException().size()==0){
+            return true;
+        }
+        else {
+            printListOfException(listOfExceptionsDTO.getListOfException());
+            engineManager.updateExceptionListMenuValidator();
+            return false;
+        }
+    }
 
     //The second way
     public String getCurrentCodeConfigurations(){
-        int numberOfConfigurations=1;
-        TheMachineSettingsDTO theMachineSettingsDTO=engineManager.getTheMachineSettingsDTO();
-        String currentCodeConfigurations="Current Code Configurations:\n";
-        currentCodeConfigurations=currentCodeConfigurations+"1.Amount of wheels in use out of possible amount of wheels: "+theMachineSettingsDTO.getAmountOfUsedRotors()+"\\"+theMachineSettingsDTO.getMaxAmountOfRotors()+"\n";
-        currentCodeConfigurations=currentCodeConfigurations+"2.The notch positions for each rotor: \n"+ getNotchPositionByIndex(theMachineSettingsDTO.getNotchPosition());
-        currentCodeConfigurations=currentCodeConfigurations+"3.The amount of reflectors is: "+theMachineSettingsDTO.getAmountOfReflectors()+"\n";
-        currentCodeConfigurations=currentCodeConfigurations+"4.The current amount of proceeded messages: "+theMachineSettingsDTO.getAmountOfProcessedMessages()+"\n";
-        if(engineManager.getIsCodeConfigurationSet()) {
-            currentCodeConfigurations = currentCodeConfigurations + "5.The current code description: \n" + getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO()) + "\n";
+        if(isMachineWasDefined()) {
+            int numberOfConfigurations = 1;
+            TheMachineSettingsDTO theMachineSettingsDTO = engineManager.getTheMachineSettingsDTO();
+            String currentCodeConfigurations = "Current Code Configurations:\n";
+            currentCodeConfigurations = currentCodeConfigurations + "1.Amount of wheels in use out of possible amount of wheels: " + theMachineSettingsDTO.getAmountOfUsedRotors() + "\\" + theMachineSettingsDTO.getMaxAmountOfRotors() + "\n";
+            currentCodeConfigurations = currentCodeConfigurations + "2.The notch positions for each rotor: \n" + getNotchPositionByIndex(theMachineSettingsDTO.getNotchPosition());
+            currentCodeConfigurations = currentCodeConfigurations + "3.The amount of reflectors is: " + theMachineSettingsDTO.getAmountOfReflectors() + "\n";
+            currentCodeConfigurations = currentCodeConfigurations + "4.The current amount of proceeded messages: " + theMachineSettingsDTO.getAmountOfProcessedMessages() + "\n";
+            if (engineManager.getIsCodeConfigurationSet()) {
+                currentCodeConfigurations = currentCodeConfigurations + "5.The current code description: \n" + getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO()) + "\n";
+            }
+            return currentCodeConfigurations;
         }
-        return currentCodeConfigurations;
-
+        return null;
     }
 
 

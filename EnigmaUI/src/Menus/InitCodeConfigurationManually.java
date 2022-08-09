@@ -47,59 +47,58 @@ public class InitCodeConfigurationManually implements MenuManager {
         boolean isUserInputReflectIdIsValid = false;
         boolean isStartingPositionAreValid = false;
         boolean isPlagBoardIsValid = false;
-
-        printRotorDescription();
-        String loadStart = scanner.nextLine();
-        while (!isUserInputRotorsIsValid) {
-            if (userConsole.isRotorsIDinInitCodeManuallyIsValid(loadStart)) {
-                isUserInputRotorsIsValid = true;
-                System.out.println("Rotors id updated successfully  \n");
-                printStartPositionDescriptionDescription();
-                loadStart = scanner.nextLine();
-                while (!isStartingPositionAreValid) {
-                    if (userConsole.isStartingPositionInitCodeManuallyIsValid(loadStart)) {
-                        isStartingPositionAreValid = true;
-                        userConsole.initStartingPositionConfigurationManually(loadStart);
-                        System.out.println("Starting position for each rotor updated successfully \n");
-                        printReflectorIdDescription();
-                        loadStart = scanner.nextLine();
-                        while (!isUserInputReflectIdIsValid) {
-                            if (userConsole.isReflectoIDinInitCodeManuallyIsValid(loadStart)) {
-                                isUserInputReflectIdIsValid = true;
-                                System.out.println("Reflector id updated successfully  \n");
-                            } else {
-                                System.out.println("Please insert updated requested details  \n");
-                                loadStart = scanner.nextLine();
-                            }
-                        }
-                        if (isPlayerWantsPlugBoard()) {
-                            printPlagBoardDescription();
+        if (userConsole.isMachineWasDefined()) {
+            printRotorDescription();
+            String loadStart = scanner.nextLine();
+            while (!isUserInputRotorsIsValid) {
+                if (userConsole.isRotorsIDinInitCodeManuallyIsValid(loadStart)) {
+                    isUserInputRotorsIsValid = true;
+                    System.out.println("Rotors id updated successfully  \n");
+                    printStartPositionDescriptionDescription();
+                    loadStart = scanner.nextLine();
+                    while (!isStartingPositionAreValid) {
+                        if (userConsole.isStartingPositionInitCodeManuallyIsValid(loadStart)) {
+                            isStartingPositionAreValid = true;
+                            userConsole.initStartingPositionConfigurationManually(loadStart);
+                            System.out.println("Starting position for each rotor updated successfully \n");
+                            printReflectorIdDescription();
                             loadStart = scanner.nextLine();
-                            while (!isPlagBoardIsValid) {
-                                if (userConsole.isPlagBoardinInitCodeManuallyIsValid(loadStart)) {
-                                    isPlagBoardIsValid = true;
-                                    userConsole.initPlugBoardConfigurationManually(loadStart);
-                                    System.out.println("Plug board updated successfully  \n");
+                            while (!isUserInputReflectIdIsValid) {
+                                if (userConsole.isReflectoIDinInitCodeManuallyIsValid(loadStart)) {
+                                    isUserInputReflectIdIsValid = true;
+                                    System.out.println("Reflector id updated successfully  \n");
                                 } else {
-                                    System.out.println("Please insert updated requested details");
+                                    System.out.println("Please insert updated requested details  \n");
                                     loadStart = scanner.nextLine();
                                 }
                             }
+                            if (isPlayerWantsPlugBoard()) {
+                                printPlagBoardDescription();
+                                loadStart = scanner.nextLine();
+                                while (!isPlagBoardIsValid) {
+                                    if (userConsole.isPlagBoardinInitCodeManuallyIsValid(loadStart)) {
+                                        isPlagBoardIsValid = true;
+                                        userConsole.initPlugBoardConfigurationManually(loadStart);
+                                        System.out.println("Plug board updated successfully  \n");
+                                    } else {
+                                        System.out.println("Please insert updated requested details");
+                                        loadStart = scanner.nextLine();
+                                    }
+                                }
+                            }
+                        } else {
+                            System.out.println("Please insert updated requested details");
+                            loadStart = scanner.nextLine();
                         }
-                        }
-                    else {
-                        System.out.println("Please insert updated requested details");
-                        loadStart = scanner.nextLine();
                     }
+                } else {
+                    System.out.println("Please insert updated requested details");
+                    loadStart = scanner.nextLine();
                 }
-            } else {
-                System.out.println("Please insert updated requested details");
-                loadStart = scanner.nextLine();
             }
+            userConsole.setIsCodeConfigurationWasdefine();
         }
-        userConsole.setIsCodeConfigurationWasdefine();
     }
-
     private boolean isPlayerWantsPlugBoard() {
         boolean isUserInputIsValid = false;
         System.out.println("Do you want to define a plug board \n 1)Yes \n 2)No");

@@ -14,21 +14,23 @@ public class InputProcess implements MenuManager{
     @Override
     public void execution() {
         boolean isValidInputProcess=false;
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter the string to process");
-        userInput = scanner.nextLine();
-        while(!isValidInputProcess){
+        boolean isMachineWasDefined=userConsole.isMachineWasDefined();
+        boolean isCodeWasDefined=userConsole.isCodeWasDefined();
+        if(isMachineWasDefined&&isCodeWasDefined) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Please enter the string to process");
+            userInput = scanner.nextLine();
+            while (!isValidInputProcess) {
 
-           isValidInputProcess=userConsole.isUserStringToProcessIsValid(userInput);
-           if(isValidInputProcess) {
-               System.out.println("The converted string is: "+userConsole.getConvertedString(userInput));
+                isValidInputProcess = userConsole.isUserStringToProcessIsValid(userInput);
+                if (isValidInputProcess) {
+                    System.out.println("The converted string is: " + userConsole.getConvertedString(userInput));
 
-           }
-          else{
-               userInput = scanner.nextLine();
-           }
+                } else {
+                    userInput = scanner.nextLine();
+                }
 
+            }
         }
-
     }
 }

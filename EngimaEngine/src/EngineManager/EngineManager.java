@@ -28,51 +28,54 @@ public class EngineManager implements EngineManagerInterface {
     boolean isCodeConfigurationSet=false;
     private int amountOfProcessedMessages=0;
     private final String JAXB_XML_GAME_PACKAGE_NAME = "schemaGenerated";
+    private MenuValidator menuValidator=new MenuValidator();
 
     @Override
     public ListOfExceptionsDTO load(String filePath) throws Exception
     {
+        menuValidator.reset();
         isCodeConfigurationSet=false;
         amountOfProcessedMessages=0;
         machineHistoryAndStatistics=new MachineHistoryAndStatistics();
 
         CTEEnigma cteEnigma =readFromXmlFile(filePath);
-        XmlReflectorValidator xmlReflectorValidator =new XmlReflectorValidator(cteEnigma);
-        XmlRotorValidator xmlRotorValidator=new XmlRotorValidator((cteEnigma));
-        XmlKeyboardValidator xmlKeyboardValidator=new XmlKeyboardValidator(cteEnigma);
+        Validator xmlReflectorValidator =new XmlReflectorValidator(cteEnigma);
+        Validator xmlRotorValidator=new XmlRotorValidator((cteEnigma));
+        Validator xmlKeyboardValidator=new XmlKeyboardValidator(cteEnigma);
         List<Validator> validators=new ArrayList<>();
         validators.add(xmlKeyboardValidator);
         validators.add(xmlReflectorValidator);
         validators.add((xmlRotorValidator));
         ValidatorRunner validatorRunner=new ValidatorRunner(validators);
-        List<Exception> exceptions=  validatorRunner.run();
+        List<Exception> exceptions=validatorRunner.run();
+        if(exceptions.size() == 0){
+            menuValidator.setTrueValueToIsMachineDefined();
+       }
           listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
           return listOfExceptionsDTO;
     }
     public TheMachineEngine buildTheMachineEngine(){
-
          schemaGenerated=new SchemaGenerated(cteEnigma);
         TheMachineEngine theMachineEngine= new TheMachineEngine(schemaGenerated.createRotorsSet(),schemaGenerated.createReflectorsSet(),schemaGenerated.createKeyboard(),schemaGenerated.getAmountOfUsedRotors());
-        //machineDTO =new MachineDTO(new ArrayList<>(),cteEnigma.getCTEMachine().getRotorsCount(),theMachineEngine.getRotorsId(),theMachineEngine.getReflectorId(),theMachineEngine.getKeyboard(),0,"");
-        //return machineDTO;
-
         return theMachineEngine;
 
     }
     public boolean getIsCodeConfigurationSet(){
         return isCodeConfigurationSet;
     }
-    public ListOfExceptionsDTO getAllErrorsRelatedToInitCodeManuallyInputStructure(String str){
+/*    public ListOfExceptionsDTO getAllErrorsRelatedToInitCodeManuallyInputStructure(String str){
          theMachineEngine=buildTheMachineEngine();
         UserInputValidator2 userInputValidator=new UserInputValidator2(str,cteEnigma,theMachineEngine);
         userInputValidator.validate();
         List<Exception> exceptions=  userInputValidator.getListOfException();
         ListOfExceptionsDTO  listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
         isCodeConfigurationSet=true;
+        menuValidator.setTrueValueToUpdateIsCodeDefined();
         return listOfExceptionsDTO;
-    }
+    }*/
     public void DefineIsCodeConfigurationSetValueToTrue(){
         this.isCodeConfigurationSet=true;
+        menuValidator.setTrueValueToUpdateIsCodeDefined();
         reverseUsedRotors(theMachineEngine);
         createCurrentCodeDescriptionDTO();
         machineHistoryAndStatistics.addNewMachineSettings(currentCodeDescriptionDTO);
@@ -171,6 +174,7 @@ public class EngineManager implements EngineManagerInterface {
         chooseAutomaticallyReflector(theMachineEngine);
         choosePlugBoardSettings(theMachineEngine);
         isCodeConfigurationSet=true;
+        menuValidator.setTrueValueToUpdateIsCodeDefined();
         reverseUsedRotors(theMachineEngine);
         createCurrentCodeDescriptionDTO();
         machineHistoryAndStatistics.addNewMachineSettings(currentCodeDescriptionDTO);
@@ -320,6 +324,7 @@ public class EngineManager implements EngineManagerInterface {
          return listOfMachineHistoryAndStatisticsDTO;
     }
     public ListOfExceptionsDTO getAllErrorsRelatedToUserDefinePlugBoard(String userInput){
+        menuValidator.setTrueValueToUpdateIsCodeDefined();
         UserInputPlugBoardValidator userInputPlugBoardValidator=new UserInputPlugBoardValidator(userInput,theMachineEngine);
          userInputPlugBoardValidator.isUserChosenInputToDefineAPlugBoardIsValid();
         List<Exception> exceptions= userInputPlugBoardValidator.getListOfException();
@@ -328,6 +333,14 @@ public class EngineManager implements EngineManagerInterface {
     }
         public void resetCurrentCode(){
         theMachineEngine.resetCurrentRotorSetCode();
+    }
+    public ListOfExceptionsDTO getAllErrorsRelatedToMachineMenuValidator(){
+        menuValidator.isXmlLoaded();
+     return new ListOfExceptionsDTO(menuValidator.getListOfException());
+    }
+    public ListOfExceptionsDTO getAllErrorsRelatedToInitCodeMenuValidator(){
+        menuValidator.isCodeConfigurationWasDefined();
+        return new ListOfExceptionsDTO(menuValidator.getListOfException());
     }
     public TheMachineSettingsDTO getTheMachineSettingsDTO(){
         if(theMachineEngine==null){
@@ -354,6 +367,9 @@ public class EngineManager implements EngineManagerInterface {
         this.currentCodeDescriptionDTO=currentCodeDescriptionDTO;
 
 
+    }
+    public void updateExceptionListMenuValidator(){
+        menuValidator.updateExceptionList();
     }
 
 }

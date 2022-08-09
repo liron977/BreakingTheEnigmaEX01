@@ -16,7 +16,9 @@ public class DisplayMachineConfiguration implements MenuManager {
     @Override
     public void execution() {
 
-        System.out.println(userConsole.getCurrentCodeConfigurations());
-
+        String output = userConsole.getCurrentCodeConfigurations();
+        if (output != null) {
+            System.out.println(output);
+        }
     }
 }
