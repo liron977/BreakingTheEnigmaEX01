@@ -9,10 +9,10 @@ public class Menu {
     private final int FIRST_OPTION = 1;
     private final int EXIT_OPTION = 8;
     final int LAST_OPTION = 7;
-    UserConsole userConsole;
+    Mediator mediator;
 
-    public Menu(UserConsole userConsole) {
-        this.userConsole = userConsole;
+    public Menu(Mediator mediator) {
+        this.mediator = mediator;
     }
 
     public void printMenu() {
@@ -52,31 +52,31 @@ public class Menu {
     public void executeMenu(int userChoice) {
         switch (userChoice) {
             case 1:
-                MenuManager loadNewFile = new LoadNewFile(userConsole);
+                MenuManager loadNewFile = new LoadNewFile(mediator);
                 loadNewFile.execution();
                 break;
        case 2:
-           MenuManager displayMachineConfiguration=new DisplayMachineConfiguration(userConsole);
+           MenuManager displayMachineConfiguration=new DisplayMachineConfiguration(mediator);
            displayMachineConfiguration.execution();
            break;
         case 3:
-            MenuManager initCodeConfigurationManually  =new InitCodeConfigurationManually(userConsole);
+            MenuManager initCodeConfigurationManually  =new InitCodeConfigurationManually(mediator);
             initCodeConfigurationManually.execution();
             break;
       case 4:
-          MenuManager initCodeConfigurationAutomatically=new InitCodeConfigurationAutomatically(userConsole);
+          MenuManager initCodeConfigurationAutomatically=new InitCodeConfigurationAutomatically(mediator);
           initCodeConfigurationAutomatically.execution();
             break;
           case 5:
-              MenuManager inputProcess=new InputProcess(userConsole);
+              MenuManager inputProcess=new InputProcess(mediator);
               inputProcess.execution();
               break;
        case 6:
-           MenuManager resetCurrentCode=new ResetCurrentCode(userConsole);
+           MenuManager resetCurrentCode=new ResetCurrentCode(mediator);
            resetCurrentCode.execution();
            break;
         case 7:
-            MenuManager historyAndStatistics=new DisplayHistoryAndStatistics(userConsole);
+            MenuManager historyAndStatistics=new DisplayHistoryAndStatistics(mediator);
             historyAndStatistics.execution();
             break;
 

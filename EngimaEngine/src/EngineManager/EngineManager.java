@@ -283,6 +283,14 @@ public class EngineManager implements EngineManagerInterface {
         return inputListOfExceptionDTO;
 
     }
+     public boolean isChooseToExit(String userInput){
+        if(userInput.equals("")){
+            return true;
+
+        }
+        return false;
+    }
+
     public ConvertedStringDTO getConvertedString(String userInputString){
         long begin = System.nanoTime();
 

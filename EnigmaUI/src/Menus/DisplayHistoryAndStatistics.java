@@ -1,14 +1,18 @@
 package Menus;
 
-import Console.UserConsole;
+import Console.Mediator;
 
 public class DisplayHistoryAndStatistics implements MenuManager{
-    private UserConsole userConsole;
-    public DisplayHistoryAndStatistics(UserConsole userConsole){
-        this.userConsole=userConsole;
+    private Mediator mediator;
+    public DisplayHistoryAndStatistics(Mediator mediator){
+        this.mediator = mediator;
     }
     @Override
     public void execution() {
-        userConsole.getHistoryAndStatistics();
+        boolean isMachineWasDefined= mediator.isMachineWasDefined();
+        boolean isCodeWasDefined= mediator.isCodeWasDefined();
+        if(isMachineWasDefined&&isCodeWasDefined) {
+            mediator.getHistoryAndStatistics();
+        }
     }
 }

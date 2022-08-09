@@ -1,17 +1,20 @@
 package Menus;
 
-import Console.UserConsole;
+import Console.Mediator;
 
 public class ResetCurrentCode implements MenuManager{
 
-    public UserConsole userConsole;
-    public ResetCurrentCode(UserConsole userConsole){
-        this.userConsole=userConsole;
+    public Mediator mediator;
+    public ResetCurrentCode(Mediator mediator){
+        this.mediator = mediator;
 
     }
     @Override
     public void execution() {
-        userConsole.resetCurrentCode();
-
+        boolean isMachineWasDefined= mediator.isMachineWasDefined();
+        boolean isCodeWasDefined= mediator.isCodeWasDefined();
+        if(isMachineWasDefined&&isCodeWasDefined) {
+            mediator.resetCurrentCode();
+        }
     }
 }

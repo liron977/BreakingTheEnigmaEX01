@@ -1,6 +1,6 @@
 package Menus;
 
-import Console.UserConsole;
+import Console.Mediator;
 
 import java.util.Scanner;
 
@@ -8,9 +8,9 @@ import java.util.Scanner;
 
 public class LoadNewFile implements MenuManager {
 
-    public UserConsole userConsole;
-    public LoadNewFile(UserConsole userConsole){
-        this.userConsole=userConsole;
+    public Mediator mediator;
+    public LoadNewFile(Mediator mediator){
+        this.mediator = mediator;
     }
 
     @Override
@@ -24,11 +24,11 @@ public class LoadNewFile implements MenuManager {
         boolean isFileNameValid=false;
         boolean isFileLoadSuccessfully=false;
         while (!isFileNameValid){
-            if (userConsole.fileNameValidation(loadStart)) {
+            if (mediator.fileNameValidation(loadStart)) {
                 isFileNameValid = true;
                 while (!isFileLoadSuccessfully) {
                     try {
-                        if (userConsole.isFileLoadSuccessfully(loadStart)) {
+                        if (mediator.isFileLoadSuccessfully(loadStart)) {
                             isFileLoadSuccessfully = true;
                             System.out.println("The xml was uploaded successfully");
                             break;

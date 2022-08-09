@@ -1,22 +1,19 @@
 package Menus;
 
-import Console.UserConsole;
-import MachineDTO.TheMachineSettingsDTO;
-
-import java.util.List;
+import Console.Mediator;
 
 public class DisplayMachineConfiguration implements MenuManager {
 
-    private UserConsole userConsole;
+    private Mediator mediator;
 
-    public DisplayMachineConfiguration(UserConsole userConsole) {
-        this.userConsole = userConsole;
+    public DisplayMachineConfiguration(Mediator mediator) {
+        this.mediator = mediator;
     }
 
     @Override
     public void execution() {
 
-        String output = userConsole.getCurrentCodeConfigurations();
+        String output = mediator.getCurrentCodeConfigurations();
         if (output != null) {
             System.out.println(output);
         }

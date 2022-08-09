@@ -1,16 +1,16 @@
 package Menus;
 
-import Console.UserConsole;
+import Console.Mediator;
 
 import java.util.Scanner;
 
 public class InitCodeConfigurationManually implements MenuManager {
-    public UserConsole userConsole;
+    public Mediator mediator;
     private Scanner scanner;
 
-    public InitCodeConfigurationManually(UserConsole userConsole) {
+    public InitCodeConfigurationManually(Mediator mediator) {
          scanner = new Scanner(System.in);
-        this.userConsole = userConsole;
+        this.mediator = mediator;
     }
 
     @Override
@@ -47,48 +47,43 @@ public class InitCodeConfigurationManually implements MenuManager {
         boolean isUserInputReflectIdIsValid = false;
         boolean isStartingPositionAreValid = false;
         boolean isPlagBoardIsValid = false;
-        if (userConsole.isMachineWasDefined()) {
+        if (mediator.isMachineWasDefined()) {
             printRotorDescription();
             String loadStart = scanner.nextLine();
-            while (!isUserInputRotorsIsValid) {
-                if (userConsole.isRotorsIDinInitCodeManuallyIsValid(loadStart)) {
-                    isUserInputRotorsIsValid = true;
-                    System.out.println("Rotors id updated successfully  \n");
-                    printStartPositionDescriptionDescription();
+    while (!isUserInputRotorsIsValid) {
+        if (mediator.isRotorsIDinInitCodeManuallyIsValid(loadStart)) {
+            isUserInputRotorsIsValid = true;
+            System.out.println("Rotors id updated successfully  \n");
+            printStartPositionDescriptionDescription();
+            loadStart = scanner.nextLine();
+            while (!isStartingPositionAreValid) {
+                if (mediator.isStartingPositionInitCodeManuallyIsValid(loadStart)) {
+                    isStartingPositionAreValid = true;
+                    mediator.initStartingPositionConfigurationManually(loadStart);
+                    System.out.println("Starting position for each rotor updated successfully \n");
+                    printReflectorIdDescription();
                     loadStart = scanner.nextLine();
-                    while (!isStartingPositionAreValid) {
-                        if (userConsole.isStartingPositionInitCodeManuallyIsValid(loadStart)) {
-                            isStartingPositionAreValid = true;
-                            userConsole.initStartingPositionConfigurationManually(loadStart);
-                            System.out.println("Starting position for each rotor updated successfully \n");
-                            printReflectorIdDescription();
-                            loadStart = scanner.nextLine();
-                            while (!isUserInputReflectIdIsValid) {
-                                if (userConsole.isReflectoIDinInitCodeManuallyIsValid(loadStart)) {
-                                    isUserInputReflectIdIsValid = true;
-                                    System.out.println("Reflector id updated successfully  \n");
-                                } else {
-                                    System.out.println("Please insert updated requested details  \n");
-                                    loadStart = scanner.nextLine();
-                                }
-                            }
-                            if (isPlayerWantsPlugBoard()) {
-                                printPlagBoardDescription();
-                                loadStart = scanner.nextLine();
-                                while (!isPlagBoardIsValid) {
-                                    if (userConsole.isPlagBoardinInitCodeManuallyIsValid(loadStart)) {
-                                        isPlagBoardIsValid = true;
-                                        userConsole.initPlugBoardConfigurationManually(loadStart);
-                                        System.out.println("Plug board updated successfully  \n");
-                                    } else {
-                                        System.out.println("Please insert updated requested details");
-                                        loadStart = scanner.nextLine();
-                                    }
-                                }
-                            }
+                    while (!isUserInputReflectIdIsValid) {
+                        if (mediator.isReflectoIDinInitCodeManuallyIsValid(loadStart)) {
+                            isUserInputReflectIdIsValid = true;
+                            System.out.println("Reflector id updated successfully  \n");
                         } else {
-                            System.out.println("Please insert updated requested details");
+                            System.out.println("Please insert updated requested details  \n");
                             loadStart = scanner.nextLine();
+                        }
+                    }
+                    if (isPlayerWantsPlugBoard()) {
+                        printPlagBoardDescription();
+                        loadStart = scanner.nextLine();
+                        while (!isPlagBoardIsValid) {
+                            if (mediator.isPlagBoardinInitCodeManuallyIsValid(loadStart)&&!mediator.isChooseToExit(loadStart)) {
+                                isPlagBoardIsValid = true;
+                                mediator.initPlugBoardConfigurationManually(loadStart);
+                                System.out.println("Plug board updated successfully  \n");
+                            } else {
+                                System.out.println("Please insert updated requested details");
+                                loadStart = scanner.nextLine();
+                            }
                         }
                     }
                 } else {
@@ -96,15 +91,21 @@ public class InitCodeConfigurationManually implements MenuManager {
                     loadStart = scanner.nextLine();
                 }
             }
-            userConsole.setIsCodeConfigurationWasdefine();
+        } else {
+            System.out.println("Please insert updated requested details");
+            loadStart = scanner.nextLine();
         }
+    }
+    mediator.setIsCodeConfigurationWasdefine();
+}
+
     }
     private boolean isPlayerWantsPlugBoard() {
         boolean isUserInputIsValid = false;
         System.out.println("Do you want to define a plug board \n 1)Yes \n 2)No");
         String userInput = scanner.nextLine();
         while (!isUserInputIsValid) {
-            isUserInputIsValid = userConsole.isPlayerDefinePlugBoardIsValid(userInput);
+            isUserInputIsValid = mediator.isPlayerDefinePlugBoardIsValid(userInput);
             if (isUserInputIsValid) {
                 if (userInput.equals("1")) {
                     return true;

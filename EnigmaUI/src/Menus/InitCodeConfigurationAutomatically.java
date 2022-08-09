@@ -1,17 +1,17 @@
 package Menus;
 
-import Console.UserConsole;
+import Console.Mediator;
 
 public class InitCodeConfigurationAutomatically implements MenuManager {
 
-    private UserConsole userConsole;
-    public InitCodeConfigurationAutomatically (UserConsole userConsole){
-        this.userConsole = userConsole;
+    private Mediator mediator;
+    public InitCodeConfigurationAutomatically (Mediator mediator){
+        this.mediator = mediator;
     }
     @Override
     public void execution() {
-        if (userConsole.isMachineWasDefined()) {
-            userConsole.initCodeConfigurationAutomatically();
+        if (mediator.isMachineWasDefined()) {
+            mediator.initCodeConfigurationAutomatically();
         }
     }
 }

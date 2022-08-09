@@ -64,6 +64,7 @@ public class TheMachineEngine {
         return rotorsSet.getMaxAmountOfRotors();
     }
 
+
     public String[] getRotorsId(){
         String[] rotorsId=new String[rotorsSet.getListOfRotors().size()];
         int i=0;

@@ -1,30 +1,30 @@
 package Menus;
 
-import Console.UserConsole;
+import Console.Mediator;
 
 import java.util.Scanner;
 
 public class InputProcess implements MenuManager{
     String userInput;
-    public UserConsole userConsole;
-    public InputProcess(UserConsole userConsole){
-        this.userConsole=userConsole;
+    public Mediator mediator;
+    public InputProcess(Mediator mediator){
+        this.mediator = mediator;
 
     }
     @Override
     public void execution() {
         boolean isValidInputProcess=false;
-        boolean isMachineWasDefined=userConsole.isMachineWasDefined();
-        boolean isCodeWasDefined=userConsole.isCodeWasDefined();
+        boolean isMachineWasDefined= mediator.isMachineWasDefined();
+        boolean isCodeWasDefined= mediator.isCodeWasDefined();
         if(isMachineWasDefined&&isCodeWasDefined) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Please enter the string to process");
             userInput = scanner.nextLine();
             while (!isValidInputProcess) {
 
-                isValidInputProcess = userConsole.isUserStringToProcessIsValid(userInput);
+                isValidInputProcess = mediator.isUserStringToProcessIsValid(userInput);
                 if (isValidInputProcess) {
-                    System.out.println("The converted string is: " + userConsole.getConvertedString(userInput));
+                    System.out.println("The converted string is: " + mediator.getConvertedString(userInput));
 
                 } else {
                     userInput = scanner.nextLine();

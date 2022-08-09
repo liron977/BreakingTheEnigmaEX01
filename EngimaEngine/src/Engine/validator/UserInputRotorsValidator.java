@@ -9,6 +9,7 @@ public class UserInputRotorsValidator implements Validator {
     private List<Exception> listOfException;
     private TheMachineEngine theMachineEngine;
     private String[] rotorsId;
+
     public UserInputRotorsValidator(String userInput, TheMachineEngine theMachineEngine) {
         this.listOfException = new ArrayList<>();
         this.userInput = userInput.toUpperCase();
@@ -16,11 +17,14 @@ public class UserInputRotorsValidator implements Validator {
     }
 
     private void isRotorsIdFromUserInputIsValid() {
-        int numberOfRotorsFromTheFile = theMachineEngine.getMaxAmountOfRotors();
+        int numberOfRotorsFromTheFile = theMachineEngine.getAmountOfUsedRotors();
         if (rotorsId.length > numberOfRotorsFromTheFile) {
-            listOfException.add(new Exception("The number of rotors you enter is more of the rotors amount exist in the machine,you can insert [" + numberOfRotorsFromTheFile + "] for maximum"));
+            listOfException.add(new Exception("The number of rotors you entered is more than it should be,please enter [" + numberOfRotorsFromTheFile + "] Rotors ID's"));
+        } else if (rotorsId.length < numberOfRotorsFromTheFile) {
+            listOfException.add(new Exception("The number of rotors you entered is less than it should be,please enter [" + numberOfRotorsFromTheFile + "] Rotors ID's"));
+
         } else if (rotorsId.length == 0) {
-            listOfException.add(new Exception("You didn`t enter rotors id,you can insert for maximum [" + numberOfRotorsFromTheFile + "]"));
+            listOfException.add(new Exception("You didn't entered rotors id,Please enter [" + numberOfRotorsFromTheFile + "] Rotors ID's"));
         } else {
             for (String rotorsId : rotorsId) {
                 if (!theMachineEngine.getRotorsSet().isRotorsIdExists(rotorsId)) {
@@ -38,6 +42,15 @@ public class UserInputRotorsValidator implements Validator {
             }
         }
     }
+   /* private boolean isChooseToExit(){
+        if(userInput.equals("")){
+            listOfException.add(new Exception("The request to init the code configuration canceled"));
+            return true;
+
+        }
+        return false;
+    }*/
+
     private void isRotorIDIsUniq(){
         for(int i=0;i<rotorsId.length;i++) {
             String str=rotorsId[i];
@@ -72,6 +85,8 @@ public class UserInputRotorsValidator implements Validator {
             isRotorsIdFromUserInputIsValid();
             isRotorIDIsUniq();
             isRotorsIdIsANumber();
+
+
         }
     }
     @Override

@@ -8,11 +8,11 @@ import MachineDTO.TheMachineSettingsDTO;
 
 import java.util.List;
 
-public class UserConsole {
+public class Mediator {
 
     EngineManagerInterface engineManager;
 
-public UserConsole (EngineManagerInterface engineManager){
+public Mediator(EngineManagerInterface engineManager){
     this.engineManager=engineManager;
 }
 
@@ -60,7 +60,12 @@ public UserConsole (EngineManagerInterface engineManager){
                 return false;
             }
     }
-    public boolean isStartingPositionInitCodeManuallyIsValid(String str){
+    public boolean isChooseToExit(String str) {
+    return engineManager.isChooseToExit(str);
+    }
+
+
+        public boolean isStartingPositionInitCodeManuallyIsValid(String str){
         ListOfExceptionsDTO listOfExceptionsDTO= engineManager.getAllErrorsRelatedToChosenManuallyStartingPosition(str);
         if (listOfExceptionsDTO.getListOfException().size() == 0) {
             return true;

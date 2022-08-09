@@ -19,7 +19,7 @@ public interface EngineManagerInterface {
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyPlagBoard(String str);
     public void initCodeAutomatically();
     public TheMachineSettingsDTO getTheMachineSettingsDTO();
-
+    public boolean isChooseToExit(String userInput);
    public ListOfExceptionsDTO getAllErrorsConvertingInputProcess(String str);
    public ConvertedStringDTO getConvertedString(String str);
     public void resetCurrentCode();
