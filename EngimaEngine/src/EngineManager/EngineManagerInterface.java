@@ -1,11 +1,9 @@
 package EngineManager;
 
 import Engine.TheEnigmaEngine.TheMachineEngine;
-import MachineDTO.ConvertedStringDTO;
-import MachineDTO.ListOfExceptionsDTO;
-import MachineDTO.MachineHistoryAndStatisticsDTO;
-import MachineDTO.TheMachineSettingsDTO;
+import MachineDTO.*;
 
+import java.util.Currency;
 import java.util.List;
 
 public interface EngineManagerInterface {
@@ -17,7 +15,7 @@ public interface EngineManagerInterface {
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyStartingPosition(String str);
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyReflectorId(String str);
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyPlagBoard(String str);
-    public void initCodeAutomatically();
+    public CurrentCodeDescriptionDTO initCodeAutomatically();
     public TheMachineSettingsDTO getTheMachineSettingsDTO();
     public boolean isChooseToExit(String userInput);
    public ListOfExceptionsDTO getAllErrorsConvertingInputProcess(String str);

@@ -7,14 +7,15 @@ import java.util.List;
 
 public class MenuValidator implements Validator {
 
-    List<Exception> exceptionList;
-    Boolean isMachineDefined;
-    Boolean isCodeDefined;
+    private List<Exception> exceptionList;
+    private Boolean isMachineDefined;
+    private Boolean isCodeDefined;
 
     public MenuValidator(){
         exceptionList=new ArrayList<>();
         isCodeDefined=false;
         isMachineDefined=false;
+
     }
     public void isXmlLoaded(){
         if(!isMachineDefined){
@@ -26,6 +27,7 @@ public class MenuValidator implements Validator {
             exceptionList.add(new Exception("The code configuration is not defined yet,please complete step 3 or 4 first"));
         }
     }
+
     public void setTrueValueToIsMachineDefined(){
         isMachineDefined=true;
     }

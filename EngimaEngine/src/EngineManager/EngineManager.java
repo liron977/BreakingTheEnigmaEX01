@@ -167,7 +167,7 @@ public class EngineManager implements EngineManagerInterface {
     public int getRotorsAmount(){
         return cteEnigma.getCTEMachine().getRotorsCount();
     }
-    public void initCodeAutomatically(){
+    public CurrentCodeDescriptionDTO initCodeAutomatically(){
         theMachineEngine = buildTheMachineEngine();
         chooseAutomaticallyRotors(theMachineEngine);
         initRotorsPositionAutomatically(theMachineEngine);
@@ -178,6 +178,7 @@ public class EngineManager implements EngineManagerInterface {
         reverseUsedRotors(theMachineEngine);
         createCurrentCodeDescriptionDTO();
         machineHistoryAndStatistics.addNewMachineSettings(currentCodeDescriptionDTO);
+        return currentCodeDescriptionDTO;
 
 
     }

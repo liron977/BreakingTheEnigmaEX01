@@ -19,7 +19,7 @@ public class InitCodeConfigurationManually implements MenuManager {
     }
 
     public void printRotorDescription() {
-        String str = "Please enter therotors ID numbers + order between them (for " +
+        String str = "Please enter the rotors ID numbers + order between them (for " +
                 "example:if you choose 2 rotors with id:7,3 and the rotor(7) appears on the far right, insert <3,7>) \n";
         System.out.println(str);
     }
@@ -31,7 +31,7 @@ public class InitCodeConfigurationManually implements MenuManager {
         System.out.println(str);
     }
 
-    public void printPlagBoardDescription() {
+    public void printPlugBoardDescription() {
         String str = "Please enter pairs of characters from the ABS of the machine that will be replaced (for example if you insert AZ ,A and Z will be replaced) \n";
         System.out.println(str);
     }
@@ -68,12 +68,12 @@ public class InitCodeConfigurationManually implements MenuManager {
                             isUserInputReflectIdIsValid = true;
                             System.out.println("Reflector id updated successfully  \n");
                         } else {
-                            System.out.println("Please insert updated requested details  \n");
+                            System.out.println("Please try again  \n");
                             loadStart = scanner.nextLine();
                         }
                     }
                     if (isPlayerWantsPlugBoard()) {
-                        printPlagBoardDescription();
+                        printPlugBoardDescription();
                         loadStart = scanner.nextLine();
                         while (!isPlagBoardIsValid) {
                             if (mediator.isPlagBoardinInitCodeManuallyIsValid(loadStart)&&!mediator.isChooseToExit(loadStart)) {
@@ -81,18 +81,18 @@ public class InitCodeConfigurationManually implements MenuManager {
                                 mediator.initPlugBoardConfigurationManually(loadStart);
                                 System.out.println("Plug board updated successfully  \n");
                             } else {
-                                System.out.println("Please insert updated requested details");
+                                System.out.println("Please try again");
                                 loadStart = scanner.nextLine();
                             }
                         }
                     }
                 } else {
-                    System.out.println("Please insert updated requested details");
+                    System.out.println("Please try again");
                     loadStart = scanner.nextLine();
                 }
             }
         } else {
-            System.out.println("Please insert updated requested details");
+            System.out.println("Please try again");
             loadStart = scanner.nextLine();
         }
     }
@@ -113,7 +113,7 @@ public class InitCodeConfigurationManually implements MenuManager {
                     return false;
                 }
             } else {
-                System.out.println("Please insert updated requested details");
+                System.out.println("Please try again");
                 userInput = scanner.nextLine();
             }
         }

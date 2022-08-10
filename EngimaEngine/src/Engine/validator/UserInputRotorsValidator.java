@@ -42,14 +42,6 @@ public class UserInputRotorsValidator implements Validator {
             }
         }
     }
-   /* private boolean isChooseToExit(){
-        if(userInput.equals("")){
-            listOfException.add(new Exception("The request to init the code configuration canceled"));
-            return true;
-
-        }
-        return false;
-    }*/
 
     private void isRotorIDIsUniq(){
         for(int i=0;i<rotorsId.length;i++) {

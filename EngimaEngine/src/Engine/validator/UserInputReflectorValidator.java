@@ -1,5 +1,6 @@
 package Engine.validator;
 
+import Engine.TheEnigmaEngine.Reflector;
 import Engine.TheEnigmaEngine.TheMachineEngine;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +40,21 @@ public class UserInputReflectorValidator implements Validator{
     }
     private void isReflectorIdValid(){
         if(!theMachineEngine.getReflectorsSet().searchReflectorById(reflectorId)){
-            listOfException.add(new Exception("The reflector ID is not exist in the file"));
+            listOfException.add(new Exception("The reflector ID is not exist in the machine, please enter one of the following: {"+getMachineReflectorsID(theMachineEngine.getReflectorsSet().getListOfReflectors())+"}"));
         }
     }
-  public void convertUserChooseToId() {
+    private String getMachineReflectorsID(List<Reflector> MachineReflectors){
+String machineReflectorsID="";
+        for (Reflector reflector:MachineReflectors) {
+            if(machineReflectorsID!=""){
+                machineReflectorsID=machineReflectorsID+",";
+            }
+            machineReflectorsID=machineReflectorsID+ reflector.getReflectorId();
+        }
+        return machineReflectorsID;
+
+    }
+  private void convertUserChooseToId() {
       switch (userChosenInput) {
           case "1":
               this.reflectorId = "I";

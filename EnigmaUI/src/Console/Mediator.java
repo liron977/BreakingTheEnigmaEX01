@@ -119,8 +119,10 @@ public Mediator(EngineManagerInterface engineManager){
     }*/
     public void initCodeConfigurationAutomatically(){
       //  FileDTO fileDTO=engineManager.initCodeAutomatically();
-        engineManager.initCodeAutomatically();
+       CurrentCodeDescriptionDTO currentCodeDescriptionDTO =engineManager.initCodeAutomatically();
+
         System.out.println("Selection of initial code configuration (automatically) performed successfully");
+        System.out.println("The current code configuration is: " +getCurrentCodeDescription(currentCodeDescriptionDTO));
 
 
     }
@@ -206,7 +208,7 @@ public Mediator(EngineManagerInterface engineManager){
                 }
             else {
                 for (int i = 0; i < userInput.length; i++) {
-                    System.out.println("<" + userInput[i] + "> --> <" + convertedStrings[i] + "> (" + timeToProcess[i] + " nano-seconds)");
+                    System.out.println((i+1)+".<" + userInput[i] + "> --> <" + convertedStrings[i] + "> (" + timeToProcess[i] + " nano-seconds)");
                 }
             }
             }
