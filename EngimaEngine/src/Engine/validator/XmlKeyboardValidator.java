@@ -27,7 +27,7 @@ public class XmlKeyboardValidator implements Validator{
     private void isKeyboardSizeIsEven(){
         int inputSize=enigmaDescriptor.getCTEMachine().getABC().trim().length();
         if((inputSize%2)!=0){
-            errors.add(new Exception("The ABC size need to be even,the ABC size tyou entered is ["+inputSize +"]"));
+            errors.add(new Exception("The ABC size need to be even,the ABC size that you entered is ["+inputSize +"]"));
         }
     }
     private void isKeyboardIsNotEmpty(){

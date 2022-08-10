@@ -25,7 +25,7 @@ public class UserStringProcessorValidator implements Validator {
 
         for (int i=0;i<userInput.length();i++) {
            if(!keyboard.contains(String.valueOf(userInput.charAt(i)))){
-               listOfException.add(new Exception("The signal ["+userInput.charAt(i)+"] is not valid you should insert input the exist in the following keyboard:"+keyboard));
+               listOfException.add(new Exception("The signal ["+userInput.charAt(i)+"] is not valid you should insert input that exist in the following keyboard:"+keyboard));
            }
         }
     }

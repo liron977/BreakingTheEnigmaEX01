@@ -1,9 +1,9 @@
 package MachineDTO;
 
 public class HistoryAndStatisticsDTO {
-   String[] userInput;
-    String[] convertedString;
-    String[] timeToProcess;
+   private String[] userInput;
+   private String[] convertedString;
+    private String[] timeToProcess;
 public HistoryAndStatisticsDTO(String[] userInput,String[] convertedString,String[] timeToProcess){
 this.userInput=userInput;
 this.convertedString=convertedString;

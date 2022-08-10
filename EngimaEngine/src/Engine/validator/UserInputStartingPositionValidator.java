@@ -16,7 +16,7 @@ public class UserInputStartingPositionValidator implements Validator{
         this.rotorsPosition=rotorsPosition.toUpperCase();
 
     }
-    public void isStartingPositionStructureIsValid() {
+    private void isStartingPositionStructureIsValid() {
         char signal;
         for (int i = 0; i < rotorsPosition.length(); i++) {
             signal=rotorsPosition.charAt(i);
@@ -25,19 +25,19 @@ public class UserInputStartingPositionValidator implements Validator{
             }
         }
     }
-    private void isRototsPositionAmountIsValid(){
+    private void isRotorsPositionAmountIsValid(){
         int amountOfUsedRotors= theMachineEngine.getAmountOfUsedRotors();
         if(rotorsPosition.length()>amountOfUsedRotors){
-            listOfException.add(new Exception("You have too much signal for stating position,you need to have ["+amountOfUsedRotors+"] signals"));
+            listOfException.add(new Exception("You entered too much signals for stating position,please enter ["+amountOfUsedRotors+"] signals"));
         }
         else if(rotorsPosition.length()<amountOfUsedRotors){
-            listOfException.add(new Exception("You need to insert amount of starting position as the amount of rotors,you need to have ["+amountOfUsedRotors+"] signals"));
+            listOfException.add(new Exception("The amount of the starting position signals should be equal to the amount of the rotors,please enter ["+amountOfUsedRotors+"] signals"));
         }
     }
     @Override
     public void validate() {
         isStartingPositionStructureIsValid();
-        isRototsPositionAmountIsValid();
+        isRotorsPositionAmountIsValid();
     }
     @Override
     public List<Exception> getListOfException() {

@@ -1,5 +1,7 @@
 package Engine.validator;
 
+import Engine.TheEnigmaEngine.Reflector;
+import Engine.TheEnigmaEngine.Rotor;
 import Engine.TheEnigmaEngine.TheMachineEngine;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +30,20 @@ public class UserInputRotorsValidator implements Validator {
         } else {
             for (String rotorsId : rotorsId) {
                 if (!theMachineEngine.getRotorsSet().isRotorsIdExists(rotorsId)) {
-                    listOfException.add(new Exception("The rotor id [" + rotorsId + "] does not exists in the machine"));
+                    listOfException.add(new Exception("The rotor id [" + rotorsId + "] does not exists in the machine,please choose "+numberOfRotorsFromTheFile+" of the following ID's: {"+getMachineRotorsId(theMachineEngine.getRotorsSet().getListOfRotors())+"}"));
                 }
             }
         }
+    }
+    private String getMachineRotorsId(List<Rotor> machineRotors){
+        String machineRotorsId="";
+        for (Rotor rotor:machineRotors) {
+            if(machineRotorsId!=""){
+                machineRotorsId=machineRotorsId+",";
+            }
+            machineRotorsId=machineRotorsId+ rotor.getRotorId();
+        }
+        return machineRotorsId;
     }
     private void isRotorsIdIsANumber(){
         boolean isNumeric;
@@ -48,13 +60,13 @@ public class UserInputRotorsValidator implements Validator {
             String str=rotorsId[i];
             for(int j=i+1;j<rotorsId.length;j++){
                 if(str.equals(rotorsId[j])){
-                    listOfException.add(new Exception("You insert the same rotors id ["+str.toString()+"]"));
+                    listOfException.add(new Exception("You entered the same rotors id ["+str.toString()+"]"));
                     break;
                 }
             }
         }
     }
-    public boolean isRotorIdStructureIsValid() {
+    private boolean isRotorIdStructureIsValid() {
         for (int i = 0; i < userInput.length(); i++) {
             if ((!Character.isDigit((userInput.charAt(i)))) && (userInput.charAt(i) != ',')) {
                 listOfException.add(new Exception("The input is not valid you need to enter numbers separated by a comma"));
@@ -66,7 +78,7 @@ public class UserInputRotorsValidator implements Validator {
     public  String[] getFilteredUserInput(){
         return rotorsId;
     }
-    public void splitTheUserInputToGetTheRotorsId(){
+    private void splitTheUserInputToGetTheRotorsId(){
         this.rotorsId=userInput.split(",");
     }
 

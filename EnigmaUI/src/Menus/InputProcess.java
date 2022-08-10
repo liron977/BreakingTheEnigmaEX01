@@ -5,8 +5,8 @@ import Console.Mediator;
 import java.util.Scanner;
 
 public class InputProcess implements MenuManager{
-    String userInput;
-    public Mediator mediator;
+    private String userInput;
+    private Mediator mediator;
     public InputProcess(Mediator mediator){
         this.mediator = mediator;
 

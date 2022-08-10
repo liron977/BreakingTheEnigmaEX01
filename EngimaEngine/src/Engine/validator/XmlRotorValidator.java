@@ -22,10 +22,11 @@ public class XmlRotorValidator implements Validator{
     public void validate() {
         isRotorsCountEqualsToExistsRotorsAmount();
         isEachRotorHasUniqId();
-        isRotorsMappedIslegal();
+        isRotorsMappedIsLegal();
         isRotorsAmountOfSignalIsLegal();
-        isRotorsSignalslAreValid();
+        isRotorsSignalsAreValid();
         isNotchPositionLegal();
+        isRotorsAmountIsLegal();
 
     }
 
@@ -34,10 +35,10 @@ public class XmlRotorValidator implements Validator{
         return errors;
     }
 
-    private void isRotorsAmountIslegal(){
+    private void isRotorsAmountIsLegal(){
         int rotorsAmountFromFile=enigmaDescriptor.getCTEMachine().getRotorsCount();
         if(rotorsAmountFromFile<2){
-            errors.add(new Exception("The rotors amount is not valid,you should have at least 2 rotors in the file"));
+            errors.add(new Exception("The rotors amount is not valid,you should have at least 2 rotors in the field rotors-count"));
         }
     }
     private int countRotorsFromFile(){
@@ -52,7 +53,7 @@ public class XmlRotorValidator implements Validator{
         int rotorsAmountFromFile=enigmaDescriptor.getCTEMachine().getRotorsCount();
         int countedRotors=countRotorsFromFile();
         if(rotorsAmountFromFile>countedRotors){
-            errors.add(new Exception("The amount of rotors entered in the field :rotors-count is+ " +rotorsAmountFromFile +"and it does not match the actual amount of rotors :"+countedRotors));
+            errors.add(new Exception("The amount of rotors to use that you entered in the field :rotors-count is [" +rotorsAmountFromFile +"] and its more than the amount of rotors in the file :"+countedRotors));
         }
     }
     private void isEachRotorHasUniqId(){
@@ -83,18 +84,22 @@ public class XmlRotorValidator implements Validator{
         for (CTEPositioning positing:ctePositioning) {
             left=positing.getLeft();
             right=positing.getRight();
-            if(!(keyboardInput.toUpperCase().contains(left.toUpperCase()))||(!keyboardInput.toUpperCase().contains(right.toUpperCase()))){
-                errors.add(new Exception("The rotor ["+cteRotor.getId()+"] is illegal,the signals should be from the ABC only" ));
+            if(!(keyboardInput.toUpperCase().contains(left.toUpperCase()))){
+                errors.add(new Exception("The signal "+left.toUpperCase()+ " on the left in rotor ["+cteRotor.getId()+"] is illegal,the signals should be from the following ABC only: "+ keyboardInput ));
+            }
+            if((!keyboardInput.toUpperCase().contains(right.toUpperCase()))){
+                errors.add(new Exception("The signal "+right.toUpperCase()+ " on the right in rotor ["+cteRotor.getId()+"] is illegal,the signals should be from the following ABC only: "+keyboardInput ));
+
             }
         }
     }
-    private void isRotorsSignalslAreValid(){
+    private void isRotorsSignalsAreValid(){
         List<CTERotor> cteRotors=enigmaDescriptor.getCTEMachine().getCTERotors().getCTERotor();
         for (CTERotor cteRotor:cteRotors) {
             isRotorSignalsAreValid(cteRotor);
         }
     }
-    public void isRotorhasDoubleMapping(CTERotor cteRotor){
+    private void isRotorHasDoubleMapping(CTERotor cteRotor){
         String left,right;
         HashMap<String, Integer> leftSignalMap = new HashMap<>();
         HashMap<String, Integer> rightSignalMap = new HashMap<>();
@@ -102,17 +107,17 @@ public class XmlRotorValidator implements Validator{
         for (CTEPositioning positing:ctePositioning) {
             left=positing.getLeft();
             if((leftSignalMap.get(left)!=null)&&(leftSignalMap.get(left)!=0)) {
-                errors.add(new Exception("The rotor ["+cteRotor.getId()+"] is illegal,the rotors should not have double mapping" ));
+                errors.add(new Exception("The rotor ["+cteRotor.getId()+"] is illegal,the rotors should not have double mapping the left signal "+left +" is already mapped"));
             }
             leftSignalMap.put(left,1);
             right=positing.getRight();
             if((rightSignalMap.get(right)!=null)&&(rightSignalMap.get(right)!=0)) {
-                errors.add(new Exception("The rotor ["+cteRotor.getId()+"] is illegal,the rotors should not have double mapping" ));
+                errors.add(new Exception("The rotor ["+cteRotor.getId()+"] is illegal,the rotors should not have double mapping the right signal "+right +" is already mapped" ));
             }
             rightSignalMap.put(right,1);
         }
     }
-    public void isRotorsAmountOfSignalIsLegal(){
+    private void isRotorsAmountOfSignalIsLegal(){
         List<CTERotor> cteRotors=enigmaDescriptor.getCTEMachine().getCTERotors().getCTERotor();
         int amount=0;
         for (CTERotor cteRotor:cteRotors) {
@@ -121,15 +126,15 @@ public class XmlRotorValidator implements Validator{
             for (CTEPositioning positing:ctePositioning) {
                 amount++;
             }
-            if(amount!=keyboardInput.length()){
+            if(amount<keyboardInput.length()){
                 errors.add(new Exception("The rotor ["+cteRotor.getId()+"] is illegal,each signal in the ABC should be mapped in the rotor" ));
             }
         }
     }
-    public void isRotorsMappedIslegal(){
+    private void isRotorsMappedIsLegal(){
         List<CTERotor> cteRotors=enigmaDescriptor.getCTEMachine().getCTERotors().getCTERotor();
         for (CTERotor cteRotor:cteRotors) {
-           isRotorhasDoubleMapping(cteRotor);
+           isRotorHasDoubleMapping(cteRotor);
         }
     }
     private void isNotchPositionLegal(){

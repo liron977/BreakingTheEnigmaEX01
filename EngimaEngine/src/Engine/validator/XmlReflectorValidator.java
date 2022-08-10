@@ -7,6 +7,14 @@ import schemaGenerated.CTEReflector;
 import java.util.*;
 
 public class XmlReflectorValidator implements Validator {
+    private List<String> romanNumeralsList;
+    private CTEEnigma enigmaDescriptor;
+    private List<Exception> errors;
+    public XmlReflectorValidator(CTEEnigma enigmaDescriptor) {
+        this.enigmaDescriptor = enigmaDescriptor;
+        errors=new ArrayList<>();
+        romanNumeralsList=new ArrayList<>();
+    }
     private void initRomanNumeralsList() {
         romanNumeralsList.add("I");
         romanNumeralsList.add("II");
@@ -14,15 +22,7 @@ public class XmlReflectorValidator implements Validator {
         romanNumeralsList.add("IV");
         romanNumeralsList.add("V");
     }
-    private List<String> romanNumeralsList;
-    private CTEEnigma enigmaDescriptor;
-    private List<Exception> errors;
 
-    public XmlReflectorValidator(CTEEnigma enigmaDescriptor) {
-        this.enigmaDescriptor = enigmaDescriptor;
-        errors=new ArrayList<>();
-        romanNumeralsList=new ArrayList<>();
-    }
     @Override
     public void validate(){
 
@@ -36,7 +36,7 @@ public class XmlReflectorValidator implements Validator {
     public List<Exception> getListOfException(){
         return errors;
     }
-    public void isReflectorIdIsRomanNumerals() {
+    private void isReflectorIdIsRomanNumerals() {
         initRomanNumeralsList();
         List<CTEReflector> cteReflectorList = enigmaDescriptor.getCTEMachine().getCTEReflectors().getCTEReflector();
         String reflectorId;
@@ -60,7 +60,7 @@ public class XmlReflectorValidator implements Validator {
             reflectorId = cteReflector.getId();
             if ((idHashMap.get(reflectorId) != null) && (idHashMap.get(reflectorId) > 0)) {
                 errors.add(new Exception("Each reflector id must be uniq," +
-                        "the id ["+ reflectorId +"] appear more than 1 time"));
+                        "the id ["+ reflectorId +"] appears more than one time"));
             }
             idHashMap.put(reflectorId, 1);
         }
@@ -75,25 +75,25 @@ public class XmlReflectorValidator implements Validator {
             switch (key) {
                 case "II":
                     if(!previousId.equals("I")){
-                        errors.add(new Exception("The different reflector`s id should be a running counter starting from 1," +
+                        errors.add(new Exception("The different reflector`s id should be a running counter starting from I," +
                                 "it can be unorganized."+"you have id ["+previousId +"] and after II " ));
                     }
                     break;
                 case "III":
                     if(!previousId.equals("II")){
-                        errors.add(new Exception("The different reflector`s id should be a running counter starting from 1," +
+                        errors.add(new Exception("The different reflector`s id should be a running counter starting from I," +
                                 "it can be unorganized."+"you have id ["+previousId +"] and after III " ));
                     }
                     break;
                 case "IV":
                     if(!previousId.equals("III")){
-                        errors.add(new Exception("The different reflector`s id should be a running counter starting from 1," +
+                        errors.add(new Exception("The different reflector`s id should be a running counter starting from I," +
                                 "it can be unorganized."+"you have id ["+previousId +"] and after IV " ));
                     }
                     break;
                 case "V":
                     if(!previousId.equals("IV")){
-                        errors.add(new Exception("The different reflector`s id should be a running counter starting from 1," +
+                        errors.add(new Exception("The different reflector`s id should be a running counter starting from I," +
                                 "it can be unorganized."+"you have id ["+previousId +"] and after V " ));
                     }
                     break;
@@ -135,11 +135,11 @@ public class XmlReflectorValidator implements Validator {
                 left=String.valueOf(reflect.getInput());
                 right=String.valueOf(reflect.getOutput());
                 if((leftSignalMap.get(left)!=null)&&(leftSignalMap.get(left)!=0)) {
-                    errors.add(new Exception("The reflector ["+reflectorId+"] is illegal,reflector can not have double mapping" ));
+                    errors.add(new Exception("The reflector ["+reflectorId+"] is illegal,reflector can not have double mapping the left signal "+left +" is already mapped" ));
                 }
                 leftSignalMap.put(left,1);
                 if((rightSignalMap.get(right)!=null)&&(rightSignalMap.get(right)!=0)) {
-                    errors.add(new Exception("The reflector ["+reflectorId+"] is illegal,reflector can not have double mapping" ));
+                    errors.add(new Exception("The reflector ["+reflectorId+"] is illegal,reflector can not have double mapping the right signal "+right +" is already mapped" ));
                 }
                 rightSignalMap.put(right,1);
             }

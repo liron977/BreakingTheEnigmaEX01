@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Mediator {
 
-    EngineManagerInterface engineManager;
+    private EngineManagerInterface engineManager;
 
 public Mediator(EngineManagerInterface engineManager){
     this.engineManager=engineManager;

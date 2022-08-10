@@ -4,7 +4,7 @@ import Console.Mediator;
 
 public class ResetCurrentCode implements MenuManager{
 
-    public Mediator mediator;
+    private Mediator mediator;
     public ResetCurrentCode(Mediator mediator){
         this.mediator = mediator;
 

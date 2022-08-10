@@ -8,8 +8,8 @@ public class Menu {
 
     private final int FIRST_OPTION = 1;
     private final int EXIT_OPTION = 8;
-    final int LAST_OPTION = 7;
-    Mediator mediator;
+    private final int LAST_OPTION = 7;
+   private Mediator mediator;
 
     public Menu(Mediator mediator) {
         this.mediator = mediator;

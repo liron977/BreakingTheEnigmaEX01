@@ -3,9 +3,9 @@ package HistoryAndStatistics;
 public class HistoryOfProcess {
 
 
-    String userInput;
-    String convertedInput;
-    long timeToProcess;
+    private String userInput;
+   private String convertedInput;
+  private long timeToProcess;
 
     public HistoryOfProcess(String userInput, String convertedInput, long timeToProcess){
         this.userInput=userInput;

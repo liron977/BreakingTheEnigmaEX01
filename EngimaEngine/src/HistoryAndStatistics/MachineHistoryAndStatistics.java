@@ -6,8 +6,7 @@ import java.util.*;
 
 public class MachineHistoryAndStatistics {
 
-
-    Map<CurrentCodeDescriptionDTO, List<HistoryOfProcess>> machineHistory = new HashMap<>();
+   private Map<CurrentCodeDescriptionDTO, List<HistoryOfProcess>> machineHistory = new HashMap<>();
 
     public void addNewMachineSettings(CurrentCodeDescriptionDTO currentCodeDescriptionDTO) {
 

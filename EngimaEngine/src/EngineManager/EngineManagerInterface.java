@@ -3,14 +3,13 @@ package EngineManager;
 import Engine.TheEnigmaEngine.TheMachineEngine;
 import MachineDTO.*;
 
-import java.util.Currency;
 import java.util.List;
 
 public interface EngineManagerInterface {
 
-    ListOfExceptionsDTO load(String filePath) throws Exception; //throws XmlException;
-    ListOfExceptionsDTO getAllErrorsRelatedToFilePath(String filePath);
-   // public ListOfExceptionsDTO getAllErrorsRelatedToInitCodeManuallyInputStructure(String str);
+   public ListOfExceptionsDTO load(String filePath) throws Exception; //throws XmlException;
+    public ListOfExceptionsDTO getAllErrorsRelatedToFilePath(String filePath);
+
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyRotors(String str);
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyStartingPosition(String str);
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyReflectorId(String str);

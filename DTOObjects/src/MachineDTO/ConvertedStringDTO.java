@@ -1,7 +1,7 @@
 package MachineDTO;
 
 public class ConvertedStringDTO {
-    String convertedString;
+    private String convertedString;
     public ConvertedStringDTO(String convertedString){
         this.convertedString=convertedString;
     }

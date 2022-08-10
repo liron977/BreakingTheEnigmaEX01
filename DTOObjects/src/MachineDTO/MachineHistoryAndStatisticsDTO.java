@@ -1,8 +1,8 @@
 package MachineDTO;
 
 public class MachineHistoryAndStatisticsDTO {
-    CurrentCodeDescriptionDTO currentCodeDescriptionDTO;
-    HistoryAndStatisticsDTO historyAndStatisticsDTO;
+    private CurrentCodeDescriptionDTO currentCodeDescriptionDTO;
+    private HistoryAndStatisticsDTO historyAndStatisticsDTO;
     public MachineHistoryAndStatisticsDTO(CurrentCodeDescriptionDTO currentCodeDescriptionDTO,HistoryAndStatisticsDTO historyAndStatisticsDTO){
         this.historyAndStatisticsDTO=historyAndStatisticsDTO;
         this.currentCodeDescriptionDTO=currentCodeDescriptionDTO;

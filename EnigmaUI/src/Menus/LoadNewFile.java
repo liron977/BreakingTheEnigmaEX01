@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class LoadNewFile implements MenuManager {
 
-    public Mediator mediator;
+    private Mediator mediator;
     public LoadNewFile(Mediator mediator){
         this.mediator = mediator;
     }
@@ -39,6 +39,8 @@ public class LoadNewFile implements MenuManager {
                         }
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
+                        loadStart = scanner.nextLine();
+
                     }
                 }
             }
