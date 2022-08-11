@@ -1,11 +1,12 @@
 package Engine.TheEnigmaEngine;
 
+import java.io.Serializable;
 import java.util.*;
 
 import Engine.TheEnigmaEngine.*;
 import schemaGenerated.*;
 
-public class SchemaGenerated /*implements Serializable*/ {
+public class SchemaGenerated implements Serializable {
     private CTEEnigma enigmaDescriptor;
     private String keyboardInput;
     private List<String> romanNumeralsList = new ArrayList<>();

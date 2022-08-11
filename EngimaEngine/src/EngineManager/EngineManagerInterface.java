@@ -3,6 +3,7 @@ package EngineManager;
 import Engine.TheEnigmaEngine.TheMachineEngine;
 import MachineDTO.*;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface EngineManagerInterface {
@@ -30,4 +31,6 @@ public interface EngineManagerInterface {
     public ListOfExceptionsDTO getAllErrorsRelatedToMachineMenuValidator();
     public void updateExceptionListMenuValidator();
     public ListOfExceptionsDTO getAllErrorsRelatedToInitCodeMenuValidator();
-    }
+    public void writeToFile(String FileName) throws IOException;
+ public void readFromFile(String FileName) throws IOException, ClassNotFoundException;
+}

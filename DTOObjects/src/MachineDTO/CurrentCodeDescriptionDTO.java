@@ -1,11 +1,12 @@
 package MachineDTO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class CurrentCodeDescriptionDTO {
+public class CurrentCodeDescriptionDTO implements Serializable {
     private String[] usedRotorsId;
     private String chosenStartingPosition;
     private String reflectorId;

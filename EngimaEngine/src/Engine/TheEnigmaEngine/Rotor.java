@@ -2,8 +2,9 @@ package Engine.TheEnigmaEngine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-public class Rotor {
+public class Rotor  implements Serializable{
     private List<Pair> rotorStructure = new ArrayList<>();
     private String rotorId;
     //private int startingPosition;

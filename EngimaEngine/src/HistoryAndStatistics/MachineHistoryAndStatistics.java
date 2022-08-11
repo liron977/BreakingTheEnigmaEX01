@@ -2,9 +2,10 @@ package HistoryAndStatistics;
 
 import MachineDTO.CurrentCodeDescriptionDTO;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class MachineHistoryAndStatistics {
+public class MachineHistoryAndStatistics implements Serializable {
 
    private Map<CurrentCodeDescriptionDTO, List<HistoryOfProcess>> machineHistory = new HashMap<>();
 

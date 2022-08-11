@@ -1,6 +1,8 @@
 package HistoryAndStatistics;
 
-public class HistoryOfProcess {
+import java.io.Serializable;
+
+public class HistoryOfProcess  implements Serializable {
 
 
     private String userInput;

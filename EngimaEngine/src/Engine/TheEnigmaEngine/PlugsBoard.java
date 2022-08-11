@@ -5,8 +5,9 @@ import Engine.TheEnigmaEngine.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-public class PlugsBoard {
+public class PlugsBoard  implements Serializable{
  private String keybord;
  private int amountOfMaximumSwappingPairs;
  private List<Pair> pairsOfSwappingCharacter = new ArrayList<>();

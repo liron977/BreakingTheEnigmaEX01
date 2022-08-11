@@ -8,6 +8,7 @@
 
 package schemaGenerated;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -44,7 +45,7 @@ import javax.xml.bind.annotation.XmlType;
     "ctePositioning"
 })
 @XmlRootElement(name = "CTE-Rotor")
-public class CTERotor {
+public class CTERotor implements Serializable {
 
     @XmlElement(name = "CTE-Positioning", required = true)
     protected List<CTEPositioning> ctePositioning;

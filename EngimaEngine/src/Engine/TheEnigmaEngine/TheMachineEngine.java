@@ -1,9 +1,10 @@
 package Engine.TheEnigmaEngine;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
-public class TheMachineEngine {
+public class TheMachineEngine implements Serializable {
     private RotorsSet rotorsSet;
     private RotorsSet usedRotors;
     private Reflector reflector;

@@ -2,10 +2,11 @@ package Engine.validator;
 
 import Engine.TheEnigmaEngine.TheMachineEngine;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuValidator implements Validator {
+public class MenuValidator implements Validator, Serializable {
 
     private List<Exception> exceptionList;
     private Boolean isMachineDefined;

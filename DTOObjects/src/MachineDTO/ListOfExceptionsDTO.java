@@ -1,8 +1,9 @@
 package MachineDTO;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ListOfExceptionsDTO {
+public class ListOfExceptionsDTO implements Serializable {
 
     private List<Exception> errors;
 

@@ -17,18 +17,18 @@ import MachineDTO.*;
 import static java.lang.Character.toUpperCase;
 
 
-public class EngineManager implements EngineManagerInterface {
+public class EngineManager implements EngineManagerInterface,Serializable {
 
     private ListOfExceptionsDTO listOfExceptionsDTO;
     private CurrentCodeDescriptionDTO currentCodeDescriptionDTO;
     private TheMachineEngine theMachineEngine;
     private MachineHistoryAndStatistics machineHistoryAndStatistics=new MachineHistoryAndStatistics();
     private  CTEEnigma cteEnigma;
-    SchemaGenerated schemaGenerated;
+    private SchemaGenerated schemaGenerated;
     boolean isCodeConfigurationSet=false;
     private int amountOfProcessedMessages=0;
-    private final String JAXB_XML_GAME_PACKAGE_NAME = "schemaGenerated";
     private MenuValidator menuValidator=new MenuValidator();
+    private final String JAXB_XML_GAME_PACKAGE_NAME = "schemaGenerated";
 
     @Override
     public ListOfExceptionsDTO load(String filePath) throws Exception {
@@ -378,6 +378,69 @@ public class EngineManager implements EngineManagerInterface {
     }
     public void updateExceptionListMenuValidator(){
         menuValidator.updateExceptionList();
+    }
+
+    public void writeToFile(String FileName) throws IOException {
+        ArrayList<EngineManager> meds = new ArrayList();
+        meds.add(this);
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FileName));
+        Throwable var4 = null;
+
+        try {
+            out.writeObject(meds);
+            out.flush();
+        } catch (Throwable var13) {
+            var4 = var13;
+            throw var13;
+        } finally {
+            if (out != null) {
+                if (var4 != null) {
+                    try {
+                        out.close();
+                    } catch (Throwable var12) {
+                        var4.addSuppressed(var12);
+                    }
+                } else {
+                    out.close();
+                }
+            }
+
+        }
+
+    }
+
+    public void readFromFile(String FileName) throws IOException, ClassNotFoundException {
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream(FileName));
+        Throwable var3 = null;
+        try {
+            ArrayList<EngineManager> meds = (ArrayList)in.readObject();
+            this.listOfExceptionsDTO = ((EngineManager)meds.get(0)).listOfExceptionsDTO;
+            this.currentCodeDescriptionDTO = ((EngineManager)meds.get(0)).currentCodeDescriptionDTO;
+            this.theMachineEngine = ((EngineManager)meds.get(0)).theMachineEngine;
+            this.machineHistoryAndStatistics = ((EngineManager)meds.get(0)).machineHistoryAndStatistics;
+            this.cteEnigma = ((EngineManager)meds.get(0)).cteEnigma;
+            this.schemaGenerated = ((EngineManager)meds.get(0)).schemaGenerated;
+            this.isCodeConfigurationSet = ((EngineManager)meds.get(0)).isCodeConfigurationSet;
+            this.amountOfProcessedMessages = ((EngineManager)meds.get(0)).amountOfProcessedMessages;
+            this.menuValidator = ((EngineManager)meds.get(0)).menuValidator;
+        } catch (Throwable var12) {
+            var3 = var12;
+            throw var12;
+        } finally {
+            if (in != null) {
+                if (var3 != null) {
+                    try {
+                        in.close();
+                    } catch (Throwable var11) {
+                        var3.addSuppressed(var11);
+                    }
+                } else {
+                    in.close();
+                }
+            }
+
+        }
+
     }
 
 }

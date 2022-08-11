@@ -8,7 +8,7 @@ public class Menu {
 
     private final int FIRST_OPTION = 1;
     private final int EXIT_OPTION = 8;
-    private final int LAST_OPTION = 7;
+    private final int LAST_OPTION = 10;
    private Mediator mediator;
 
     public Menu(Mediator mediator) {
@@ -26,6 +26,8 @@ public class Menu {
         System.out.println("6. Resetting the current code");
         System.out.println("7. History and statistics");
         System.out.println("8. Exit");
+        System.out.println("9. Save the current machine state to file");
+        System.out.println("10. Read the current machine state from file");
         System.out.println("-------------------------------------------------");
     }
 
@@ -80,6 +82,16 @@ public class Menu {
             historyAndStatistics.execution();
             break;
 
-        }
+        case 9:
+        MenuManager writeCurrentStateToFile=new WriteCurrentStateToFile(mediator);
+            writeCurrentStateToFile.execution();
+        break;
+
+        case 10:
+    MenuManager readCurrentStateFromFile=new ReadCurrentStateFromFile(mediator);
+            readCurrentStateFromFile.execution();
+            break;
+
+}
     }
 }

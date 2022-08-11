@@ -6,7 +6,10 @@ import EngineManager.EngineManagerInterface;
 import MachineDTO.MachineHistoryAndStatisticsDTO;
 import MachineDTO.TheMachineSettingsDTO;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 
 public class Mediator {
 
@@ -263,6 +266,44 @@ public Mediator(EngineManagerInterface engineManager){
             printListOfException(listOfExceptionsDTO.getListOfException());
             return false;
         }
+    }
+    public void writeCurrentStateToFile(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter the full path name of the file without the suffix\nEnter 0 for return to the main menu");
+        String fileName = scanner.nextLine().trim();
+        if (fileName.equals("0")) {
+            return;
+        }
+        fileName += ".txt";
+        try {
+            engineManager.writeToFile(fileName);
+        } catch (IOException ignore) {
+            System.out.println("Error! can not write to the file\n");
+            return;
+        }
+        System.out.println("Saved successfully!\n");
+    }
+    public void readCurrentStateFromFile() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter the full path name of the file without the suffix\n" +
+                "Enter 0 for return to the main menu");
+        String fileName = scanner.nextLine().trim();
+        if (fileName.equals("0")) {
+            return;
+        }
+        fileName += ".txt";
+        File f = new File(fileName);
+        if (!f.exists()) {
+            System.out.println("\nthe file full path name does not exist!\nPlease try again\n");
+            return;
+        }
+        try {
+            engineManager.readFromFile(fileName);
+        } catch (IOException | ClassNotFoundException ignore) {
+            System.out.println("Error! can not load from a file\n");
+            return;
+        }
+        System.out.println("Load successfully!\n");
     }
 
 }

@@ -1,6 +1,6 @@
 package Engine.TheEnigmaEngine;
-
-public class Pair {
+import java.io.Serializable;
+public class Pair  implements Serializable {
     private String entry;
     private String exit;
 

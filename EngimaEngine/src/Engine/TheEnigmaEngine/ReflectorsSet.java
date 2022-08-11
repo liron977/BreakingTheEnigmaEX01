@@ -4,8 +4,9 @@ import Engine.TheEnigmaEngine.Reflector;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-public class ReflectorsSet {
+public class ReflectorsSet implements Serializable {
 
 
     private List<Reflector> reflectors =new ArrayList<>();

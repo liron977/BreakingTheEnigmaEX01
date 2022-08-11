@@ -1,6 +1,8 @@
 package Engine.TheEnigmaEngine;
 
-public class Keyboard {
+import java.io.Serializable;
+
+public class Keyboard  implements Serializable {
     private String keyboard;
    private int keyboardAmount;
     public Keyboard (String keyboard){

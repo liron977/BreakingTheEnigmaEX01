@@ -3,8 +3,9 @@ package Engine.TheEnigmaEngine;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.io.Serializable;
 
-public class RotorsSet {
+public class RotorsSet implements Serializable {
    private List<Rotor> rotors =new ArrayList<>();
     private int rotorsAmount;
     public RotorsSet(List<Rotor> rotors){
