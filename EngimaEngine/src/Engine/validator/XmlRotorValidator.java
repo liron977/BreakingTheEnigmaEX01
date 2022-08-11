@@ -40,6 +40,9 @@ public class XmlRotorValidator implements Validator{
         if(rotorsAmountFromFile<2){
             errors.add(new Exception("The rotors amount is not valid,you should have at least 2 rotors in the field rotors-count"));
         }
+        if(rotorsAmountFromFile>99){
+            errors.add(new Exception("The rotors amount is not valid,you should have maximum 99 rotors in the field rotors-count"));
+        }
     }
     private int countRotorsFromFile(){
         List<CTERotor> cteRotors=enigmaDescriptor.getCTEMachine().getCTERotors().getCTERotor();
@@ -53,7 +56,7 @@ public class XmlRotorValidator implements Validator{
         int rotorsAmountFromFile=enigmaDescriptor.getCTEMachine().getRotorsCount();
         int countedRotors=countRotorsFromFile();
         if(rotorsAmountFromFile>countedRotors){
-            errors.add(new Exception("The amount of rotors to use that you entered in the field :rotors-count is [" +rotorsAmountFromFile +"] and its more than the amount of rotors in the file :"+countedRotors));
+            errors.add(new Exception("The amount of rotors to use that you entered in the field rotors-count is [" +rotorsAmountFromFile +"] and its more than the amount of rotors in the file :"+countedRotors));
         }
     }
     private void isEachRotorHasUniqId(){

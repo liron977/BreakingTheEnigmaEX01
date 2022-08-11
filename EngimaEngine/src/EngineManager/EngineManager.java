@@ -31,13 +31,7 @@ public class EngineManager implements EngineManagerInterface {
     private MenuValidator menuValidator=new MenuValidator();
 
     @Override
-    public ListOfExceptionsDTO load(String filePath) throws Exception
-    {
-        menuValidator.reset();
-        isCodeConfigurationSet=false;
-        amountOfProcessedMessages=0;
-        machineHistoryAndStatistics=new MachineHistoryAndStatistics();
-
+    public ListOfExceptionsDTO load(String filePath) throws Exception {
         CTEEnigma cteEnigma =readFromXmlFile(filePath);
         Validator xmlReflectorValidator =new XmlReflectorValidator(cteEnigma);
         Validator xmlRotorValidator=new XmlRotorValidator((cteEnigma));
@@ -49,7 +43,12 @@ public class EngineManager implements EngineManagerInterface {
         ValidatorRunner validatorRunner=new ValidatorRunner(validators);
         List<Exception> exceptions=validatorRunner.run();
         if(exceptions.size() == 0){
+            menuValidator.reset();
+            isCodeConfigurationSet=false;
+            amountOfProcessedMessages=0;
+            machineHistoryAndStatistics=new MachineHistoryAndStatistics();
             menuValidator.setTrueValueToIsMachineDefined();
+            theMachineEngine=buildTheMachineEngine();
        }
           listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
           return listOfExceptionsDTO;
