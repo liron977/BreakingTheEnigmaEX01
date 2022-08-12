@@ -1,11 +1,11 @@
 package MachineDTO;
 
 public class MachineHistoryAndStatisticsDTO {
-    private CurrentCodeDescriptionDTO currentCodeDescriptionDTO;
+    private CodeDescriptionDTO codeDescriptionDTO;
     private HistoryAndStatisticsDTO historyAndStatisticsDTO;
-    public MachineHistoryAndStatisticsDTO(CurrentCodeDescriptionDTO currentCodeDescriptionDTO,HistoryAndStatisticsDTO historyAndStatisticsDTO){
+    public MachineHistoryAndStatisticsDTO(CodeDescriptionDTO codeDescriptionDTO, HistoryAndStatisticsDTO historyAndStatisticsDTO){
         this.historyAndStatisticsDTO=historyAndStatisticsDTO;
-        this.currentCodeDescriptionDTO=currentCodeDescriptionDTO;
+        this.codeDescriptionDTO = codeDescriptionDTO;
 
     }
 
@@ -13,7 +13,7 @@ public class MachineHistoryAndStatisticsDTO {
         return historyAndStatisticsDTO;
     }
 
-    public CurrentCodeDescriptionDTO getCurrentCodeDescriptionDTO() {
-        return currentCodeDescriptionDTO;
+    public CodeDescriptionDTO getCurrentCodeDescriptionDTO() {
+        return codeDescriptionDTO;
     }
 }

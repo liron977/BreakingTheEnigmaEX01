@@ -20,7 +20,7 @@ import static java.lang.Character.toUpperCase;
 public class EngineManager implements EngineManagerInterface,Serializable {
 
     private ListOfExceptionsDTO listOfExceptionsDTO;
-    private CurrentCodeDescriptionDTO currentCodeDescriptionDTO;
+    private CodeDescriptionDTO codeDescriptionDTO;
     private TheMachineEngine theMachineEngine;
     private MachineHistoryAndStatistics machineHistoryAndStatistics=new MachineHistoryAndStatistics();
     private  CTEEnigma cteEnigma;
@@ -80,7 +80,7 @@ public class EngineManager implements EngineManagerInterface,Serializable {
         menuValidator.setTrueValueToUpdateIsCodeDefined();
         reverseUsedRotors(theMachineEngine);
         createCurrentCodeDescriptionDTO();
-        machineHistoryAndStatistics.addNewMachineSettings(currentCodeDescriptionDTO);
+        machineHistoryAndStatistics.addNewMachineSettings(codeDescriptionDTO);
     }
     private void reverseUsedRotors(TheMachineEngine theMachineEngine){
         theMachineEngine.reverseUsedRotors();
@@ -169,7 +169,7 @@ public class EngineManager implements EngineManagerInterface,Serializable {
     public int getRotorsAmount(){
         return cteEnigma.getCTEMachine().getRotorsCount();
     }
-    public CurrentCodeDescriptionDTO initCodeAutomatically(){
+    public CodeDescriptionDTO initCodeAutomatically(){
         theMachineEngine = buildTheMachineEngine();
         chooseAutomaticallyRotors(theMachineEngine);
         initRotorsPositionAutomatically(theMachineEngine);
@@ -179,8 +179,8 @@ public class EngineManager implements EngineManagerInterface,Serializable {
         menuValidator.setTrueValueToUpdateIsCodeDefined();
         reverseUsedRotors(theMachineEngine);
         createCurrentCodeDescriptionDTO();
-        machineHistoryAndStatistics.addNewMachineSettings(currentCodeDescriptionDTO);
-        return currentCodeDescriptionDTO;
+        machineHistoryAndStatistics.addNewMachineSettings(codeDescriptionDTO);
+        return codeDescriptionDTO;
 
 
     }
@@ -308,7 +308,8 @@ public class EngineManager implements EngineManagerInterface,Serializable {
         long end = System.nanoTime();
         amountOfProcessedMessages++;
         ConvertedStringDTO convertedStringDTO=new ConvertedStringDTO(convertedString);
-        machineHistoryAndStatistics.addNewProcess(currentCodeDescriptionDTO,new HistoryOfProcess(userInputString,convertedString,end-begin));
+        createCurrentCodeDescriptionDTO();
+        machineHistoryAndStatistics.addNewProcess(codeDescriptionDTO,new HistoryOfProcess(userInputString,convertedString,end-begin));
 
         return convertedStringDTO;
 
@@ -317,8 +318,8 @@ public class EngineManager implements EngineManagerInterface,Serializable {
     }
     public List<MachineHistoryAndStatisticsDTO> getHistoryAndStatisticsDTO() {
         List<MachineHistoryAndStatisticsDTO> listOfMachineHistoryAndStatisticsDTO=new ArrayList<>();
-        Map<CurrentCodeDescriptionDTO, List<HistoryOfProcess>> machineHistory= machineHistoryAndStatistics.getMachineHistory();
-         for (Map.Entry<CurrentCodeDescriptionDTO,List<HistoryOfProcess>> entry : machineHistory.entrySet()) {
+        Map<CodeDescriptionDTO, List<HistoryOfProcess>> machineHistory= machineHistoryAndStatistics.getMachineHistory();
+         for (Map.Entry<CodeDescriptionDTO,List<HistoryOfProcess>> entry : machineHistory.entrySet()) {
              String[] userInput=new String[entry.getValue().size()];
              String[] convertedString=new String[entry.getValue().size()];;
              String[] timeToProcess=new String[entry.getValue().size()];;
@@ -359,24 +360,26 @@ public class EngineManager implements EngineManagerInterface,Serializable {
         }
         int amountOfUsedRotors=theMachineEngine.getAmountOfUsedRotors();
         int maxAmountOfRotors=theMachineEngine.getMaxAmountOfRotors();
-        List<String> notchPosition=theMachineEngine.getListOfNotch();
-        List<String> originalNotchPosition=theMachineEngine.getOriginalNotchPositionList();
+        /*List<String> notchPosition=theMachineEngine.getListOfNotch();
+        List<String> originalNotchPosition=theMachineEngine.getOriginalNotchPositionList();*/
        int amountOfReflectors= theMachineEngine.getReflectorsAmount();
-
+       createCurrentCodeDescriptionDTO();
       //createCurrentCodeDescriptionDTO();
-        TheMachineSettingsDTO theMachineSettingsDTO=new TheMachineSettingsDTO(amountOfUsedRotors,maxAmountOfRotors,notchPosition,originalNotchPosition,amountOfReflectors,amountOfProcessedMessages,currentCodeDescriptionDTO);
+        TheMachineSettingsDTO theMachineSettingsDTO=new TheMachineSettingsDTO(amountOfUsedRotors,maxAmountOfRotors,amountOfReflectors,amountOfProcessedMessages, codeDescriptionDTO);
         return theMachineSettingsDTO;
     }
     public  void  createCurrentCodeDescriptionDTO(){
-        CurrentCodeDescriptionDTO currentCodeDescriptionDTO=null;
+        CodeDescriptionDTO codeDescriptionDTO =null;
         if(isCodeConfigurationSet) {
             String[] usedRotorsId = theMachineEngine.getArrayOfRotorsId();
             String chosenStartingPosition = theMachineEngine.getUsedRotors().getRotorsStartingPositions();
             String reflectorId = theMachineEngine.getReflector().getReflectorId();
+            List<String> notchPosition=theMachineEngine.getListOfNotch();
+            List<String> originalNotchPosition=theMachineEngine.getOriginalNotchPositionList();
             List<String> pairsOfSwappingCharacter = theMachineEngine.getStringPairsOfSwappingCharacter();
-          currentCodeDescriptionDTO = new CurrentCodeDescriptionDTO(pairsOfSwappingCharacter, reflectorId, chosenStartingPosition, usedRotorsId);
+          codeDescriptionDTO = new CodeDescriptionDTO(pairsOfSwappingCharacter, reflectorId, chosenStartingPosition, usedRotorsId,originalNotchPosition,notchPosition);
         }
-        this.currentCodeDescriptionDTO=currentCodeDescriptionDTO;
+        this.codeDescriptionDTO = codeDescriptionDTO;
 
 
     }
@@ -419,7 +422,7 @@ public class EngineManager implements EngineManagerInterface,Serializable {
         try {
             ArrayList<EngineManager> meds = (ArrayList)in.readObject();
             this.listOfExceptionsDTO = ((EngineManager)meds.get(0)).listOfExceptionsDTO;
-            this.currentCodeDescriptionDTO = ((EngineManager)meds.get(0)).currentCodeDescriptionDTO;
+            this.codeDescriptionDTO = ((EngineManager)meds.get(0)).codeDescriptionDTO;
             this.theMachineEngine = ((EngineManager)meds.get(0)).theMachineEngine;
             this.machineHistoryAndStatistics = ((EngineManager)meds.get(0)).machineHistoryAndStatistics;
             this.cteEnigma = ((EngineManager)meds.get(0)).cteEnigma;

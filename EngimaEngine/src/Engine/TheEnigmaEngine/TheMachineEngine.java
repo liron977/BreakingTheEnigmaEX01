@@ -40,10 +40,10 @@ public class TheMachineEngine implements Serializable {
        return null;
  }
     public List<String> getListOfNotch(){
-       return rotorsSet.getNotchList();
+       return usedRotors.getNotchList();
     }
     public List<String> getOriginalNotchPositionList(){
-        return rotorsSet.getOriginalNotchPositionList();
+        return usedRotors.getOriginalNotchPositionList();
     }
     public String[] getArrayOfRotorsId(){
         return usedRotors.getAllRotorsId();

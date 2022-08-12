@@ -13,7 +13,7 @@ public class DisplayMachineConfiguration implements MenuManager {
     @Override
     public void execution() {
 
-        String output = mediator.getCurrentCodeConfigurations();
+        String output = mediator.getMachineConfiguration();
         if (output != null) {
             System.out.println(output);
         }

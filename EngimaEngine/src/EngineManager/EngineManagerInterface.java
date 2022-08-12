@@ -15,7 +15,7 @@ public interface EngineManagerInterface {
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyStartingPosition(String str);
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyReflectorId(String str);
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyPlagBoard(String str);
-    public CurrentCodeDescriptionDTO initCodeAutomatically();
+    public CodeDescriptionDTO initCodeAutomatically();
     public TheMachineSettingsDTO getTheMachineSettingsDTO();
     public boolean isChooseToExit(String userInput);
    public ListOfExceptionsDTO getAllErrorsConvertingInputProcess(String str);
@@ -34,4 +34,5 @@ public interface EngineManagerInterface {
     public void writeToFile(String FileName) throws IOException;
  public void readFromFile(String FileName) throws IOException, ClassNotFoundException;
  public List<String> getNotchList();
+ public  void  createCurrentCodeDescriptionDTO();
 }

@@ -1,30 +1,27 @@
 package MachineDTO;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TheMachineSettingsDTO {
     private int amountOfUsedRotors;
     private int maxAmountOfRotors;
-    private List<String> notchPosition=new ArrayList<>();
-    private  List<String> originalNotchPosition=new ArrayList<>();
+   /* private List<String> notchPosition=new ArrayList<>();
+    private  List<String> originalNotchPosition=new ArrayList<>();*/
     private int amountOfReflectors;
     private int amountOfProcessedMessages;
 
-    private CurrentCodeDescriptionDTO currentCodeDescriptionDTO;
+    private CodeDescriptionDTO codeDescriptionDTO;
 
-     public TheMachineSettingsDTO(int amountOfUsedRotors,int maxAmountOfRotors, List<String> notchPosition, List<String> originalNotchPosition,int amountOfReflectors,int amountOfProcessedMessages,CurrentCodeDescriptionDTO currentCodeDescriptionDTO){
+     public TheMachineSettingsDTO(int amountOfUsedRotors, int maxAmountOfRotors, int amountOfReflectors, int amountOfProcessedMessages, CodeDescriptionDTO codeDescriptionDTO){
 this.amountOfProcessedMessages=amountOfProcessedMessages;
 this.amountOfReflectors=amountOfReflectors;
-this.notchPosition=notchPosition;
-this.originalNotchPosition=originalNotchPosition;
+//this.notchPosition=notchPosition;
+//this.originalNotchPosition=originalNotchPosition;
 this.maxAmountOfRotors=maxAmountOfRotors;
-this.currentCodeDescriptionDTO=currentCodeDescriptionDTO;
+this.codeDescriptionDTO = codeDescriptionDTO;
 this.amountOfUsedRotors=amountOfUsedRotors;
      }
 
-    public CurrentCodeDescriptionDTO getCurrentCodeDescriptionDTO() {
-        return currentCodeDescriptionDTO;
+    public CodeDescriptionDTO getCurrentCodeDescriptionDTO() {
+        return codeDescriptionDTO;
     }
 
     public int getAmountOfProcessedMessages() {
@@ -43,11 +40,11 @@ this.amountOfUsedRotors=amountOfUsedRotors;
         return maxAmountOfRotors;
     }
 
-    public List<String> getNotchPosition() {
-        return notchPosition;
-    }
-
-    public List<String> getOriginalNotchPosition(){return originalNotchPosition;}
+//    public List<String> getNotchPosition() {
+//        return notchPosition;
+//    }
+//
+//    public List<String> getOriginalNotchPosition(){return originalNotchPosition;}
 
 
 }

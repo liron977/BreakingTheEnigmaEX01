@@ -1,6 +1,6 @@
 package Console;
 
-import MachineDTO.CurrentCodeDescriptionDTO;
+import MachineDTO.CodeDescriptionDTO;
 import MachineDTO.ListOfExceptionsDTO;
 import EngineManager.EngineManagerInterface;
 import MachineDTO.MachineHistoryAndStatisticsDTO;
@@ -8,8 +8,9 @@ import MachineDTO.TheMachineSettingsDTO;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 
 public class Mediator {
 
@@ -121,10 +122,10 @@ public Mediator(EngineManagerInterface engineManager){
         }
     }*/
     public void initCodeConfigurationAutomatically(){
-       CurrentCodeDescriptionDTO currentCodeDescriptionDTO =engineManager.initCodeAutomatically();
+       CodeDescriptionDTO codeDescriptionDTO =engineManager.initCodeAutomatically();
        List<String> notchList=engineManager.getNotchList();
         System.out.println("Selection of initial code configuration (automatically) performed successfully");
-        System.out.println("The current code configuration is: " +getCurrentCodeDescription(currentCodeDescriptionDTO,notchList));
+        System.out.println("The current code configuration is: " +getCurrentCodeDescription(codeDescriptionDTO,notchList));
     }
     public void  initStartingPositionConfigurationManually(String userInput){
         engineManager.chooseManuallyStartingPosition(userInput);
@@ -160,35 +161,35 @@ public Mediator(EngineManagerInterface engineManager){
     }
 
     //The second way
-    public String getCurrentCodeConfigurations(){
+    public String getMachineConfiguration(){
+        engineManager.createCurrentCodeDescriptionDTO();
         if(isMachineWasDefined()) {
-            int numberOfConfigurations = 1;
             TheMachineSettingsDTO theMachineSettingsDTO = engineManager.getTheMachineSettingsDTO();
-            String currentCodeConfigurations = "Current Code Configurations:\n";
-            currentCodeConfigurations = currentCodeConfigurations + "1.Amount of wheels in use out of possible amount of wheels: " + theMachineSettingsDTO.getAmountOfUsedRotors() + "\\" + theMachineSettingsDTO.getMaxAmountOfRotors() + "\n";
-            currentCodeConfigurations = currentCodeConfigurations + "2.The amount of reflectors is: " + theMachineSettingsDTO.getAmountOfReflectors() + "\n";
-            currentCodeConfigurations = currentCodeConfigurations + "3.The current amount of proceeded messages: " + theMachineSettingsDTO.getAmountOfProcessedMessages() + "\n";
+            String machineConfiguration = "Current machine Configurations:\n";
+            machineConfiguration = machineConfiguration + "1.Amount of wheels in use out of possible amount of wheels: " + theMachineSettingsDTO.getAmountOfUsedRotors() + "\\" + theMachineSettingsDTO.getMaxAmountOfRotors() + "\n";
+            machineConfiguration = machineConfiguration + "2.The amount of reflectors is: " + theMachineSettingsDTO.getAmountOfReflectors() + "\n";
+            machineConfiguration = machineConfiguration + "3.The current amount of proceeded messages: " + theMachineSettingsDTO.getAmountOfProcessedMessages() + "\n";
             if (engineManager.getIsCodeConfigurationSet()) {
-                currentCodeConfigurations = currentCodeConfigurations + "4.The original code description: \n" + getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO(),theMachineSettingsDTO.getOriginalNotchPosition()) + "\n";
-                 currentCodeConfigurations = currentCodeConfigurations + "5.The current notch positions for each rotor: \n" + getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO(),theMachineSettingsDTO.getNotchPosition()) + "\n";
+                machineConfiguration = machineConfiguration + "4.The original code description: \n" + getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO(),theMachineSettingsDTO.getCurrentCodeDescriptionDTO().getOriginalNotchPosition()) + "\n";
+                machineConfiguration = machineConfiguration + "5.The current notch positions for each rotor: \n" + getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO(),theMachineSettingsDTO.getCurrentCodeDescriptionDTO().getNotchPosition()) + "\n";
             }
-            return currentCodeConfigurations;
+            return machineConfiguration;
         }
         return null;
     }
 
 
-    public String getCurrentCodeDescription(CurrentCodeDescriptionDTO currentCodeDescriptionDTO,List<String> notchPosition){
+    public String getCurrentCodeDescription(CodeDescriptionDTO codeDescriptionDTO, List<String> notchPosition){
         String currentCodeDescription="";
-        currentCodeDescription=currentCodeDescription+"<"+getUsedRotorsId(currentCodeDescriptionDTO.getUsedRotorsId(),notchPosition)+">";
+        currentCodeDescription=currentCodeDescription+"<"+getRotorsInfo(codeDescriptionDTO.getUsedRotorsId(),notchPosition)+">";
         StringBuilder startingPositionRevers = new StringBuilder();
-        startingPositionRevers.append(currentCodeDescriptionDTO.getChosenStartingPosition());
+        startingPositionRevers.append(codeDescriptionDTO.getChosenStartingPosition());
         startingPositionRevers.reverse();
         currentCodeDescription=currentCodeDescription+"<"+startingPositionRevers+">";
-        currentCodeDescription=currentCodeDescription+"<"+currentCodeDescriptionDTO.getReflectorId()+">";
-        List<String> pairsOfSwappingCharacter =currentCodeDescriptionDTO.getPairsOfSwappingCharacter();
+        currentCodeDescription=currentCodeDescription+"<"+ codeDescriptionDTO.getReflectorId()+">";
+        List<String> pairsOfSwappingCharacter = codeDescriptionDTO.getPairsOfSwappingCharacter();
         if((pairsOfSwappingCharacter!=null)&&(pairsOfSwappingCharacter.size()!=0)) {
-            currentCodeDescription=currentCodeDescription+"<" + getPairsOfSwappingCharacter(currentCodeDescriptionDTO.getPairsOfSwappingCharacter()) + ">";
+            currentCodeDescription=currentCodeDescription+"<" + getPairsOfSwappingCharacter(codeDescriptionDTO.getPairsOfSwappingCharacter()) + ">";
         }
         return currentCodeDescription;
 
@@ -199,7 +200,7 @@ public Mediator(EngineManagerInterface engineManager){
         for (MachineHistoryAndStatisticsDTO machineHistory:listOfMachineHistory) {
             if(machineHistory.getCurrentCodeDescriptionDTO()!=null) {
                 ///To remove from NOTE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                //System.out.printf("The strings that proceeded for "+getCurrentCodeDescription(machineHistory.getCurrentCodeDescriptionDTO()) + " are :\n");
+                System.out.printf("The strings that proceeded for "+getCurrentCodeDescription(machineHistory.getCurrentCodeDescriptionDTO(),machineHistory.getCurrentCodeDescriptionDTO().getNotchPosition()) + " are :\n");
                 String[] userInput = machineHistory.getHistoryAndStatisticsDTO().getUserInput();
                 String[] convertedStrings = machineHistory.getHistoryAndStatisticsDTO().getConvertedString();
                 String[] timeToProcess = machineHistory.getHistoryAndStatisticsDTO().getTimeToProcess();
@@ -226,19 +227,31 @@ public Mediator(EngineManagerInterface engineManager){
 
     }
 
-    public String getUsedRotorsId(String[] usedRotorsId,List<String> notchPosition) {
+    public List<String> getUsedRotorsId(String[] usedRotorsId,List<String> notchPosition) {
         String usedRotors="";
+        List<String> rotorsInfo=new ArrayList<>();
         int index=0;
         for (String RotorId:usedRotorsId) {
 
-            usedRotors=usedRotors+RotorId+"("+notchPosition.get(index)+")"+",";
+            usedRotors=RotorId+"("+notchPosition.get(index)+")";
+            rotorsInfo.add(usedRotors);
+            index++;
         }
-        usedRotors=usedRotors.substring(0,usedRotors.length()-1);
 
-        StringBuffer userReversedRotors = new StringBuffer(usedRotors);
-        // To reverse the string
-        userReversedRotors.reverse();
-        return userReversedRotors.toString();
+        Collections.reverse(rotorsInfo);
+        return rotorsInfo;
+
+    }
+    public String getRotorsInfo(String[] usedRotorsId,List<String> notchPosition){
+        List<String> rotorsInfo= getUsedRotorsId(usedRotorsId,notchPosition);
+        String rotor="";
+        for (String rotorInfo:rotorsInfo) {
+
+                rotor=rotor+rotorInfo+",";
+
+        }
+        rotor=rotor.substring(0,rotor.length()-1);
+        return rotor;
 
     }
 
