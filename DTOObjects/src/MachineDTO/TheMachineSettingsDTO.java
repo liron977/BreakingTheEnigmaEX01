@@ -7,15 +7,17 @@ public class TheMachineSettingsDTO {
     private int amountOfUsedRotors;
     private int maxAmountOfRotors;
     private List<String> notchPosition=new ArrayList<>();
+    private  List<String> originalNotchPosition=new ArrayList<>();
     private int amountOfReflectors;
     private int amountOfProcessedMessages;
 
     private CurrentCodeDescriptionDTO currentCodeDescriptionDTO;
 
-     public TheMachineSettingsDTO(int amountOfUsedRotors,int maxAmountOfRotors, List<String> notchPosition,int amountOfReflectors,int amountOfProcessedMessages,CurrentCodeDescriptionDTO currentCodeDescriptionDTO){
+     public TheMachineSettingsDTO(int amountOfUsedRotors,int maxAmountOfRotors, List<String> notchPosition, List<String> originalNotchPosition,int amountOfReflectors,int amountOfProcessedMessages,CurrentCodeDescriptionDTO currentCodeDescriptionDTO){
 this.amountOfProcessedMessages=amountOfProcessedMessages;
 this.amountOfReflectors=amountOfReflectors;
 this.notchPosition=notchPosition;
+this.originalNotchPosition=originalNotchPosition;
 this.maxAmountOfRotors=maxAmountOfRotors;
 this.currentCodeDescriptionDTO=currentCodeDescriptionDTO;
 this.amountOfUsedRotors=amountOfUsedRotors;
@@ -44,6 +46,8 @@ this.amountOfUsedRotors=amountOfUsedRotors;
     public List<String> getNotchPosition() {
         return notchPosition;
     }
+
+    public List<String> getOriginalNotchPosition(){return originalNotchPosition;}
 
 
 }

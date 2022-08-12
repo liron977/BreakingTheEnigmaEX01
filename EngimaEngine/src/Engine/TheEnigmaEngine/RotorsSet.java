@@ -11,7 +11,6 @@ public class RotorsSet implements Serializable {
     public RotorsSet(List<Rotor> rotors){
         this.rotors=rotors;
         this.rotorsAmount=rotors.size();
-
     }
 
     public Rotor getRotorById(String rotorId){
@@ -74,6 +73,13 @@ return rotors.size();
         }
        return notchList;
     }
+    public List<String> getOriginalNotchPositionList(){
+        List<String> notchList=new ArrayList<>();
+        for (Rotor rotor:rotors) {
+            notchList.add(rotor.getRotorId()+rotor.getOriginalNotchPosition());
+        }
+        return notchList;
+    }
 
     public boolean isRotorsIdExists(String id){
         for (Rotor rotor:rotors){
@@ -89,15 +95,5 @@ return rotors.size();
 
         }
     }
- /*   @Override
-    public String toString()
-    {
-        String str="";
-        for (Engine.TheEnigmaEngine.Rotor rotor:rotors) {
-            //str+=;
-           str= str+ "New rotow:"+ rotor.getRotorStructure().toString() + "]";
-        }
-        return str;
-    }*/
 
 }

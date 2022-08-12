@@ -53,6 +53,9 @@ public class EngineManager implements EngineManagerInterface,Serializable {
           listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
           return listOfExceptionsDTO;
     }
+    public List<String> getNotchList(){
+        return theMachineEngine.getListOfNotch();
+    }
     public TheMachineEngine buildTheMachineEngine(){
          schemaGenerated=new SchemaGenerated(cteEnigma);
         TheMachineEngine theMachineEngine= new TheMachineEngine(schemaGenerated.createRotorsSet(),schemaGenerated.createReflectorsSet(),schemaGenerated.createKeyboard(),schemaGenerated.getAmountOfUsedRotors());
@@ -357,10 +360,11 @@ public class EngineManager implements EngineManagerInterface,Serializable {
         int amountOfUsedRotors=theMachineEngine.getAmountOfUsedRotors();
         int maxAmountOfRotors=theMachineEngine.getMaxAmountOfRotors();
         List<String> notchPosition=theMachineEngine.getListOfNotch();
+        List<String> originalNotchPosition=theMachineEngine.getOriginalNotchPositionList();
        int amountOfReflectors= theMachineEngine.getReflectorsAmount();
 
       //createCurrentCodeDescriptionDTO();
-        TheMachineSettingsDTO theMachineSettingsDTO=new TheMachineSettingsDTO(amountOfUsedRotors,maxAmountOfRotors,notchPosition,amountOfReflectors,amountOfProcessedMessages,currentCodeDescriptionDTO);
+        TheMachineSettingsDTO theMachineSettingsDTO=new TheMachineSettingsDTO(amountOfUsedRotors,maxAmountOfRotors,notchPosition,originalNotchPosition,amountOfReflectors,amountOfProcessedMessages,currentCodeDescriptionDTO);
         return theMachineSettingsDTO;
     }
     public  void  createCurrentCodeDescriptionDTO(){

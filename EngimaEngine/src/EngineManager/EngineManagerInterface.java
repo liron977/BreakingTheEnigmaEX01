@@ -33,4 +33,5 @@ public interface EngineManagerInterface {
     public ListOfExceptionsDTO getAllErrorsRelatedToInitCodeMenuValidator();
     public void writeToFile(String FileName) throws IOException;
  public void readFromFile(String FileName) throws IOException, ClassNotFoundException;
+ public List<String> getNotchList();
 }

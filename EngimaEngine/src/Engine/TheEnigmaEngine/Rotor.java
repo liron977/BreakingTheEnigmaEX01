@@ -10,6 +10,7 @@ public class Rotor  implements Serializable{
     //private int startingPosition;
     private String startingPosition;
     private Pair notchPair;
+    private int originalNotchPosition;
     private int entriesAmount;
 
     public Rotor(String rotorId, int entriesAmount, List<Pair> rotorStructure,int notchPosition) {
@@ -18,11 +19,15 @@ public class Rotor  implements Serializable{
         this.rotorStructure = rotorStructure;
         initRotorStructure();
         this.notchPair = this.rotorStructure.get((notchPosition) -1);
+        this.originalNotchPosition=notchPosition;
 
     }
 
     public String getStartingPosition() {
         return startingPosition;
+    }
+    public int getOriginalNotchPosition(){
+        return originalNotchPosition;
     }
 
     public Pair getNotchPair() {
