@@ -267,14 +267,7 @@ public Mediator(EngineManagerInterface engineManager){
             return false;
         }
     }
-    public void writeCurrentStateToFile(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter the full path name of the file without the suffix\nEnter 0 for return to the main menu");
-        String fileName = scanner.nextLine().trim();
-        if (fileName.equals("0")) {
-            return;
-        }
-        fileName += ".txt";
+    public void writeCurrentStateToFile(String fileName){
         try {
             engineManager.writeToFile(fileName);
         } catch (IOException ignore) {
@@ -283,15 +276,7 @@ public Mediator(EngineManagerInterface engineManager){
         }
         System.out.println("Saved successfully!\n");
     }
-    public void readCurrentStateFromFile() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter the full path name of the file without the suffix\n" +
-                "Enter 0 for return to the main menu");
-        String fileName = scanner.nextLine().trim();
-        if (fileName.equals("0")) {
-            return;
-        }
-        fileName += ".txt";
+    public void readCurrentStateFromFile(String fileName){
         File f = new File(fileName);
         if (!f.exists()) {
             System.out.println("\nthe file full path name does not exist!\nPlease try again\n");
