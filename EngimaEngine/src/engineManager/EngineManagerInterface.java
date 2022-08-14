@@ -26,6 +26,7 @@ public interface EngineManagerInterface {
     public void chooseManuallyStartingPosition(String userInput);
     public void chooseManuallyPlugBoard(String userInput);
     public void DefineIsCodeConfigurationSetValueToTrue();
+   public CodeDescriptionDTO getCodeDescriptionDTO();
     public TheMachineEngine buildTheMachineEngine();
     public ListOfExceptionsDTO getAllErrorsRelatedToUserDefinePlugBoard(String userInput);
     public ListOfExceptionsDTO getAllErrorsRelatedToMachineMenuValidator();

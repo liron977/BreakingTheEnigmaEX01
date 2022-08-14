@@ -18,7 +18,7 @@ public class Rotor  implements Serializable{
         this.rotorStructure = rotorStructure;
         initRotorStructure();
         this.notchPair = this.rotorStructure.get((notchPosition) -1);
-        this.originalNotchPosition=notchPosition;
+        //this.originalNotchPosition=notchPosition;
 
     }
 
@@ -41,6 +41,7 @@ public class Rotor  implements Serializable{
     public void setRotorStartingPosition(String startingPosition){
         this.startingPosition =startingPosition;
         initRotorStructure();
+        this.originalNotchPosition=getEntryIndexFromRotorByValue(notchPair.getEntry())+1;
 }
     public void initRotorStructure() {
         List<Pair> tmpRotorStructure = new ArrayList<>();

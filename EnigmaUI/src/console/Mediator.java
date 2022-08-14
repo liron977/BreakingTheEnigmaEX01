@@ -112,10 +112,13 @@ public Mediator(EngineManagerInterface engineManager){
     }
     public void  initPlugBoardConfigurationManually(String userInput){
         engineManager.chooseManuallyPlugBoard(userInput);
+
     }
+
     public void resetCurrentCode(){
         engineManager.resetCurrentCode();
         System.out.println("The reset code succeeded");
+        printCodeConfiguration();
     }
     public Boolean isMachineWasDefined(){
         ListOfExceptionsDTO listOfExceptionsDTO=engineManager.getAllErrorsRelatedToMachineMenuValidator();
@@ -156,7 +159,12 @@ public Mediator(EngineManagerInterface engineManager){
         return null;
     }
 
+public void printCodeConfiguration(){
+    List<String> notchList=engineManager.getNotchList();
+    engineManager.createCurrentCodeDescriptionDTO();
+    System.out.println("The current code configuration is: " +getCurrentCodeDescription(engineManager.getCodeDescriptionDTO(),notchList));
 
+}
     public String getCurrentCodeDescription(CodeDescriptionDTO codeDescriptionDTO, List<String> notchPosition){
         String currentCodeDescription="";
         currentCodeDescription=currentCodeDescription+"<"+getRotorsInfo(codeDescriptionDTO.getUsedRotorsId(),notchPosition)+">";
@@ -176,7 +184,7 @@ public Mediator(EngineManagerInterface engineManager){
        List<MachineHistoryAndStatisticsDTO> listOfMachineHistory= engineManager.getHistoryAndStatisticsDTO();
         for (MachineHistoryAndStatisticsDTO machineHistory:listOfMachineHistory) {
             if(machineHistory.getCurrentCodeDescriptionDTO()!=null) {
-                System.out.printf("The strings that proceeded for "+getCurrentCodeDescription(machineHistory.getCurrentCodeDescriptionDTO(),machineHistory.getCurrentCodeDescriptionDTO().getNotchPosition()) + " are :\n");
+                System.out.printf("The strings that proceeded for "+getCurrentCodeDescription(machineHistory.getCurrentCodeDescriptionDTO(),machineHistory.getCurrentCodeDescriptionDTO().getOriginalNotchPosition()) + " are :\n");
                 String[] userInput = machineHistory.getHistoryAndStatisticsDTO().getUserInput();
                 String[] convertedStrings = machineHistory.getHistoryAndStatisticsDTO().getConvertedString();
                 String[] timeToProcess = machineHistory.getHistoryAndStatisticsDTO().getTimeToProcess();

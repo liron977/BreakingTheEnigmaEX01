@@ -14,6 +14,7 @@ public class InitCodeConfigurationManually implements MenuManager {
     private boolean isUserWantsToExit;
     private  boolean isUserInputIsValid ;
 
+
     public InitCodeConfigurationManually(Mediator mediator) {
          scanner = new Scanner(System.in);
         this.mediator = mediator;
@@ -72,7 +73,7 @@ public class InitCodeConfigurationManually implements MenuManager {
                                     isUserInputReflectIdIsValid = true;
                                     System.out.println("Reflector id updated successfully");
                                 } else {
-                                    System.out.println("Please try again,if you want to exit please press ENTER");
+                                    System.out.println("Please try again \nIf you want to exit please press ENTER(The configuration will not be saved)");
                                     loadStart = scanner.nextLine();
                                     exitFromInitCodeManually(loadStart);
                                 }
@@ -87,8 +88,9 @@ public class InitCodeConfigurationManually implements MenuManager {
                                                 isPlugBoardIsValid = true;
                                                 mediator.initPlugBoardConfigurationManually(loadStart);
                                                 System.out.println("Plug board updated successfully");
+
                                             } else {
-                                                System.out.println("Please try again,if you want to exit please press ENTER");
+                                                System.out.println("Please try again\nIf you want to exit please press ENTER(The configuration will not be saved)");
                                                 loadStart = scanner.nextLine();
                                                 exitFromInitCodeManually(loadStart);
                                             }
@@ -98,21 +100,24 @@ public class InitCodeConfigurationManually implements MenuManager {
                                         }
                                     }
                                 }
+
+
                             }
                         } else {
-                            System.out.println("Please try again,if you want to exit please press ENTER");
+                            System.out.println("Please try again\nIf you want to exit please press ENTER(The configuration will not be saved)");
                             loadStart = scanner.nextLine();
                             exitFromInitCodeManually(loadStart);
                         }
                     }
                 } else {
-                    System.out.println("Please try again,if you want to exit please press ENTER");
+                    System.out.println("Please try again \nIf you want to exit please press ENTER(The configuration will not be saved)");
                     loadStart = scanner.nextLine();
                     exitFromInitCodeManually(loadStart);
                 }
             }
             if (!isUserWantsToExit) {
                 mediator.setIsCodeConfigurationWasdefine();
+                mediator.printCodeConfiguration();
             }
         }
     }
@@ -126,9 +131,10 @@ public class InitCodeConfigurationManually implements MenuManager {
                     return true;
                 } else {
                     return false;
+
                 }
             } else {
-                System.out.println("Please try again,if you want to exit please press ENTER");
+                System.out.println("Please try again \nIf you want to exit please press ENTER(The configuration will not be saved)");
                 userInput = scanner.nextLine();
                 exitFromInitCodeManually(userInput);
             }

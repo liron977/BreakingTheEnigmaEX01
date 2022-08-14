@@ -50,7 +50,7 @@ this.notchPosition=notchPosition;
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CodeDescriptionDTO that = (CodeDescriptionDTO) o;
-        return Arrays.equals(usedRotorsId, that.usedRotorsId) && Objects.equals(chosenStartingPosition, that.chosenStartingPosition) && Objects.equals(reflectorId, that.reflectorId) && Objects.equals(pairsOfSwappingCharacter, that.pairsOfSwappingCharacter) && Objects.equals(notchPosition, that.notchPosition) && Objects.equals(originalNotchPosition, that.originalNotchPosition);
+        return Arrays.equals(usedRotorsId, that.usedRotorsId) && Objects.equals(chosenStartingPosition, that.chosenStartingPosition) && Objects.equals(reflectorId, that.reflectorId) && Objects.equals(pairsOfSwappingCharacter, that.pairsOfSwappingCharacter)  && Objects.equals(originalNotchPosition, that.originalNotchPosition);
     }
 
     @Override

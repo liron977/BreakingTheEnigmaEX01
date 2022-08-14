@@ -165,6 +165,9 @@ public class EngineManager implements EngineManagerInterface,Serializable {
 
     }
 
+    public CodeDescriptionDTO getCodeDescriptionDTO() {
+        return codeDescriptionDTO;
+    }
 
     public int getRotorsAmount(){
         return cteEnigma.getCTEMachine().getRotorsCount();
