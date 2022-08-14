@@ -77,6 +77,12 @@ public Mediator(EngineManagerInterface engineManager){
             return false;
         }
     }
+    public void saveRotors(){
+    engineManager.chooseManuallyRotors();
+    }
+    public void saveReflector(){
+        engineManager.chooseManuallyReflect();
+    }
     public boolean isPlagBoardinInitCodeManuallyIsValid(String str){
         ListOfExceptionsDTO listOfExceptionsDTO= engineManager.getAllErrorsRelatedToChosenManuallyPlugBoard(str);
         if (listOfExceptionsDTO.getListOfException().size() == 0) {
@@ -114,7 +120,9 @@ public Mediator(EngineManagerInterface engineManager){
         engineManager.chooseManuallyPlugBoard(userInput);
 
     }
-
+public void resetPlugBoard(){
+    engineManager.resetPlugBoard();
+}
     public void resetCurrentCode(){
         engineManager.resetCurrentCode();
         System.out.println("The reset code succeeded");

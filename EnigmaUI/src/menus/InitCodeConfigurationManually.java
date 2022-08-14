@@ -13,6 +13,12 @@ public class InitCodeConfigurationManually implements MenuManager {
     private boolean isPlugBoardIsValid;
     private boolean isUserWantsToExit;
     private  boolean isUserInputIsValid ;
+    private String selectedRotors;
+    private String selectedReflector;
+    private String selectedStartingPosition;
+    private String selectedPlugBoardPairs="";
+
+
 
 
     public InitCodeConfigurationManually(Mediator mediator) {
@@ -64,7 +70,8 @@ public class InitCodeConfigurationManually implements MenuManager {
                     while (!isStartingPositionAreValid) {
                         if (mediator.isStartingPositionInitCodeManuallyIsValid(loadStart)) {
                             isStartingPositionAreValid = true;
-                            mediator.initStartingPositionConfigurationManually(loadStart);
+                            //mediator.initStartingPositionConfigurationManually(loadStart);
+                            selectedStartingPosition=loadStart;
                             System.out.println("Starting position for each rotor updated successfully");
                             printReflectorIdDescription();
                             loadStart = scanner.nextLine();
@@ -82,36 +89,47 @@ public class InitCodeConfigurationManually implements MenuManager {
                                 if (isPlayerWantsPlugBoard()) {
                                     printPlugBoardDescription();
                                     loadStart = scanner.nextLine();
+                                    selectedPlugBoardPairs= loadStart;
                                     while (!isPlugBoardIsValid) {
                                         if (!loadStart.equals("")) {
                                             if (mediator.isPlagBoardinInitCodeManuallyIsValid(loadStart) && !mediator.isChooseToExit(loadStart)) {
                                                 isPlugBoardIsValid = true;
-                                                mediator.initPlugBoardConfigurationManually(loadStart);
+                                                selectedPlugBoardPairs= loadStart;
+
                                                 System.out.println("Plug board updated successfully");
+                                                saveCodeConfiguration();
 
                                             } else {
                                                 System.out.println("Please try again\nIf you want to exit please press ENTER(The configuration will not be saved)");
                                                 loadStart = scanner.nextLine();
+                                                selectedPlugBoardPairs= loadStart;
                                                 exitFromInitCodeManually(loadStart);
                                             }
                                         } else {
                                             isPlugBoardIsValid = true;
+                                            mediator.resetPlugBoard();
                                             System.out.println("Plug board was not updated");
+                                            saveCodeConfiguration();
                                         }
                                     }
                                 }
-
+                                else {
+                                    mediator.resetPlugBoard();
+                                    saveCodeConfiguration();
+                                }
 
                             }
                         } else {
                             System.out.println("Please try again\nIf you want to exit please press ENTER(The configuration will not be saved)");
                             loadStart = scanner.nextLine();
+                            selectedPlugBoardPairs= loadStart;
                             exitFromInitCodeManually(loadStart);
                         }
                     }
                 } else {
                     System.out.println("Please try again \nIf you want to exit please press ENTER(The configuration will not be saved)");
                     loadStart = scanner.nextLine();
+                    selectedPlugBoardPairs= loadStart;
                     exitFromInitCodeManually(loadStart);
                 }
             }
@@ -121,6 +139,13 @@ public class InitCodeConfigurationManually implements MenuManager {
             }
         }
     }
+private void saveCodeConfiguration(){
+        mediator.saveRotors();
+    mediator.initStartingPositionConfigurationManually(selectedStartingPosition);
+    mediator.saveReflector();
+    mediator.initPlugBoardConfigurationManually(selectedPlugBoardPairs);
+
+}
     private boolean isPlayerWantsPlugBoard() {
         System.out.println("Do you want to define a plug board \n 1)Yes \n 2)No");
         String userInput = scanner.nextLine();

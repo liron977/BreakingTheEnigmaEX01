@@ -10,10 +10,11 @@ public interface EngineManagerInterface {
 
    public ListOfExceptionsDTO load(String filePath) throws Exception; //throws XmlException;
     public ListOfExceptionsDTO getAllErrorsRelatedToFilePath(String filePath);
-
+ public void chooseManuallyRotors();
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyRotors(String str);
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyStartingPosition(String str);
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyReflectorId(String str);
+    public void chooseManuallyReflect();
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyPlugBoard(String str);
     public CodeDescriptionDTO initCodeAutomatically();
     public TheMachineSettingsDTO getTheMachineSettingsDTO();
@@ -25,6 +26,7 @@ public interface EngineManagerInterface {
     public List<MachineHistoryAndStatisticsDTO> getHistoryAndStatisticsDTO();
     public void chooseManuallyStartingPosition(String userInput);
     public void chooseManuallyPlugBoard(String userInput);
+    public void resetPlugBoard();
     public void DefineIsCodeConfigurationSetValueToTrue();
    public CodeDescriptionDTO getCodeDescriptionDTO();
     public TheMachineEngine buildTheMachineEngine();

@@ -27,6 +27,8 @@ public class EngineManager implements EngineManagerInterface,Serializable {
     private SchemaGenerated schemaGenerated;
     boolean isCodeConfigurationSet=false;
     private int amountOfProcessedMessages=0;
+    List<Rotor> listOfRotors;
+    String reflectorId;
     private MenuValidator menuValidator=new MenuValidator();
     private final String JAXB_XML_GAME_PACKAGE_NAME = "schemaGenerated";
 
@@ -87,21 +89,34 @@ public class EngineManager implements EngineManagerInterface,Serializable {
 
     }
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyRotors(String str){
-         theMachineEngine=buildTheMachineEngine();
+       //  theMachineEngine=buildTheMachineEngine();
         UserInputRotorsValidator userInputRotorsValidator=new UserInputRotorsValidator(str,theMachineEngine);
         userInputRotorsValidator.validate();
-        List<Rotor> listOfRotors=new ArrayList<>();
+         listOfRotors=new ArrayList<>();
         String[] rotorsId=userInputRotorsValidator.getFilteredUserInput();
           if(rotorsId!=null) {
             for (String rotorId : rotorsId) {
                 listOfRotors.add(theMachineEngine.getRotorsSet().getRotorById(rotorId));
             }
-            chooseManuallyRotors(listOfRotors);
+           // chooseManuallyRotors(listOfRotors);
         }
         List<Exception> exceptions=  userInputRotorsValidator.getListOfException();
         ListOfExceptionsDTO  listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
         return listOfExceptionsDTO;
     }
+
+    /*public void createChosenRotors(String str){
+        UserInputRotorsValidator userInputRotorsValidator=new UserInputRotorsValidator(str,theMachineEngine);
+        userInputRotorsValidator.validate();
+        List<Rotor> listOfRotors=new ArrayList<>();
+        String[] rotorsId=userInputRotorsValidator.getFilteredUserInput();
+        if(rotorsId!=null) {
+            for (String rotorId : rotorsId) {
+                listOfRotors.add(theMachineEngine.getRotorsSet().getRotorById(rotorId));
+            }
+             chooseManuallyRotors(listOfRotors);
+        }
+    }*/
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyStartingPosition(String str){
         Validator userInputStartingPositionValidator=new UserInputStartingPositionValidator(str,theMachineEngine);
         userInputStartingPositionValidator.validate();
@@ -112,8 +127,8 @@ public class EngineManager implements EngineManagerInterface,Serializable {
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyReflectorId(String str){
         UserInputReflectorValidator userInputReflectorValidator=new UserInputReflectorValidator(str,theMachineEngine);
         userInputReflectorValidator.validate();
-        String reflectorId=userInputReflectorValidator.getReflectorId();
-        chooseManuallyReflect(reflectorId);
+        reflectorId=userInputReflectorValidator.getReflectorId();
+       // chooseManuallyReflect(reflectorId);
         List<Exception> exceptions= userInputReflectorValidator.getListOfException();
         ListOfExceptionsDTO  listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
         return listOfExceptionsDTO;
@@ -125,9 +140,9 @@ public class EngineManager implements EngineManagerInterface,Serializable {
         ListOfExceptionsDTO  listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
         return listOfExceptionsDTO;
     }
-    public void chooseManuallyRotors(List<Rotor> rotors){
-        if(rotors.size()>0){
-            theMachineEngine.createUsedRotorsSet(rotors);
+    public void chooseManuallyRotors(){
+        if(listOfRotors.size()>0){
+            theMachineEngine.createUsedRotorsSet(listOfRotors);
         }
     }
     public void chooseManuallyStartingPosition(String userInput){
@@ -142,29 +157,35 @@ public class EngineManager implements EngineManagerInterface,Serializable {
             i++;
         }
     }
-    public void chooseManuallyReflect(String reflectorId){
+    public void chooseManuallyReflect(){
        if(reflectorId!="") {
            theMachineEngine.addSelectedReflector(reflectorId);
        }
     }
     public void chooseManuallyPlugBoard(String userInput){
-        userInput=userInput.toUpperCase();
-        List<Pair> pairsOfSwappingLetters=new ArrayList<>();
-        String firstSignal,secondSignal;
-        int amountOfSwappingPairs=userInput.length()/2;
-        if(amountOfSwappingPairs>0) {
-            for (int i = 0; i < userInput.length()-1; i+=2) {
-                firstSignal = String.valueOf(userInput.charAt(i));
-                secondSignal = String.valueOf(userInput.charAt(i+1));
-                Pair pair = new Pair(firstSignal, secondSignal);
-                pairsOfSwappingLetters.add(pair);
+        if(!userInput.equals("")) {
+            userInput = userInput.toUpperCase();
+            List<Pair> pairsOfSwappingLetters = new ArrayList<>();
+            String firstSignal, secondSignal;
+            int amountOfSwappingPairs = userInput.length() / 2;
+            if (amountOfSwappingPairs > 0) {
+                for (int i = 0; i < userInput.length() - 1; i += 2) {
+                    firstSignal = String.valueOf(userInput.charAt(i));
+                    secondSignal = String.valueOf(userInput.charAt(i + 1));
+                    Pair pair = new Pair(firstSignal, secondSignal);
+                    pairsOfSwappingLetters.add(pair);
+                }
             }
+            PlugsBoard plugsBoard = new PlugsBoard(theMachineEngine.getKeyboard(), pairsOfSwappingLetters);
+            theMachineEngine.addPlugsBoardTOTheMachine(plugsBoard);
         }
-        PlugsBoard plugsBoard=new PlugsBoard(theMachineEngine.getKeyboard(),pairsOfSwappingLetters);
-        theMachineEngine.addPlugsBoardTOTheMachine(plugsBoard);
 
     }
-
+public void resetPlugBoard(){
+    List<Pair> pairsOfSwappingLetters=new ArrayList<>();
+    PlugsBoard plugsBoard=new PlugsBoard(theMachineEngine.getKeyboard(),pairsOfSwappingLetters);
+    theMachineEngine.addPlugsBoardTOTheMachine(plugsBoard);
+}
     public CodeDescriptionDTO getCodeDescriptionDTO() {
         return codeDescriptionDTO;
     }
@@ -430,6 +451,9 @@ public class EngineManager implements EngineManagerInterface,Serializable {
             this.isCodeConfigurationSet = ((EngineManager)meds.get(0)).isCodeConfigurationSet;
             this.amountOfProcessedMessages = ((EngineManager)meds.get(0)).amountOfProcessedMessages;
             this.menuValidator = ((EngineManager)meds.get(0)).menuValidator;
+            this.listOfRotors=((EngineManager)meds.get(0)).listOfRotors;
+            this.reflectorId=((EngineManager)meds.get(0)).reflectorId;
+
         } catch (Throwable error) {
             var = error;
             throw error;
