@@ -36,7 +36,7 @@ public class LoadNewFile implements MenuManager {
                             exitFromLoadNewFile(loadStart);
                         }
                     } catch (Exception e) {
-                        System.out.println(e.getMessage()+"if you want to exit please press ENTER");
+                        System.out.println(e.getMessage()+" if you want to exit please press ENTER");
                         loadStart = scanner.nextLine();
                         exitFromLoadNewFile(loadStart);
                     }

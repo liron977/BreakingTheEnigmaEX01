@@ -8,7 +8,7 @@ public class Reflector  implements Serializable{
     private List<Pair> reflectorPairStructure=new ArrayList<>();
     private List<String> reflectorStructure=new ArrayList<>();
     public Reflector(String reflectorId,List<Pair> reflectorPairStructure ){
-        this.reflectorId=reflectorId;
+        this.reflectorId=reflectorId.toUpperCase();
         this.reflectorPairStructure=reflectorPairStructure;
         initReflector();
         updateReflector();

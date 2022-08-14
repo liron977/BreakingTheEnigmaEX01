@@ -47,7 +47,7 @@ public class TheMachineEngine implements Serializable {
 
     public void  addSelectedReflector(String reflectorId){
 
-        this.reflector=reflectorsSet.getReflectorById(reflectorId);
+        this.reflector=reflectorsSet.getReflectorById(reflectorId.toUpperCase());
     }
     public ReflectorsSet getReflectorsSet(){
         return reflectorsSet;

@@ -278,19 +278,22 @@ public void printCodeConfiguration(){
         }
         System.out.println("Saved successfully!\n");
     }
-    public void readCurrentStateFromFile(String fileName){
-        File f = new File(fileName);
-        if (!f.exists()) {
-            System.out.println("\nthe file full path name does not exist!\nPlease try again\n");
-            return;
-        }
-        try {
-            engineManager.readFromFile(fileName);
-        } catch (IOException | ClassNotFoundException ignore) {
-            System.out.println("Error! can not load from a file\n");
-            return;
-        }
-        System.out.println("Load successfully!\n");
+    public void readCurrentStateFromFile(String fileName) {
+            File f = new File(fileName);
+            if (!f.exists()) {
+                System.out.println("\nthe file full path name does not exist!\nPlease try again\n");
+                return;
+            }
+            try {
+                engineManager.readFromFile(fileName);
+            } catch (IOException | ClassNotFoundException ignore) {
+                System.out.println("Error! can not load from a file\n");
+                return;
+            }
+            System.out.println("Load successfully!\n");
+    }
+    public int getAmountOfUsedRotors(){
+    return engineManager.getAmountOfUsedRotors();
     }
 
 }

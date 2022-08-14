@@ -36,13 +36,15 @@ public class InitCodeConfigurationManually implements MenuManager {
     }
 
     private void printRotorDescription() {
-        String str = "Please enter the rotors ID numbers + order between them (for " +
+        int amountOfRotors=mediator.getAmountOfUsedRotors();
+        String str = "Please enter "+amountOfRotors+" rotors ID numbers + order between them. \n(for " +
                 "example:if you choose 2 rotors with id:7,3 and the rotor(7) appears on the far right, insert <3,7>)";
         System.out.println(str);
     }
 
     private void printStartPositionDescriptionDescription() {
-        String str = "Please enter the initial position for each rotor ,series of valid characters from the ABC of the machine without separation" +
+        int amountOfRotors=mediator.getAmountOfUsedRotors();
+        String str = "Please enter the initial position for "+amountOfRotors+" selected rotors,series of valid characters from the ABC of the machine without separation" +
                 " between them (for example <AO>,A position is for rotor(7) abf O for rotor(3))";
 
         System.out.println(str);
