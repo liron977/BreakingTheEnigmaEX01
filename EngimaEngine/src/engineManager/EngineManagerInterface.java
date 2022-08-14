@@ -38,4 +38,5 @@ public interface EngineManagerInterface {
  public void readFromFile(String FileName) throws IOException, ClassNotFoundException;
  public List<String> getNotchList();
  public  void  createCurrentCodeDescriptionDTO();
+    public int getAmountOfUsedRotors();
 }

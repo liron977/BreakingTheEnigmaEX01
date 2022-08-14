@@ -40,7 +40,7 @@ public class XmlReflectorValidator implements Validator {
         List<CTEReflector> cteReflectorList = enigmaDescriptor.getCTEMachine().getCTEReflectors().getCTEReflector();
         String reflectorId;
         for (CTEReflector cteReflector : cteReflectorList) {
-            reflectorId = cteReflector.getId();
+            reflectorId = cteReflector.getId().toUpperCase();
             if (!romanNumeralsList.contains(reflectorId)) {
                 errors.add(new Exception("The reflector id :[" +reflectorId + "] is not valid." +
                         "reflector id can be only a roman char {I,II,III,IV,V}" +
@@ -55,7 +55,7 @@ public class XmlReflectorValidator implements Validator {
 
         for (CTEReflector cteReflector : cteReflectorList) {
             List<CTEReflect> cteReflects = cteReflector.getCTEReflect();
-            reflectorId = cteReflector.getId();
+            reflectorId = cteReflector.getId().toUpperCase();
             if ((idHashMap.get(reflectorId) != null) && (idHashMap.get(reflectorId) > 0)) {
                 errors.add(new Exception("Each reflector id must be uniq," +
                         "the id ["+ reflectorId +"] appears more than one time"));
@@ -104,7 +104,7 @@ public class XmlReflectorValidator implements Validator {
         List<CTEReflector> cteReflectorList = enigmaDescriptor.getCTEMachine().getCTEReflectors().getCTEReflector();
         for (CTEReflector cteReflector : cteReflectorList) {
             List<CTEReflect> cteReflects = cteReflector.getCTEReflect();
-            String reflectorId=cteReflector.getId();
+            String reflectorId=cteReflector.getId().toUpperCase();
             for (CTEReflect reflect:cteReflects) {
                 left=(char)(reflect.getInput()+'0');
                 right=(char)(reflect.getOutput()+'0');
@@ -123,7 +123,7 @@ public class XmlReflectorValidator implements Validator {
             HashMap<String, Integer> leftSignalMap = new HashMap<>();
             HashMap<String, Integer> rightSignalMap = new HashMap<>();
             List<CTEReflect> cteReflects = cteReflector.getCTEReflect();
-            String reflectorId=cteReflector.getId();
+            String reflectorId=cteReflector.getId().toUpperCase();
             for (CTEReflect reflect:cteReflects) {
                 left=String.valueOf(reflect.getInput());
                 right=String.valueOf(reflect.getOutput());
@@ -143,7 +143,7 @@ public class XmlReflectorValidator implements Validator {
         int counter;
         for (CTEReflector cteReflector : cteReflectorList) {
             counter=0;
-            String reflectorId=cteReflector.getId();
+            String reflectorId=cteReflector.getId().toUpperCase();
             List<CTEReflect> cteReflects = cteReflector.getCTEReflect();
             for (CTEReflect reflect : cteReflects) {
                 counter++;

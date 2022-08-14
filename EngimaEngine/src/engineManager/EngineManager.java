@@ -327,7 +327,6 @@ public void resetPlugBoard(){
             String userInputByString =String.valueOf(userInputString.charAt(i));
             String convertedCharByString=theMachineEngine.manageDecode(userInputByString);
             convertedString=convertedString.concat(convertedCharByString);
-            //convertedString=convertedString.concat(theMachineEngine.manageDecode(String.valueOf(userInputString.charAt(i))));
         }
         long end = System.nanoTime();
         amountOfProcessedMessages++;
@@ -435,6 +434,9 @@ public void resetPlugBoard(){
 
         }
 
+    }
+    public int getAmountOfUsedRotors(){
+        return theMachineEngine.getAmountOfUsedRotors();
     }
 
     public void readFromFile(String FileName) throws IOException, ClassNotFoundException {

@@ -145,7 +145,7 @@ public class XmlRotorValidator implements Validator{
                 errors.add(new Exception("The rotor ["+cteRotor.getId()+"] is illegal,the notch position can not be less than 1" ));
             }
             if((notchPosition>keyboardInput.length())){
-                errors.add(new Exception("The rotor ["+cteRotor.getId()+"] is illegal,the notch position can not be more than ["+keyboardInput.length() +"]" ));
+                errors.add(new Exception("The rotor ["+cteRotor.getId()+"] is illegal,the notch position can not be more than ABC length ["+keyboardInput.length() +"]" ));
             }
         }
     }
