@@ -10,6 +10,14 @@ public class ReflectorsSet implements Serializable {
     public ReflectorsSet(List<Reflector> reflectors){
         this.reflectors=reflectors;;
     }
+
+    public List<String> getReflectorsId(){
+        List<String> reflectorsId=new ArrayList<>();
+        for (Reflector reflector:reflectors) {
+            reflectorsId.add(reflector.getReflectorId());
+        }
+        return reflectorsId;
+    }
     public List<Reflector> getListOfReflectors() {
         return reflectors;
     }

@@ -68,7 +68,7 @@ return rotors.size();
     public List<String> getNotchList(){
         List<String> notchList=new ArrayList<>();
         for (Rotor rotor:rotors) {
-            notchList.add(String.valueOf(rotor.getNotchPosition()));
+            notchList.add(String.valueOf(rotor.getNotchPosition()-1));
 
         }
        return notchList;
@@ -76,7 +76,7 @@ return rotors.size();
     public List<String> getOriginalNotchPositionList(){
         List<String> notchList=new ArrayList<>();
         for (Rotor rotor:rotors) {
-            notchList.add(String.valueOf(rotor.getOriginalNotchPosition()));
+            notchList.add(String.valueOf(rotor.getOriginalNotchPosition()-1));
         }
         return notchList;
     }

@@ -23,6 +23,10 @@ public class TheMachineEngine implements Serializable {
         this.reflectorsSet=reflectorsSet;
         this.amountOfUsedRotors=amountOfUsedRotors;
     }
+
+    public List<String> getReflectorsId(){
+       return reflectorsSet.getReflectorsId();
+    }
     public void reverseUsedRotors(){
         usedRotors.reverseRotors();
     }

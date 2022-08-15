@@ -67,16 +67,7 @@ public class EngineManager implements EngineManagerInterface,Serializable {
     public boolean getIsCodeConfigurationSet(){
         return isCodeConfigurationSet;
     }
-/*    public ListOfExceptionsDTO getAllErrorsRelatedToInitCodeManuallyInputStructure(String str){
-         theMachineEngine=buildTheMachineEngine();
-        UserInputValidator2 userInputValidator=new UserInputValidator2(str,cteEnigma,theMachineEngine);
-        userInputValidator.validate();
-        List<Exception> exceptions=  userInputValidator.getListOfException();
-        ListOfExceptionsDTO  listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
-        isCodeConfigurationSet=true;
-        menuValidator.setTrueValueToUpdateIsCodeDefined();
-        return listOfExceptionsDTO;
-    }*/
+
     public void DefineIsCodeConfigurationSetValueToTrue(){
         this.isCodeConfigurationSet=true;
         menuValidator.setTrueValueToUpdateIsCodeDefined();
@@ -89,7 +80,6 @@ public class EngineManager implements EngineManagerInterface,Serializable {
 
     }
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyRotors(String str){
-       //  theMachineEngine=buildTheMachineEngine();
         UserInputRotorsValidator userInputRotorsValidator=new UserInputRotorsValidator(str,theMachineEngine);
         userInputRotorsValidator.validate();
          listOfRotors=new ArrayList<>();
@@ -98,7 +88,7 @@ public class EngineManager implements EngineManagerInterface,Serializable {
             for (String rotorId : rotorsId) {
                 listOfRotors.add(theMachineEngine.getRotorsSet().getRotorById(rotorId));
             }
-           // chooseManuallyRotors(listOfRotors);
+
         }
         List<Exception> exceptions=  userInputRotorsValidator.getListOfException();
         ListOfExceptionsDTO  listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
@@ -378,14 +368,12 @@ public void resetPlugBoard(){
         if(theMachineEngine==null){
             theMachineEngine=buildTheMachineEngine();
         }
+        List<String> reflectorsId=theMachineEngine.getReflectorsId();
         int amountOfUsedRotors=theMachineEngine.getAmountOfUsedRotors();
         int maxAmountOfRotors=theMachineEngine.getMaxAmountOfRotors();
-        /*List<String> notchPosition=theMachineEngine.getListOfNotch();
-        List<String> originalNotchPosition=theMachineEngine.getOriginalNotchPositionList();*/
        int amountOfReflectors= theMachineEngine.getReflectorsAmount();
        createCurrentCodeDescriptionDTO();
-      //createCurrentCodeDescriptionDTO();
-        TheMachineSettingsDTO theMachineSettingsDTO=new TheMachineSettingsDTO(amountOfUsedRotors,maxAmountOfRotors,amountOfReflectors,amountOfProcessedMessages, codeDescriptionDTO);
+        TheMachineSettingsDTO theMachineSettingsDTO=new TheMachineSettingsDTO(amountOfUsedRotors,maxAmountOfRotors,amountOfReflectors,amountOfProcessedMessages, codeDescriptionDTO,reflectorsId);
         return theMachineSettingsDTO;
     }
     public  void  createCurrentCodeDescriptionDTO(){

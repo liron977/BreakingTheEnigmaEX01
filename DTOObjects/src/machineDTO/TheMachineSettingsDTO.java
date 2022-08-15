@@ -1,5 +1,7 @@
 package machineDTO;
 
+import java.util.List;
+
 public class TheMachineSettingsDTO {
     private int amountOfUsedRotors;
     private int maxAmountOfRotors;
@@ -7,18 +9,21 @@ public class TheMachineSettingsDTO {
     private  List<String> originalNotchPosition=new ArrayList<>();*/
     private int amountOfReflectors;
     private int amountOfProcessedMessages;
-
+     List<String> reflectorsId;
     private CodeDescriptionDTO codeDescriptionDTO;
 
-     public TheMachineSettingsDTO(int amountOfUsedRotors, int maxAmountOfRotors, int amountOfReflectors, int amountOfProcessedMessages, CodeDescriptionDTO codeDescriptionDTO){
+     public TheMachineSettingsDTO(int amountOfUsedRotors, int maxAmountOfRotors, int amountOfReflectors, int amountOfProcessedMessages, CodeDescriptionDTO codeDescriptionDTO,List<String> reflectorsId){
 this.amountOfProcessedMessages=amountOfProcessedMessages;
 this.amountOfReflectors=amountOfReflectors;
-//this.notchPosition=notchPosition;
-//this.originalNotchPosition=originalNotchPosition;
 this.maxAmountOfRotors=maxAmountOfRotors;
 this.codeDescriptionDTO = codeDescriptionDTO;
 this.amountOfUsedRotors=amountOfUsedRotors;
+this.reflectorsId=reflectorsId;
      }
+
+    public List<String> getReflectorsId() {
+        return reflectorsId;
+    }
 
     public CodeDescriptionDTO getCurrentCodeDescriptionDTO() {
         return codeDescriptionDTO;

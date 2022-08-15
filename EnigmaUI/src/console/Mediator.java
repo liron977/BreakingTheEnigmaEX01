@@ -113,6 +113,18 @@ public Mediator(EngineManagerInterface engineManager){
         System.out.println("Selection of initial code configuration (automatically) performed successfully");
         System.out.println("The current code configuration is: " +getCurrentCodeDescription(codeDescriptionDTO,notchList));
     }
+
+    public String getAvailableReflectorsId(){
+    String availableReflectorsId="";
+    List<String> availableReflectorsIdList= engineManager.getTheMachineSettingsDTO().getReflectorsId();
+
+        for (int i=0;i<availableReflectorsIdList.size();i++){
+            int index=i+1;
+            availableReflectorsId=availableReflectorsId+index+") "+availableReflectorsIdList.get(i)+"\n";
+        }
+        return availableReflectorsId;
+
+    }
     public void  initStartingPositionConfigurationManually(String userInput){
         engineManager.chooseManuallyStartingPosition(userInput);
     }

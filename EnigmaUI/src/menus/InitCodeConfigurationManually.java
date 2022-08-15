@@ -56,7 +56,7 @@ public class InitCodeConfigurationManually implements MenuManager {
     }
 
     private void printReflectorIdDescription() {
-        String str = "Please choose a reflector:\n 1)I \n 2)II \n 3)III \n 4)IV \n 5)V";
+        String str = "Please choose a reflector:\n"+mediator.getAvailableReflectorsId();
         System.out.println(str);
     }
     private void initCodeConfiguration() {
