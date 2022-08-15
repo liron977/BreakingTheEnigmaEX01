@@ -111,7 +111,7 @@ public Mediator(EngineManagerInterface engineManager){
        CodeDescriptionDTO codeDescriptionDTO =engineManager.initCodeAutomatically();
        List<String> notchList=engineManager.getNotchList();
         System.out.println("Selection of initial code configuration (automatically) performed successfully");
-        System.out.println("The current code configuration is: " +getCurrentCodeDescription(codeDescriptionDTO,notchList));
+        System.out.println("The current code configuration is: " +getCurrentCodeDescription(codeDescriptionDTO,notchList,engineManager.getCodeDescriptionDTO().getCurrentStartingPosition()));
     }
 
     public String getAvailableReflectorsId(){
@@ -171,8 +171,8 @@ public void resetPlugBoard(){
             machineConfiguration = machineConfiguration + "2.The amount of reflectors is: " + theMachineSettingsDTO.getAmountOfReflectors() + "\n";
             machineConfiguration = machineConfiguration + "3.The current amount of proceeded messages: " + theMachineSettingsDTO.getAmountOfProcessedMessages() + "\n";
             if (engineManager.getIsCodeConfigurationSet()) {
-                machineConfiguration = machineConfiguration + "4.The original code description: \n" + getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO(),theMachineSettingsDTO.getCurrentCodeDescriptionDTO().getOriginalNotchPosition()) + "\n";
-                machineConfiguration = machineConfiguration + "5.The current code description: \n" + getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO(),theMachineSettingsDTO.getCurrentCodeDescriptionDTO().getNotchPosition()) + "\n";
+                machineConfiguration = machineConfiguration + "4.The original code description: \n" + getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO(),theMachineSettingsDTO.getCurrentCodeDescriptionDTO().getOriginalNotchPosition(),engineManager.getCodeDescriptionDTO().getChosenStartingPosition()) + "\n";
+                machineConfiguration = machineConfiguration + "5.The current code description: \n" + getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO(),theMachineSettingsDTO.getCurrentCodeDescriptionDTO().getNotchPosition(),engineManager.getCodeDescriptionDTO().getCurrentStartingPosition()) + "\n";
             }
             return machineConfiguration;
         }
@@ -182,14 +182,14 @@ public void resetPlugBoard(){
 public void printCodeConfiguration(){
     List<String> notchList=engineManager.getNotchList();
     engineManager.createCurrentCodeDescriptionDTO();
-    System.out.println("The current code configuration is: " +getCurrentCodeDescription(engineManager.getCodeDescriptionDTO(),notchList));
+    System.out.println("The current code configuration is: " +getCurrentCodeDescription(engineManager.getCodeDescriptionDTO(),notchList,engineManager.getCodeDescriptionDTO().getCurrentStartingPosition()));
 
 }
-    public String getCurrentCodeDescription(CodeDescriptionDTO codeDescriptionDTO, List<String> notchPosition){
+    public String getCurrentCodeDescription(CodeDescriptionDTO codeDescriptionDTO, List<String> notchPosition,String startingPosition){
         String currentCodeDescription="";
         currentCodeDescription=currentCodeDescription+"<"+getRotorsInfo(codeDescriptionDTO.getUsedRotorsId(),notchPosition)+">";
         StringBuilder startingPositionRevers = new StringBuilder();
-        startingPositionRevers.append(codeDescriptionDTO.getChosenStartingPosition());
+        startingPositionRevers.append(startingPosition);
         startingPositionRevers.reverse();
         currentCodeDescription=currentCodeDescription+"<"+startingPositionRevers+">";
         currentCodeDescription=currentCodeDescription+"<"+ codeDescriptionDTO.getReflectorId()+">";
@@ -204,7 +204,7 @@ public void printCodeConfiguration(){
        List<MachineHistoryAndStatisticsDTO> listOfMachineHistory= engineManager.getHistoryAndStatisticsDTO();
         for (MachineHistoryAndStatisticsDTO machineHistory:listOfMachineHistory) {
             if(machineHistory.getCurrentCodeDescriptionDTO()!=null) {
-                System.out.printf("The strings that proceeded for "+getCurrentCodeDescription(machineHistory.getCurrentCodeDescriptionDTO(),machineHistory.getCurrentCodeDescriptionDTO().getOriginalNotchPosition()) + " are :\n");
+                System.out.printf("The strings that proceeded for "+getCurrentCodeDescription(machineHistory.getCurrentCodeDescriptionDTO(),machineHistory.getCurrentCodeDescriptionDTO().getOriginalNotchPosition(),machineHistory.getCurrentCodeDescriptionDTO().getChosenStartingPosition()) + " are :\n");
                 String[] userInput = machineHistory.getHistoryAndStatisticsDTO().getUserInput();
                 String[] convertedStrings = machineHistory.getHistoryAndStatisticsDTO().getConvertedString();
                 String[] timeToProcess = machineHistory.getHistoryAndStatisticsDTO().getTimeToProcess();

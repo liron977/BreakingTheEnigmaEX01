@@ -25,7 +25,15 @@ public class RotorsSet implements Serializable {
        return rotors;
     }
 
-    public String getRotorsStartingPositions(){
+    public String getCurrentRotorsStartingPositions(){
+        String rotorsStartingPositions="";
+        for (Rotor rotor:rotors) {
+
+            rotorsStartingPositions=rotorsStartingPositions+rotor.getSignalInWindow();
+        }
+        return rotorsStartingPositions;
+    }
+    public String getRotorsOriginalStartingPositions(){
         String rotorsStartingPositions="";
         for (Rotor rotor:rotors) {
 

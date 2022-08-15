@@ -109,7 +109,7 @@ public class XmlReflectorValidator implements Validator {
                 left=(char)(reflect.getInput()+'0');
                 right=(char)(reflect.getOutput()+'0');
                 if(left==right){
-                    errors.add(new Exception("The reflector ["+reflectorId+"] is illegal,signal can not be mapped to itself" ));
+                    errors.add(new Exception("The reflector ["+reflectorId+"] is illegal,the signal ["+left+"] can not be mapped to itself" ));
                 }
             }
         }
@@ -128,11 +128,11 @@ public class XmlReflectorValidator implements Validator {
                 left=String.valueOf(reflect.getInput());
                 right=String.valueOf(reflect.getOutput());
                 if((leftSignalMap.get(left)!=null)&&(leftSignalMap.get(left)!=0)) {
-                    errors.add(new Exception("The reflector ["+reflectorId+"] is illegal,reflector can not have double mapping the left signal "+left +" is already mapped" ));
+                    errors.add(new Exception("The reflector ["+reflectorId+"] is illegal,reflector can not have double mapping the signal "+left+" in the left field is already mapped" ));
                 }
                 leftSignalMap.put(left,1);
                 if((rightSignalMap.get(right)!=null)&&(rightSignalMap.get(right)!=0)) {
-                    errors.add(new Exception("The reflector ["+reflectorId+"] is illegal,reflector can not have double mapping the right signal "+right +" is already mapped" ));
+                    errors.add(new Exception("The reflector ["+reflectorId+"] is illegal,reflector can not have double mapping the signal "+right+" in the right field is already mapped" ));
                 }
                 rightSignalMap.put(right,1);
             }

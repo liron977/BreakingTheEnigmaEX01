@@ -20,6 +20,7 @@ public class LoadNewFile implements MenuManager {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please insert full xml path \n");
         String loadStart = scanner.nextLine();
+        loadStart=loadStart.toLowerCase();
         while (!isFileNameValid){
             if (mediator.fileNameValidation(loadStart)) {
                 isFileNameValid = true;
@@ -33,11 +34,13 @@ public class LoadNewFile implements MenuManager {
                         else {
                             System.out.println("Please insert updated xml path,if you want to exit please press ENTER");
                             loadStart = scanner.nextLine();
+                            loadStart=loadStart.toLowerCase();
                             exitFromLoadNewFile(loadStart);
                         }
                     } catch (Exception e) {
                         System.out.println(e.getMessage()+" if you want to exit please press ENTER");
                         loadStart = scanner.nextLine();
+                        loadStart=loadStart.toLowerCase();
                         exitFromLoadNewFile(loadStart);
                     }
                 }
@@ -45,6 +48,7 @@ public class LoadNewFile implements MenuManager {
             else {
                 System.out.println("Please insert full xml path,if you want to exit please press ENTER");
                 loadStart = scanner.nextLine();
+                loadStart=loadStart.toLowerCase();
                 exitFromLoadNewFile(loadStart);
             }
         }

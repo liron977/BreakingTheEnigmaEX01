@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public class CodeDescriptionDTO implements Serializable {
     private String[] usedRotorsId;
+    private String currentStartingPosition;
     private String chosenStartingPosition;
     private String reflectorId;
     private List<String> pairsOfSwappingCharacter=new ArrayList<>();
@@ -15,13 +16,14 @@ public class CodeDescriptionDTO implements Serializable {
     private  List<String> originalNotchPosition=new ArrayList<>();
 
 
-    public CodeDescriptionDTO(List<String> pairsOfSwappingCharacter, String reflectorId, String chosenStartingPosition, String[] usedRotorsId, List<String> originalNotchPosition, List<String> notchPosition){
+    public CodeDescriptionDTO(List<String> pairsOfSwappingCharacter, String reflectorId, String chosenStartingPosition,String currentStartingPosition, String[] usedRotorsId, List<String> originalNotchPosition, List<String> notchPosition){
 this.pairsOfSwappingCharacter=pairsOfSwappingCharacter;
 this.reflectorId=reflectorId;
 this.chosenStartingPosition=chosenStartingPosition;
 this.usedRotorsId=usedRotorsId;
 this.originalNotchPosition=originalNotchPosition;
 this.notchPosition=notchPosition;
+this.currentStartingPosition=currentStartingPosition;
     }
 
     public List<String> getPairsOfSwappingCharacter() {
@@ -30,6 +32,10 @@ this.notchPosition=notchPosition;
 
     public String getChosenStartingPosition() {
         return chosenStartingPosition;
+    }
+
+    public String getCurrentStartingPosition() {
+        return currentStartingPosition;
     }
 
     public String getReflectorId() {

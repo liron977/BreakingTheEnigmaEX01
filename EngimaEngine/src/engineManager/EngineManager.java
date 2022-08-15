@@ -380,12 +380,14 @@ public void resetPlugBoard(){
         CodeDescriptionDTO codeDescriptionDTO =null;
         if(isCodeConfigurationSet) {
             String[] usedRotorsId = theMachineEngine.getArrayOfRotorsId();
-            String chosenStartingPosition = theMachineEngine.getUsedRotors().getRotorsStartingPositions();
+            String currentStartingPosition = theMachineEngine.getUsedRotors().getCurrentRotorsStartingPositions();
+
+            String chosenStartingPosition = theMachineEngine.getUsedRotors().getRotorsOriginalStartingPositions();
             String reflectorId = theMachineEngine.getReflector().getReflectorId();
             List<String> notchPosition=theMachineEngine.getListOfNotch();
             List<String> originalNotchPosition=theMachineEngine.getOriginalNotchPositionList();
             List<String> pairsOfSwappingCharacter = theMachineEngine.getStringPairsOfSwappingCharacter();
-          codeDescriptionDTO = new CodeDescriptionDTO(pairsOfSwappingCharacter, reflectorId, chosenStartingPosition, usedRotorsId,originalNotchPosition,notchPosition);
+          codeDescriptionDTO = new CodeDescriptionDTO(pairsOfSwappingCharacter, reflectorId, chosenStartingPosition,currentStartingPosition, usedRotorsId,originalNotchPosition,notchPosition);
         }
         this.codeDescriptionDTO = codeDescriptionDTO;
 

@@ -91,7 +91,7 @@ public class InitCodeConfigurationManually implements MenuManager {
                                 if (isPlayerWantsPlugBoard()) {
                                     printPlugBoardDescription();
                                     loadStart = scanner.nextLine();
-                                    selectedPlugBoardPairs= loadStart;
+                                   // selectedPlugBoardPairs= loadStart;
                                     while (!isPlugBoardIsValid) {
                                         if (!loadStart.equals("")) {
                                             if (mediator.isPlagBoardinInitCodeManuallyIsValid(loadStart) && !mediator.isChooseToExit(loadStart)) {
@@ -104,7 +104,7 @@ public class InitCodeConfigurationManually implements MenuManager {
                                             } else {
                                                 System.out.println("Please try again\nIf you want to exit please press ENTER(The configuration will not be saved)");
                                                 loadStart = scanner.nextLine();
-                                                selectedPlugBoardPairs= loadStart;
+                                                //selectedPlugBoardPairs= loadStart;
                                                 exitFromInitCodeManually(loadStart);
                                             }
                                         } else {
@@ -124,14 +124,14 @@ public class InitCodeConfigurationManually implements MenuManager {
                         } else {
                             System.out.println("Please try again\nIf you want to exit please press ENTER(The configuration will not be saved)");
                             loadStart = scanner.nextLine();
-                            selectedPlugBoardPairs= loadStart;
+                            //selectedPlugBoardPairs= loadStart;
                             exitFromInitCodeManually(loadStart);
                         }
                     }
                 } else {
                     System.out.println("Please try again \nIf you want to exit please press ENTER(The configuration will not be saved)");
                     loadStart = scanner.nextLine();
-                    selectedPlugBoardPairs= loadStart;
+                   // selectedPlugBoardPairs= loadStart;
                     exitFromInitCodeManually(loadStart);
                 }
             }

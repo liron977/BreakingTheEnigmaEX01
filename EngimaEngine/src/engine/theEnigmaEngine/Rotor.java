@@ -25,6 +25,11 @@ public class Rotor  implements Serializable{
     public String getStartingPosition() {
         return startingPosition;
     }
+    public String getSignalInWindow(){
+
+       return rotorStructure.get(0).getEntry();
+
+    }
     public int getOriginalNotchPosition(){
         return originalNotchPosition;
     }
