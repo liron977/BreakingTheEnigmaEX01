@@ -172,7 +172,7 @@ public void resetPlugBoard(){
             machineConfiguration = machineConfiguration + "3.The current amount of proceeded messages: " + theMachineSettingsDTO.getAmountOfProcessedMessages() + "\n";
             if (engineManager.getIsCodeConfigurationSet()) {
                 machineConfiguration = machineConfiguration + "4.The original code description: \n" + getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO(),theMachineSettingsDTO.getCurrentCodeDescriptionDTO().getOriginalNotchPosition()) + "\n";
-                machineConfiguration = machineConfiguration + "5.The current notch positions for each rotor: \n" + getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO(),theMachineSettingsDTO.getCurrentCodeDescriptionDTO().getNotchPosition()) + "\n";
+                machineConfiguration = machineConfiguration + "5.The current code description: \n" + getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO(),theMachineSettingsDTO.getCurrentCodeDescriptionDTO().getNotchPosition()) + "\n";
             }
             return machineConfiguration;
         }
