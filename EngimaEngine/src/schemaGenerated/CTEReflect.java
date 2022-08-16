@@ -37,7 +37,7 @@ import java.io.Serializable;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 @XmlRootElement(name = "CTE-Reflect")
-public class CTEReflect implements Serializable {
+public class CTEReflect {
 
     @XmlAttribute(name = "input", required = true)
     protected int input;

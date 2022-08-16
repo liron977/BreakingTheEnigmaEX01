@@ -8,10 +8,10 @@ public class DisplayMachineConfiguration implements MenuManager {
         this.mediator = mediator;
     }
     @Override
-    public void execution() {
-        String output = mediator.getMachineConfiguration();
-        if (output != null) {
-            System.out.println(output);
-        }
+    public void execution() throws Exception {
+            String output = mediator.getMachineConfiguration();
+            if (output != null) {
+                System.out.println(output);
+            }
     }
 }

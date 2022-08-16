@@ -40,7 +40,7 @@ import java.io.Serializable;
     "cteMachine"
 })
 @XmlRootElement(name = "CTE-Enigma")
-public class CTEEnigma implements Serializable {
+public class CTEEnigma{
 
     @XmlElement(name = "CTE-Machine", required = true)
     protected CTEMachine cteMachine;

@@ -17,7 +17,7 @@ public interface EngineManagerInterface {
     public void chooseManuallyReflect();
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyPlugBoard(String str);
     public CodeDescriptionDTO initCodeAutomatically();
-    public TheMachineSettingsDTO getTheMachineSettingsDTO();
+    public TheMachineSettingsDTO getTheMachineSettingsDTO() throws  Exception;
     public boolean isChooseToExit(String userInput);
    public ListOfExceptionsDTO getAllErrorsConvertingInputProcess(String str);
    public ConvertedStringDTO getConvertedString(String str);
@@ -29,7 +29,7 @@ public interface EngineManagerInterface {
     public void resetPlugBoard();
     public void DefineIsCodeConfigurationSetValueToTrue();
    public CodeDescriptionDTO getCodeDescriptionDTO();
-    public TheMachineEngine buildTheMachineEngine();
+    public TheMachineEngine buildTheMachineEngine()  throws Exception;
     public ListOfExceptionsDTO getAllErrorsRelatedToUserDefinePlugBoard(String userInput);
     public ListOfExceptionsDTO getAllErrorsRelatedToMachineMenuValidator();
     public void updateExceptionListMenuValidator();

@@ -37,7 +37,7 @@ import java.io.Serializable;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 @XmlRootElement(name = "CTE-Positioning")
-public class CTEPositioning implements Serializable {
+public class CTEPositioning {
 
     @XmlAttribute(name = "left", required = true)
     protected String left;

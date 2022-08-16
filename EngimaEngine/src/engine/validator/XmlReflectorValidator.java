@@ -183,10 +183,10 @@ public class XmlReflectorValidator implements Validator {
                 left = reflect.getInput();
                 right = reflect.getOutput();
                 if((left<1)||(left>abcLength)){
-                    errors.add(new Exception("The signal ["+left+"] is not valid,the signals should be a number between 1-"+abcLength));
+                    errors.add(new Exception("The reflector ["+reflectorId+"] is not valid,the signal ["+left+"] is not valid,the signals should be a number between 1-"+abcLength));
                 }
               if ((right<1)||(right>abcLength)){
-                    errors.add(new Exception("The signal [" + right + "] is not valid,the signals should be a number between 1-" + abcLength));
+                    errors.add(new Exception("The reflector ["+reflectorId+"] is not valid,the signal [" + right + "] is not valid,the signals should be a number between 1-" + abcLength));
                 }
 
             }

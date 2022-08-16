@@ -31,7 +31,7 @@ public class InitCodeConfigurationManually implements MenuManager {
         isUserInputIsValid = false;
     }
     @Override
-    public void execution() {
+    public void execution() throws Exception {
         initCodeConfiguration();
     }
 
@@ -55,11 +55,11 @@ public class InitCodeConfigurationManually implements MenuManager {
         System.out.println(str);
     }
 
-    private void printReflectorIdDescription() {
+    private void printReflectorIdDescription() throws Exception {
         String str = "Please choose a reflector:\n"+mediator.getAvailableReflectorsId();
         System.out.println(str);
     }
-    private void initCodeConfiguration() {
+    private void initCodeConfiguration() throws Exception {
         if (mediator.isMachineWasDefined()) {
             printRotorDescription();
             String loadStart = scanner.nextLine();

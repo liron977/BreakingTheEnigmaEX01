@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
     "cteReflector"
 })
 @XmlRootElement(name = "CTE-Reflectors")
-public class CTEReflectors implements Serializable {
+public class CTEReflectors  {
 
     @XmlElement(name = "CTE-Reflector", required = true)
     protected List<CTEReflector> cteReflector;

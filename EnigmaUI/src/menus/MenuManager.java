@@ -2,5 +2,5 @@ package menus;
 
 public interface MenuManager {
 
-    public void execution();
+    public void execution() throws Exception;
 }

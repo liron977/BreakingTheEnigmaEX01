@@ -27,7 +27,7 @@ import java.io.Serializable;
  * 
  */
 @XmlRegistry
-public class ObjectFactory implements Serializable {
+public class ObjectFactory  {
 
 
     /**

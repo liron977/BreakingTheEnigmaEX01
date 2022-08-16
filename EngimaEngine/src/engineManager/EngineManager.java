@@ -23,14 +23,15 @@ public class EngineManager implements EngineManagerInterface,Serializable {
     private CodeDescriptionDTO codeDescriptionDTO;
     private TheMachineEngine theMachineEngine;
     private MachineHistoryAndStatistics machineHistoryAndStatistics=new MachineHistoryAndStatistics();
-    private  CTEEnigma cteEnigma;
-    private SchemaGenerated schemaGenerated;
     boolean isCodeConfigurationSet=false;
     private int amountOfProcessedMessages=0;
     List<Rotor> listOfRotors;
     String reflectorId;
     private MenuValidator menuValidator=new MenuValidator();
     private final String JAXB_XML_GAME_PACKAGE_NAME = "schemaGenerated";
+   // private  CTEEnigma cteEnigma;
+    //private SchemaGenerated schemaGenerated;
+    private  String filePath;
 
     @Override
     public ListOfExceptionsDTO load(String filePath) throws Exception {
@@ -45,6 +46,7 @@ public class EngineManager implements EngineManagerInterface,Serializable {
         ValidatorRunner validatorRunner=new ValidatorRunner(validators);
         List<Exception> exceptions=validatorRunner.run();
         if(exceptions.size() == 0){
+            this.filePath=filePath;
             menuValidator.reset();
             isCodeConfigurationSet=false;
             amountOfProcessedMessages=0;
@@ -58,8 +60,9 @@ public class EngineManager implements EngineManagerInterface,Serializable {
     public List<String> getNotchList(){
         return theMachineEngine.getListOfNotch();
     }
-    public TheMachineEngine buildTheMachineEngine(){
-         schemaGenerated=new SchemaGenerated(cteEnigma);
+    public TheMachineEngine buildTheMachineEngine()  throws Exception{
+        CTEEnigma cteEnigma =readFromXmlFile(filePath);
+       SchemaGenerated  schemaGenerated=new SchemaGenerated(cteEnigma);
         TheMachineEngine theMachineEngine= new TheMachineEngine(schemaGenerated.createRotorsSet(),schemaGenerated.createReflectorsSet(),schemaGenerated.createKeyboard(),schemaGenerated.getAmountOfUsedRotors());
         return theMachineEngine;
 
@@ -167,11 +170,14 @@ public void resetPlugBoard(){
         return codeDescriptionDTO;
     }
 
-    public int getRotorsAmount(){
+/*    public int getRotorsAmount(){
+
+
         return cteEnigma.getCTEMachine().getRotorsCount();
-    }
-    public CodeDescriptionDTO initCodeAutomatically(){
-        theMachineEngine = buildTheMachineEngine();
+    }*/
+    public CodeDescriptionDTO initCodeAutomatically() {
+        //CTEEnigma cteEnigma =readFromXmlFile(filePath);
+        //theMachineEngine = buildTheMachineEngine();
         chooseAutomaticallyRotors(theMachineEngine);
         initRotorsPositionAutomatically(theMachineEngine);
         chooseAutomaticallyReflector(theMachineEngine);
@@ -267,7 +273,7 @@ public void resetPlugBoard(){
             JAXBContext jaxbContext = JAXBContext.newInstance(JAXB_XML_GAME_PACKAGE_NAME);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             CTEEnigma cteEnigma = (CTEEnigma) jaxbUnmarshaller.unmarshal(inputStream);
-            this.cteEnigma=cteEnigma;
+           // this.cteEnigma=cteEnigma;
             return cteEnigma;
         }
         catch (JAXBException e) {
@@ -351,8 +357,9 @@ public void resetPlugBoard(){
         menuValidator.isCodeConfigurationWasDefined();
         return new ListOfExceptionsDTO(menuValidator.getListOfException());
     }
-    public TheMachineSettingsDTO getTheMachineSettingsDTO(){
+    public TheMachineSettingsDTO getTheMachineSettingsDTO() throws Exception{
         if(theMachineEngine==null){
+            CTEEnigma cteEnigma=readFromXmlFile(filePath);
             theMachineEngine=buildTheMachineEngine();
         }
         List<String> reflectorsId=theMachineEngine.getReflectorsId();
@@ -425,8 +432,8 @@ public void resetPlugBoard(){
             this.codeDescriptionDTO = ((EngineManager)meds.get(0)).codeDescriptionDTO;
             this.theMachineEngine = ((EngineManager)meds.get(0)).theMachineEngine;
             this.machineHistoryAndStatistics = ((EngineManager)meds.get(0)).machineHistoryAndStatistics;
-            this.cteEnigma = ((EngineManager)meds.get(0)).cteEnigma;
-            this.schemaGenerated = ((EngineManager)meds.get(0)).schemaGenerated;
+            // this.cteEnigma = ((EngineManager)meds.get(0)).cteEnigma;
+           // this.schemaGenerated = ((EngineManager)meds.get(0)).schemaGenerated;
             this.isCodeConfigurationSet = ((EngineManager)meds.get(0)).isCodeConfigurationSet;
             this.amountOfProcessedMessages = ((EngineManager)meds.get(0)).amountOfProcessedMessages;
             this.menuValidator = ((EngineManager)meds.get(0)).menuValidator;

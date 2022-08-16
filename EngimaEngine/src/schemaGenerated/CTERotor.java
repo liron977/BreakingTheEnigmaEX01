@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.XmlType;
     "ctePositioning"
 })
 @XmlRootElement(name = "CTE-Rotor")
-public class CTERotor implements Serializable {
+public class CTERotor {
 
     @XmlElement(name = "CTE-Positioning", required = true)
     protected List<CTEPositioning> ctePositioning;

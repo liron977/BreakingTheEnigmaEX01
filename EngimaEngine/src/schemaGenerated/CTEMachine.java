@@ -46,7 +46,7 @@ import java.io.Serializable;
     "cteReflectors"
 })
 @XmlRootElement(name = "CTE-Machine")
-public class CTEMachine implements Serializable {
+public class CTEMachine {
 
     @XmlElement(name = "ABC", required = true)
     protected String abc;

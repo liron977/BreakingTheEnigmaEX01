@@ -17,7 +17,7 @@ public class Menu {
 
     public void printMenu() {
         System.out.println("-------------------------------------------------");
-        System.out.println("Select option (press number " + FIRST_OPTION + "-" + EXIT_OPTION + "):");
+        System.out.println("Select option (press number " + FIRST_OPTION + "-" + LAST_OPTION + "):");
         System.out.println("1. Load new file");
         System.out.println("2. Get general information about the machine specifications");
         System.out.println("3. Choose an initial code configuration (manually)");
@@ -41,7 +41,7 @@ public class Menu {
                 if (userChoice <= LAST_OPTION && userChoice >= FIRST_OPTION) {
                     executeMenu(userChoice);
                 } else if (userChoice != EXIT_OPTION) {
-                    System.out.println("please select a valid option,between [" + FIRST_OPTION + "-" + EXIT_OPTION + "]");
+                    System.out.println("please select a valid option,between [" + FIRST_OPTION + "-" + LAST_OPTION + "]");
                 }
             }catch (Exception e){
                 System.out.println("Insert only numbers between [" + FIRST_OPTION + "-" + LAST_OPTION + "]");
@@ -50,7 +50,7 @@ public class Menu {
         } while (userChoice != EXIT_OPTION);
         System.out.println("Thanks,bye");
     }
-    public void executeMenu(int userChoice) {
+    public void executeMenu(int userChoice) throws Exception {
         switch (userChoice) {
             case 1:
                 MenuManager loadNewFile = new LoadNewFile(mediator);

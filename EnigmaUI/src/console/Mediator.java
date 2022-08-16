@@ -116,7 +116,7 @@ public Mediator(EngineManagerInterface engineManager){
         System.out.println("The current code configuration is: " +getCurrentCodeDescription(codeDescriptionDTO,notchList,engineManager.getCodeDescriptionDTO().getCurrentStartingPosition()));
     }
 
-    public String getAvailableReflectorsId(){
+    public String getAvailableReflectorsId() throws Exception {
     String availableReflectorsId="";
     List<String> availableReflectorsIdList= engineManager.getTheMachineSettingsDTO().getReflectorsId();
     int index=1;
@@ -185,20 +185,22 @@ public void resetPlugBoard(){
             return false;
         }
     }
-    public String getMachineConfiguration(){
+    public String getMachineConfiguration() throws Exception{
         engineManager.createCurrentCodeDescriptionDTO();
         if(isMachineWasDefined()) {
-            TheMachineSettingsDTO theMachineSettingsDTO = engineManager.getTheMachineSettingsDTO();
-            String machineConfiguration = "Current machine Configurations:\n";
-            machineConfiguration = machineConfiguration + "1.Amount of wheels in use out of possible amount of wheels: " + theMachineSettingsDTO.getAmountOfUsedRotors() + "\\" + theMachineSettingsDTO.getMaxAmountOfRotors() + "\n";
-            machineConfiguration = machineConfiguration + "2.The amount of reflectors is: " + theMachineSettingsDTO.getAmountOfReflectors() + "\n";
-            machineConfiguration = machineConfiguration + "3.The current amount of proceeded messages: " + theMachineSettingsDTO.getAmountOfProcessedMessages() + "\n";
-            if (engineManager.getIsCodeConfigurationSet()) {
-                machineConfiguration = machineConfiguration + "4.The original code description: \n" + getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO(),theMachineSettingsDTO.getCurrentCodeDescriptionDTO().getOriginalNotchPosition(),engineManager.getCodeDescriptionDTO().getChosenStartingPosition()) + "\n";
-                machineConfiguration = machineConfiguration + "5.The current code description: \n" + getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO(),theMachineSettingsDTO.getCurrentCodeDescriptionDTO().getNotchPosition(),engineManager.getCodeDescriptionDTO().getCurrentStartingPosition()) + "\n";
+                TheMachineSettingsDTO theMachineSettingsDTO = engineManager.getTheMachineSettingsDTO();
+                String machineConfiguration = "Current machine Configurations:\n";
+                machineConfiguration = machineConfiguration + "1.Amount of wheels in use out of possible amount of wheels: " + theMachineSettingsDTO.getAmountOfUsedRotors() + "\\" + theMachineSettingsDTO.getMaxAmountOfRotors() + "\n";
+                machineConfiguration = machineConfiguration + "2.The amount of reflectors is: " + theMachineSettingsDTO.getAmountOfReflectors() + "\n";
+                machineConfiguration = machineConfiguration + "3.The current amount of proceeded messages: " + theMachineSettingsDTO.getAmountOfProcessedMessages() + "\n";
+                if (engineManager.getIsCodeConfigurationSet()) {
+                    machineConfiguration = machineConfiguration + "4.The original code description: \n" + getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO(), theMachineSettingsDTO.getCurrentCodeDescriptionDTO().getOriginalNotchPosition(), engineManager.getCodeDescriptionDTO().getChosenStartingPosition()) + "\n";
+                    machineConfiguration = machineConfiguration + "5.The current code description: \n" + getCurrentCodeDescription(theMachineSettingsDTO.getCurrentCodeDescriptionDTO(), theMachineSettingsDTO.getCurrentCodeDescriptionDTO().getNotchPosition(), engineManager.getCodeDescriptionDTO().getCurrentStartingPosition()) + "\n";
+                }
+                return machineConfiguration;
             }
-            return machineConfiguration;
-        }
+
+
         return null;
     }
 

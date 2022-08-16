@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
     "cteRotor"
 })
 @XmlRootElement(name = "CTE-Rotors")
-public class CTERotors implements Serializable {
+public class CTERotors  {
 
     @XmlElement(name = "CTE-Rotor", required = true)
     protected List<CTERotor> cteRotor;
