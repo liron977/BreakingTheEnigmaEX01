@@ -8,9 +8,10 @@ import java.util.*;
 public class MachineHistoryAndStatistics implements Serializable {
    private Map<CodeDescriptionDTO, List<HistoryOfProcess>> machineHistory = new HashMap<>();
     public void addNewMachineSettings(CodeDescriptionDTO codeDescriptionDTO) {
-
-        List<HistoryOfProcess> historyOfProcesses = new ArrayList<HistoryOfProcess>();
-        machineHistory.put(codeDescriptionDTO, historyOfProcesses);
+if(!machineHistory.containsKey(codeDescriptionDTO)) {
+    List<HistoryOfProcess> historyOfProcesses = new ArrayList<HistoryOfProcess>();
+    machineHistory.put(codeDescriptionDTO, historyOfProcesses);
+}
     }
     public Map<CodeDescriptionDTO, List<HistoryOfProcess>> getMachineHistory() {
         return machineHistory;
