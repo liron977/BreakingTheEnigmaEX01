@@ -25,7 +25,7 @@ public class InputProcess implements MenuManager{
             while (!isValidInputProcess) {
                 isValidInputProcess = mediator.isUserStringToProcessIsValid(userInput);
                 if (isValidInputProcess) {
-                    System.out.println("The converted string is: " + mediator.getConvertedString(userInput));
+                    System.out.println("The converted string is (displayed in <>): \n<" + mediator.getConvertedString(userInput) +">");
                 } else {
                     System.out.println("Please try again,if you want to exit please press ENTER");
                     userInput = scanner.nextLine();

@@ -76,11 +76,8 @@ public class XmlRotorValidator implements Validator{
 
                         errors.add(new Exception("The rotors`s id should be a running counter starting from 1," +
                                 "it can be unorganized." + "you have id [" + previousId + "] and the next id is [" + key + "]"));
-
                 }
-
                 previousId = key;
-
             }
         }
     }
@@ -88,8 +85,8 @@ public class XmlRotorValidator implements Validator{
         String left,right;
         List<CTEPositioning> ctePositioning=cteRotor.getCTEPositioning();
         for (CTEPositioning positing:ctePositioning) {
-            left=positing.getLeft();
-            right=positing.getRight();
+            left=positing.getLeft().toUpperCase();
+            right=positing.getRight().toUpperCase();
             if(!(keyboardInput.toUpperCase().contains(left.toUpperCase()))){
                 errors.add(new Exception("The signal "+left.toUpperCase()+ " on the left field in rotor ["+cteRotor.getId()+"] is illegal,the signals should be from the following ABC only: "+ keyboardInput ));
             }
@@ -111,12 +108,12 @@ public class XmlRotorValidator implements Validator{
         HashMap<String, Integer> rightSignalMap = new HashMap<>();
         List<CTEPositioning> ctePositioning=cteRotor.getCTEPositioning();
         for (CTEPositioning positing:ctePositioning) {
-            left=positing.getLeft();
+            left=positing.getLeft().toUpperCase();
             if((leftSignalMap.get(left)!=null)&&(leftSignalMap.get(left)!=0)) {
                 errors.add(new Exception("The rotor ["+cteRotor.getId()+"] is illegal,rotor can not have double mapping the signal ["+left+ "] in the left field is already mapped"));
             }
             leftSignalMap.put(left,1);
-            right=positing.getRight();
+            right=positing.getRight().toUpperCase();
             if((rightSignalMap.get(right)!=null)&&(rightSignalMap.get(right)!=0)) {
                 errors.add(new Exception("The rotor ["+cteRotor.getId()+"] is illegal,rotor can not have double mapping the signal ["+right+ "] in the right field is already mapped" ));
             }
@@ -133,7 +130,7 @@ public class XmlRotorValidator implements Validator{
                 amount++;
             }
             if(amount<keyboardInput.length()){
-                errors.add(new Exception("The rotor ["+cteRotor.getId()+"] is illegal,each signal in the ABC should be mapped in the rotor" ));
+                errors.add(new Exception("The rotor ["+cteRotor.getId()+"] is illegal,each signal in the ABC should be mapped in the rotor.You have "+amount+ " mappings,you should have "+keyboardInput.length() ));
             }
         }
     }

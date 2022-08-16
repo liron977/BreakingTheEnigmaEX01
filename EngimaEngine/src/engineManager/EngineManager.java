@@ -94,19 +94,6 @@ public class EngineManager implements EngineManagerInterface,Serializable {
         ListOfExceptionsDTO  listOfExceptionsDTO =new ListOfExceptionsDTO(exceptions);
         return listOfExceptionsDTO;
     }
-
-    /*public void createChosenRotors(String str){
-        UserInputRotorsValidator userInputRotorsValidator=new UserInputRotorsValidator(str,theMachineEngine);
-        userInputRotorsValidator.validate();
-        List<Rotor> listOfRotors=new ArrayList<>();
-        String[] rotorsId=userInputRotorsValidator.getFilteredUserInput();
-        if(rotorsId!=null) {
-            for (String rotorId : rotorsId) {
-                listOfRotors.add(theMachineEngine.getRotorsSet().getRotorById(rotorId));
-            }
-             chooseManuallyRotors(listOfRotors);
-        }
-    }*/
     public ListOfExceptionsDTO getAllErrorsRelatedToChosenManuallyStartingPosition(String str){
         Validator userInputStartingPositionValidator=new UserInputStartingPositionValidator(str,theMachineEngine);
         userInputStartingPositionValidator.validate();

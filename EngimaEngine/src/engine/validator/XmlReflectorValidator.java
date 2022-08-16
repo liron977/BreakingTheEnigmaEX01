@@ -30,6 +30,7 @@ public class XmlReflectorValidator implements Validator {
         isSignalMappedToItselfInReflector();
         isReflectorhasDoubleMapping();
         amountOfReflectorMapped();
+        isSignalsAreValid();
     }
     @Override
     public List<Exception> getListOfException(){
@@ -120,21 +121,39 @@ public class XmlReflectorValidator implements Validator {
         String left,right;
         List<CTEReflector> cteReflectorList = enigmaDescriptor.getCTEMachine().getCTEReflectors().getCTEReflector();
         for (CTEReflector cteReflector : cteReflectorList) {
-            HashMap<String, Integer> leftSignalMap = new HashMap<>();
-            HashMap<String, Integer> rightSignalMap = new HashMap<>();
+            /*HashMap<String, Integer> leftSignalMap = new HashMap<>();
+            HashMap<String, Integer> rightSignalMap = new HashMap<>();*/
+            HashMap<String, Integer> signalsMap = new HashMap<>();
+            List<String> alreadyChecked=new ArrayList<>();
             List<CTEReflect> cteReflects = cteReflector.getCTEReflect();
             String reflectorId=cteReflector.getId().toUpperCase();
             for (CTEReflect reflect:cteReflects) {
                 left=String.valueOf(reflect.getInput());
                 right=String.valueOf(reflect.getOutput());
-                if((leftSignalMap.get(left)!=null)&&(leftSignalMap.get(left)!=0)) {
+                if(signalsMap.containsKey(left)) {
+                    if (!alreadyChecked.contains(left)) {
+                        errors.add(new Exception("The reflector [" + reflectorId + "] is illegal,reflector can not have double mapping the signal " + left + " is already mapped"));
+                        alreadyChecked.add(left);
+                    }
+                }
+                    signalsMap.put(left, 1);
+                if(signalsMap.containsKey(right)) {
+                    if (!alreadyChecked.contains(right)) {
+                        errors.add(new Exception("The reflector [" + reflectorId + "] is illegal,reflector can not have double mapping the signal " + right + " is already mapped"));
+                        alreadyChecked.add(right);
+                    }
+                }
+                signalsMap.put(right, 1);
+
+
+               /* if((leftSignalMap.get(left)!=null)&&(leftSignalMap.get(left)!=0)) {
                     errors.add(new Exception("The reflector ["+reflectorId+"] is illegal,reflector can not have double mapping the signal "+left+" in the left field is already mapped" ));
                 }
                 leftSignalMap.put(left,1);
                 if((rightSignalMap.get(right)!=null)&&(rightSignalMap.get(right)!=0)) {
                     errors.add(new Exception("The reflector ["+reflectorId+"] is illegal,reflector can not have double mapping the signal "+right+" in the right field is already mapped" ));
                 }
-                rightSignalMap.put(right,1);
+                rightSignalMap.put(right,1);*/
             }
         }
     }
@@ -150,6 +169,26 @@ public class XmlReflectorValidator implements Validator {
             }
             if(counter*2!=enigmaDescriptor.getCTEMachine().getABC().trim().length()){
                 errors.add(new Exception("The reflector ["+reflectorId+"] is illegal,the amount of mappings should be half of ABC" ));
+            }
+        }
+    }
+    private void isSignalsAreValid() {
+        int left, right;
+        List<CTEReflector> cteReflectorList = enigmaDescriptor.getCTEMachine().getCTEReflectors().getCTEReflector();
+        int abcLength=enigmaDescriptor.getCTEMachine().getABC().trim().length();
+        for (CTEReflector cteReflector : cteReflectorList) {
+            List<CTEReflect> cteReflects = cteReflector.getCTEReflect();
+            String reflectorId = cteReflector.getId().toUpperCase();
+            for (CTEReflect reflect : cteReflects) {
+                left = reflect.getInput();
+                right = reflect.getOutput();
+                if((left<1)||(left>abcLength)){
+                    errors.add(new Exception("The signal ["+left+"] is not valid,the signals should be a number between 1-"+abcLength));
+                }
+              if ((right<1)||(right>abcLength)){
+                    errors.add(new Exception("The signal [" + right + "] is not valid,the signals should be a number between 1-" + abcLength));
+                }
+
             }
         }
     }

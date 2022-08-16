@@ -5,6 +5,8 @@ import machineDTO.ListOfExceptionsDTO;
 import engineManager.EngineManagerInterface;
 import machineDTO.MachineHistoryAndStatisticsDTO;
 import machineDTO.TheMachineSettingsDTO;
+import menus.LoadNewFile;
+import menus.MenuManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -117,13 +119,34 @@ public Mediator(EngineManagerInterface engineManager){
     public String getAvailableReflectorsId(){
     String availableReflectorsId="";
     List<String> availableReflectorsIdList= engineManager.getTheMachineSettingsDTO().getReflectorsId();
-
+    int index=1;
         for (int i=0;i<availableReflectorsIdList.size();i++){
-            int index=i+1;
+            index=getReflectorIdIndex(availableReflectorsIdList.get(i));
             availableReflectorsId=availableReflectorsId+index+") "+availableReflectorsIdList.get(i)+"\n";
         }
         return availableReflectorsId;
 
+    }
+    private int getReflectorIdIndex(String availableReflectorsId){
+          int index=1;
+        switch (availableReflectorsId) {
+            case "I":
+                index = 1;
+                break;
+            case "II":
+                index = 2;
+                break;
+            case "III":
+                index = 3;
+                break;
+            case "IV":
+                index = 4;
+                break;
+            case "V":
+                index = 5;
+                break;
+        }
+        return index;
     }
     public void  initStartingPositionConfigurationManually(String userInput){
         engineManager.chooseManuallyStartingPosition(userInput);
