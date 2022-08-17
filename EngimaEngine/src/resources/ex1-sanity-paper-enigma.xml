@@ -2,7 +2,7 @@
 <CTE-Enigma xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Enigma-Ex1.xsd">
 	<CTE-Machine rotors-count="3">
 		<ABC>
-			ABCDEFGHIJKLMNOPQRSTUVWXYZ
+			ABCDEF(HIJKLMNOPQRSTUVWXYZ
 		</ABC>
 		<CTE-Rotors>
 			<CTE-Rotor id="1" notch="17">
@@ -11,8 +11,8 @@
 				<CTE-Positioning right="M" left="C"/>
 				<CTE-Positioning right="F" left="D"/>
 				<CTE-Positioning right="L" left="E"/>
-				<CTE-Positioning right="G" left="F"/>
-				<CTE-Positioning right="D" left="G"/>
+				<CTE-Positioning right="(" left="F"/>
+				<CTE-Positioning right="D" left="("/>
 				<CTE-Positioning right="Q" left="H"/>
 				<CTE-Positioning right="V" left="I"/>
 				<CTE-Positioning right="Z" left="J"/>
@@ -40,7 +40,7 @@
 				<CTE-Positioning right="K" left="D"/>
 				<CTE-Positioning right="S" left="E"/>
 				<CTE-Positioning right="I" left="F"/>
-				<CTE-Positioning right="R" left="G"/>
+				<CTE-Positioning right="R" left="("/>
 				<CTE-Positioning right="U" left="H"/>
 				<CTE-Positioning right="X" left="I"/>
 				<CTE-Positioning right="B" left="J"/>
@@ -51,7 +51,7 @@
 				<CTE-Positioning right="M" left="O"/>
 				<CTE-Positioning right="C" left="P"/>
 				<CTE-Positioning right="Q" left="Q"/>
-				<CTE-Positioning right="G" left="R"/>
+				<CTE-Positioning right="(" left="R"/>
 				<CTE-Positioning right="Z" left="S"/>
 				<CTE-Positioning right="N" left="T"/>
 				<CTE-Positioning right="P" left="U"/>
@@ -68,7 +68,7 @@
 				<CTE-Positioning right="H" left="D"/>
 				<CTE-Positioning right="J" left="E"/>
 				<CTE-Positioning right="L" left="F"/>
-				<CTE-Positioning right="C" left="G"/>
+				<CTE-Positioning right="C" left="("/>
 				<CTE-Positioning right="P" left="H"/>
 				<CTE-Positioning right="R" left="I"/>
 				<CTE-Positioning right="T" left="J"/>
@@ -80,7 +80,7 @@
 				<CTE-Positioning right="E" left="P"/>
 				<CTE-Positioning right="I" left="Q"/>
 				<CTE-Positioning right="W" left="R"/>
-				<CTE-Positioning right="G" left="S"/>
+				<CTE-Positioning right="(" left="S"/>
 				<CTE-Positioning right="A" left="T"/>
 				<CTE-Positioning right="K" left="U"/>
 				<CTE-Positioning right="M" left="V"/>
@@ -105,6 +105,21 @@
 				<CTE-Reflect input="13" output="15"/>
 				<CTE-Reflect input="20" output="26"/>
 				<CTE-Reflect input="22" output="23"/>
+			</CTE-Reflector>
+			<CTE-Reflector id="II">
+				<CTE-Reflect input="1" output="9"/>
+				<CTE-Reflect input="2" output="18"/>
+				<CTE-Reflect input="3" output="21"/>
+				<CTE-Reflect input="8" output="4"/>
+				<CTE-Reflect input="5" output="17"/>
+				<CTE-Reflect input="6" output="19"/>
+				<CTE-Reflect input="7" output="12"/>
+				<CTE-Reflect input="25" output="16"/>
+				<CTE-Reflect input="10" output="24"/>
+				<CTE-Reflect input="11" output="14"/>
+				<CTE-Reflect input="23" output="15"/>
+				<CTE-Reflect input="20" output="26"/>
+				<CTE-Reflect input="22" output="13"/>
 			</CTE-Reflector>
 		</CTE-Reflectors>
 	</CTE-Machine>	
