@@ -54,16 +54,21 @@ public class RotorsSet implements Serializable {
         Collections.reverse(rotors);
     }
     public void manageSpins(){
-
+        rotors.get(0).spinRotor();
         for(int i=0;i<rotorsAmount-1;i++) {
            if(i==0){
-               rotors.get(0).spinRotor();
+
               if(rotors.get(0).isNotchLocatedInWindow()){
                   rotors.get(1).spinRotor();
               }
            }
            else{
-               if(rotors.get(i).isNotchLocatedInWindow()){
+               if(!rotors.get(i).isNotchLocatedInWindow()){
+                   break;
+
+               }
+               else {
+
                    rotors.get(i+1).spinRotor();
                }
            }
