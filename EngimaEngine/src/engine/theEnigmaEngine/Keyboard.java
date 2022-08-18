@@ -1,12 +1,13 @@
 package engine.theEnigmaEngine;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 public class Keyboard  implements Serializable {
     private String keyboard;
    private int keyboardAmount;
     public Keyboard (String keyboard){
-        this.keyboard=keyboard;
+        this.keyboard=keyboard.toUpperCase();
         this.keyboardAmount=keyboard.length();
     }
     public int getIndexFromKeyboard(String ch){

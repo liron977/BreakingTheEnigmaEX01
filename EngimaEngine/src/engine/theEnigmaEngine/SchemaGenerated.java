@@ -25,8 +25,8 @@ public class SchemaGenerated implements Serializable {
 
     }
     private Pair createNewPair(CTEPositioning positing){
-        String left=positing.getLeft();
-        String right=positing.getRight();
+        String left=positing.getLeft().toUpperCase();
+        String right=positing.getRight().toUpperCase();
         Pair pair=new Pair(right,left);
 
         return pair;
