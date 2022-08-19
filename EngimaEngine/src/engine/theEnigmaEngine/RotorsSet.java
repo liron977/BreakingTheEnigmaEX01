@@ -61,6 +61,9 @@ public class RotorsSet implements Serializable {
               if(rotors.get(0).isNotchLocatedInWindow()){
                   rotors.get(1).spinRotor();
               }
+              else{
+                  break;
+              }
            }
            else{
                if(!rotors.get(i).isNotchLocatedInWindow()){

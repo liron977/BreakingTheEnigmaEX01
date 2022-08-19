@@ -5,12 +5,10 @@ import machineDTO.ListOfExceptionsDTO;
 import engineManager.EngineManagerInterface;
 import machineDTO.MachineHistoryAndStatisticsDTO;
 import machineDTO.TheMachineSettingsDTO;
-import menus.LoadNewFile;
-import menus.MenuManager;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -212,11 +210,11 @@ public void printCodeConfiguration(){
 }
     public String getCurrentCodeDescription(CodeDescriptionDTO codeDescriptionDTO, List<String> notchPosition,String startingPosition){
         String currentCodeDescription="";
-        currentCodeDescription=currentCodeDescription+"<"+getRotorsInfo(codeDescriptionDTO.getUsedRotorsId(),notchPosition)+">";
+        currentCodeDescription=currentCodeDescription+"<"+getRotorsInfo(codeDescriptionDTO.getUsedRotorsId())+">";
         StringBuilder startingPositionRevers = new StringBuilder();
         startingPositionRevers.append(startingPosition);
         startingPositionRevers.reverse();
-        currentCodeDescription=currentCodeDescription+"<"+startingPositionRevers+">";
+        currentCodeDescription=currentCodeDescription+"<"+ getWindowInfoId(startingPositionRevers,notchPosition)+">";
         currentCodeDescription=currentCodeDescription+"<"+ codeDescriptionDTO.getReflectorId()+">";
         List<String> pairsOfSwappingCharacter = codeDescriptionDTO.getPairsOfSwappingCharacter();
         if((pairsOfSwappingCharacter!=null)&&(pairsOfSwappingCharacter.size()!=0)) {
@@ -256,30 +254,32 @@ public void printCodeConfiguration(){
 
     }
 
-    public List<String> getUsedRotorsId(String[] usedRotorsId,List<String> notchPosition) {
+    public String getWindowInfoId(StringBuilder startingPositionRevers, List<String> notchPosition) {
         String usedRotors="";
-        List<String> rotorsInfo=new ArrayList<>();
+        String windowInfo="";
         int index=0;
-        for (String RotorId:usedRotorsId) {
+       Collections.reverse(notchPosition);
+        for (int i=0;i<startingPositionRevers.length();i++){
+            windowInfo=windowInfo+startingPositionRevers.charAt(i)+"("+notchPosition.get(index)+")";
 
-            usedRotors=RotorId+"("+notchPosition.get(index)+")";
-            rotorsInfo.add(usedRotors);
             index++;
         }
 
-        Collections.reverse(rotorsInfo);
-        return rotorsInfo;
+        Collections.reverse(notchPosition);
+        return windowInfo;
 
     }
-    public String getRotorsInfo(String[] usedRotorsId,List<String> notchPosition){
-        List<String> rotorsInfo= getUsedRotorsId(usedRotorsId,notchPosition);
+    public String getRotorsInfo(String[] rotors){
+    /*    List<String> rotorsInfo= getUsedRotorsId(usedRotorsId,notchPosition);*/
+    Collections.reverse(Arrays.asList(rotors));
         String rotor="";
-        for (String rotorInfo:rotorsInfo) {
+        for (int i=0;i<rotors.length;i++) {
 
-                rotor=rotor+rotorInfo+",";
+                rotor=rotor+rotors[i]+",";
 
         }
         rotor=rotor.substring(0,rotor.length()-1);
+        Collections.reverse(Arrays.asList(rotors));
         return rotor;
 
     }
